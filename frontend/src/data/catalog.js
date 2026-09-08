@@ -4,19 +4,19 @@
  */
 
 export const IMG = {
-  logo: 'https://raftarfootwear.com/wp-content/uploads/2026/07/logo.webp',
-  hero: 'https://raftarfootwear.com/wp-content/uploads/2026/07/hero-image-final.png',
-  factory: 'https://raftarfootwear.com/wp-content/uploads/2026/07/factory-image-e1785482188113.webp',
-  article019brown: 'https://raftarfootwear.com/wp-content/uploads/2026/07/article-019-brown.webp',
-  article815: 'https://raftarfootwear.com/wp-content/uploads/2026/07/article-815.webp',
-  article05: 'https://raftarfootwear.com/wp-content/uploads/2026/07/article-05.webp',
-  article019black: 'https://raftarfootwear.com/wp-content/uploads/2026/07/article-019-black.webp',
-  article017: 'https://raftarfootwear.com/wp-content/uploads/2026/07/article-017.webp',
-  article011: 'https://raftarfootwear.com/wp-content/uploads/2026/07/article-011.webp',
-  article025: 'https://raftarfootwear.com/wp-content/uploads/2026/07/article-025.webp',
-  article291: 'https://raftarfootwear.com/wp-content/uploads/2026/07/article-291.webp',
-  article027: 'https://raftarfootwear.com/wp-content/uploads/2026/07/article-027.webp',
-  articleWoven: 'https://raftarfootwear.com/wp-content/uploads/2026/07/article-woven.webp',
+  logo: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771608/raftar-footwear/logo.webp.webp',
+  hero: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771606/raftar-footwear/hero-image-final.png.png',
+  factory: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771605/raftar-footwear/factory-image-e1785482188113.webp.webp',
+  article019brown: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771590/raftar-footwear/article-019-brown.webp.webp',
+  article815: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771596/raftar-footwear/article-815.webp.webp',
+  article05: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771593/raftar-footwear/article-05.webp.webp',
+  article019black: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771588/raftar-footwear/article-019-black.webp.webp',
+  article017: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771587/raftar-footwear/article-017.webp.webp',
+  article011: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771586/raftar-footwear/article-011.webp.webp',
+  article025: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771591/raftar-footwear/article-025.webp.webp',
+  article291: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771595/raftar-footwear/article-291.webp.webp',
+  article027: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771592/raftar-footwear/article-027.webp.webp',
+  articleWoven: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771597/raftar-footwear/article-woven.webp.webp',
 };
 
 const pack = (unit) => ({

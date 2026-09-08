@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
 const IMG = {
-  factory: 'https://raftarfootwear.com/wp-content/uploads/2026/07/factory-image-e1785482188113.webp',
-  hero: 'https://raftarfootwear.com/wp-content/uploads/2026/07/hero-image-final.png',
+  factory: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771605/raftar-footwear/factory-image-e1785482188113.webp.webp',
+  hero: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771606/raftar-footwear/hero-image-final.png.png',
 };
 
 export default function About() {

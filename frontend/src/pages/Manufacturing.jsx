@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 const IMG = {
-  factory: 'https://raftarfootwear.com/wp-content/uploads/2026/07/factory-image-e1785482188113.webp',
+  factory: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771605/raftar-footwear/factory-image-e1785482188113.webp.webp',
 };
 
 const steps = [

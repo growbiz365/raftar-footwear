@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login, clearError } from '../../store/slices/authSlice';
 
 export default function AdminLogin() {
-  const [email, setEmail] = useState('admin@revone.com');
-  const [password, setPassword] = useState('admin123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error, user } = useSelector(s => s.auth);
@@ -50,7 +50,6 @@ export default function AdminLogin() {
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
-        <p className="text-xs text-gray-400 text-center mt-6">Demo: admin@revone.com / admin123</p>
         <p className="text-center mt-4"><Link to="/" className="text-sm text-gray-500 underline">← Back to store</Link></p>
       </div>
     </div>
