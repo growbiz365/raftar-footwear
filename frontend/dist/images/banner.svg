@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="500" viewBox="0 0 1400 500">
+  <defs>
+    <linearGradient id="ban" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a1a1a"/>
+      <stop offset="100%" style="stop-color:#3d3d3d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1400" height="500" fill="url(#ban)"/>
+  <text x="700" y="260" font-family="system-ui,sans-serif" font-size="36" fill="rgba(255,255,255,0.5)" text-anchor="middle">Exclusive Collection</text>
+</svg>
