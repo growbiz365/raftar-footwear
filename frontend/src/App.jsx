@@ -13,6 +13,7 @@ import Shop from './pages/Shop';
 import ProductDetail from './pages/ProductDetail';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
 import Manufacturing from './pages/Manufacturing';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
@@ -72,7 +73,7 @@ export default function App() {
         <Route path="blogs" element={<AdminBlogs />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<StoreLayout><NotFound /></StoreLayout>} />
     </Routes>
     </>
   );
