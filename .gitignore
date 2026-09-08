@@ -1,0 +1,14 @@
+# --- Environment files (never commit secrets) ---
+.env
+.env.*
+!.env.example
+
+# --- Node / build ---
+node_modules/
+dist/
+build/
+.vite/
+
+# --- Logs ---
+*.log
+npm-debug.log*

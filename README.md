@@ -23,7 +23,7 @@ Full-stack wholesale footwear store based on [raftarfootwear.com](https://raftar
 ### Backend
 ```bash
 cd backend
-cp .env.example .env   # already has your Mongo + Cloudinary keys
+cp .env.example .env
 npm install
 npm run seed           # creates admin + products
 npm run dev            # http://localhost:5000
@@ -44,16 +44,9 @@ Proxy `/api` to backend is configured in `vite.config.js`.
 
 `http://localhost:5173/admin/v1/admin`
 
-## Environment (backend `.env`)
+## Environment
 
-```
-PORT=5000
-MONGO_URI=mongodb+srv://mubashermodern118_db_user:admin123@cluster0.wwv4luv.mongodb.net/revone?retryWrites=true&w=majority
-JWT_SECRET=revone-jwt-secret-2026-secure
-CLOUDINARY_CLOUD_NAME=dwv4luv
-CLOUDINARY_API_KEY=129643658816371
-CLOUDINARY_API_SECRET=-ejHwdigTnw3ppnqnTSoaUv72kI
-```
+Backend config lives in `backend/.env` (copy `backend/.env.example` and fill in your own values). It is **not** committed — never commit real secrets.
 
 ## Menu
 
