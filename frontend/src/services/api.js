@@ -2,7 +2,7 @@ import axios from 'axios';
 import { cacheKey, cacheGet, cacheSet, clearCache } from './cache';
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_URL || '/api',
   headers: {
     'Content-Type': 'application/json',
     'X-App-Key': import.meta.env.VITE_APP_KEY || 'raftar-frontend-key-2026',

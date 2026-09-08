@@ -1,0 +1,10 @@
+{
+  "name": "raftar-footwear",
+  "version": "3.0.0",
+  "description": "Raftar Footwear – Wholesale e-commerce (MERN). Combined frontend + backend for Hostinger shared hosting.",
+  "private": true,
+  "scripts": {
+    "start": "node backend/src/server.js",
+    "build": "bash build.sh"
+  }
+}

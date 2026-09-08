@@ -9,6 +9,9 @@ dist/
 build/
 .vite/
 
+# Pre-built React app is intentionally committed so Hostinger never runs Vite
+!frontend/dist/
+
 # --- Logs ---
 *.log
 npm-debug.log*
