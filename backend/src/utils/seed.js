@@ -6,19 +6,19 @@ const Blog = require('../models/Blog');
 
 // Real images from https://raftarfootwear.com/
 const IMG = {
-  logo: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771608/raftar-footwear/logo.webp.webp',
-  hero: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771606/raftar-footwear/hero-image-final.png.png',
-  factory: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771605/raftar-footwear/factory-image-e1785482188113.webp.webp',
-  article019brown: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771590/raftar-footwear/article-019-brown.webp.webp',
-  article815: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771596/raftar-footwear/article-815.webp.webp',
-  article05: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771593/raftar-footwear/article-05.webp.webp',
-  article019black: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771588/raftar-footwear/article-019-black.webp.webp',
-  article017: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771587/raftar-footwear/article-017.webp.webp',
-  article011: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771586/raftar-footwear/article-011.webp.webp',
-  article025: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771591/raftar-footwear/article-025.webp.webp',
-  article291: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771595/raftar-footwear/article-291.webp.webp',
-  article027: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771592/raftar-footwear/article-027.webp.webp',
-  articleWoven: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771597/raftar-footwear/article-woven.webp.webp',
+  logo: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771608/raftar-footwear/logo.webp',
+  hero: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771606/raftar-footwear/hero-image-final.png',
+  factory: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771605/raftar-footwear/factory-image-e1785482188113.webp',
+  article019brown: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771590/raftar-footwear/article-019-brown.webp',
+  article815: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771596/raftar-footwear/article-815.webp',
+  article05: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771593/raftar-footwear/article-05.webp',
+  article019black: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771588/raftar-footwear/article-019-black.webp',
+  article017: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771587/raftar-footwear/article-017.webp',
+  article011: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771586/raftar-footwear/article-011.webp',
+  article025: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771591/raftar-footwear/article-025.webp',
+  article291: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771595/raftar-footwear/article-291.webp',
+  article027: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771592/raftar-footwear/article-027.webp',
+  articleWoven: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771597/raftar-footwear/article-woven.webp',
 };
 
 async function seed() {
@@ -233,7 +233,7 @@ async function seed() {
           slug: 'why-wholesale-plastic-footwear',
           excerpt: 'Learn how dealers benefit from bulk PCU & PVC footwear from Peshawar manufacturers.',
           content: 'Raftar Footwear Enterprises supplies quality plastic chappals and slides across Pakistan. Our wholesale packs of 1, 6 and 12 pairs help dealers manage inventory efficiently while offering competitive prices.\n\nWe use reliable PCU and PVC materials designed for everyday comfort and durability.',
-          coverImage: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771605/raftar-footwear/factory-image-e1785482188113.webp.webp',
+          coverImage: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771605/raftar-footwear/factory-image-e1785482188113.webp',
           tags: ['wholesale', 'footwear'],
           isPublished: true
         },
@@ -242,7 +242,7 @@ async function seed() {
           slug: 'pcu-vs-pvc-footwear',
           excerpt: 'A quick guide to materials used in plastic chappals and slides.',
           content: 'PCU and PVC are the standard materials for affordable, durable plastic footwear in Pakistan. Raftar specializes in both, with strict quality control at our Peshawar facility.',
-          coverImage: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771606/raftar-footwear/hero-image-final.png.png',
+          coverImage: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771606/raftar-footwear/hero-image-final.png',
           tags: ['materials', 'guide'],
           isPublished: true
         }

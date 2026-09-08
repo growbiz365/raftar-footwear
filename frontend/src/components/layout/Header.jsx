@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCartOpen, setSearchOpen, selectCartCount } from '../../store/slices/cartSlice';
 import api from '../../services/api';
 
-const LOGO = 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771608/raftar-footwear/logo.webp.webp';
+const LOGO = 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771608/raftar-footwear/logo.webp';
 const PHONE = '03338788861';
 
 export default function Header() {

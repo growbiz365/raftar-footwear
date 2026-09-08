@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const connectDB = require('./config/db');
 const { originGuard, rateLimit, appKeyGuard } = require('./middleware/security');
+const { cloudify } = require('./utils/imageMigrate');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -40,6 +41,13 @@ app.use('/api', appKeyGuard);
 app.use('/api', rateLimit({ windowMs: 60_000, max: 240, methods: ['POST'], message: 'Too many requests. Slow down your API access.' }));
 
 app.post('/api/auth/login', rateLimit({ windowMs: 15 * 60_000, max: 20, message: 'Too many login attempts. Try again in 15 minutes.' }));
+
+// Rewrite legacy wp-content / uploads image URLs to Cloudinary in every API response
+app.use('/api', (req, res, next) => {
+  const _json = res.json.bind(res);
+  res.json = (body) => _json(cloudify(body));
+  next();
+});
 
 app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/auth', require('./routes/authRoutes'));
