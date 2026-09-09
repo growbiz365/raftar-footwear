@@ -26,6 +26,7 @@ const normalizeSlide = (s) => ({
 export default function AdminSettings() {
   const { toast, confirm } = useToast();
   const [promoBar, setPromoBar] = useState('');
+  const [logo, setLogo] = useState('');
   const [slides, setSlides] = useState([{ ...emptySlide, image: '' }]);
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState('');
@@ -87,15 +88,17 @@ export default function AdminSettings() {
         const { data } = await api.get('/admin/settings');
         const d = data.data || {};
         setPromoBar(typeof d.promoBar === 'string' ? d.promoBar : d.promoBar || '');
+        setLogo(typeof d.logo === 'string' ? d.logo : '');
         const h = d.hero || {};
         if (Array.isArray(h.slides) && h.slides.length) setSlides(h.slides.map(normalizeSlide));
         else if (h.image || h.title) setSlides([normalizeSlide({ ...emptySlide, ...h })]);
       } catch {
         const local = getLocalSettings();
         setPromoBar(local.promoBar || '');
-        const h = local.hero || {};
-        if (Array.isArray(h.slides) && h.slides.length) setSlides(h.slides.map(normalizeSlide));
-        else setSlides([normalizeSlide({ ...emptySlide, ...h, image: h.image || '' })]);
+        setLogo(typeof local.logo === 'string' ? local.logo : '');
+        const lh = local.hero || {};
+        if (Array.isArray(lh.slides) && lh.slides.length) setSlides(lh.slides.map(normalizeSlide));
+        else setSlides([normalizeSlide({ ...emptySlide, ...lh, image: lh.image || '' })]);
       }
       setLoading(false);
     })();
@@ -124,10 +127,11 @@ export default function AdminSettings() {
     try {
       await api.put('/admin/settings/promoBar', { value: promoBar });
       await api.put('/admin/settings/hero', { value: hero });
+      if (logo) await api.put('/admin/settings/logo', { value: logo });
       setMsg('✓ Settings saved — refresh the storefront to see changes');
       toast('Settings saved — refresh the storefront');
     } catch {
-      saveLocalSettings({ ...getLocalSettings(), promoBar, hero });
+      saveLocalSettings({ ...getLocalSettings(), promoBar, hero, logo });
       setMsg('✓ Saved locally (backend offline). Storefront will use local data.');
       toast('Saved locally (backend offline)', 'info');
     }
@@ -217,6 +221,17 @@ export default function AdminSettings() {
           onChange={(e) => setPromoBar(e.target.value)}
           className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-[#0b4f86]/20 focus:border-[#0b4f86]"
           placeholder="★ Quality Footwear · Wholesale packs 1 · 6 · 12"
+        />
+      </section>
+
+      {/* Logo */}
+      <section className="bg-white border border-gray-200 rounded-2xl p-5 sm:p-6 mb-6 shadow-sm">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-gray-400 mb-3">Site logo</h2>
+        <ImageField
+          label="Header logo (file upload or URL)"
+          help="Wide logo with transparent/white background works best. Upload a file to store it in the cloud."
+          value={logo || ''}
+          onChange={(url) => setLogo(url)}
         />
       </section>
 
