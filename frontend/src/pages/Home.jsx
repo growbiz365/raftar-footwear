@@ -10,7 +10,7 @@ import { getLocalSettings, STATIC_SETTINGS } from '../data/catalog';
 function SkeletonCard() {
   return (
     <div className="animate-pulse">
-      <div className="aspect-[3/4] bg-gray-100 mb-3" />
+      <div className="aspect-square bg-gray-100 mb-3" />
       <div className="h-3 bg-gray-100 rounded w-3/4 mb-2" />
       <div className="h-3 bg-gray-100 rounded w-1/3" />
     </div>
@@ -126,77 +126,81 @@ export default function Home() {
         className="relative overflow-hidden transition-colors duration-700"
         style={{ backgroundColor: current.bgColor || '#faf7f5' }}
       >
-        <div className="max-w-[1440px] mx-auto">
-          <div className="grid lg:grid-cols-2 min-h-[72vh] lg:min-h-[85vh] items-center">
-            <div className="order-2 lg:order-1 px-6 sm:px-10 lg:px-16 xl:px-20 py-12 lg:py-0 text-center lg:text-left animate-fade-up">
+        {current.image && (
+          <img
+            key={current.image}
+            src={current.image}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover animate-fade-in"
+            loading="eager"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20" />
+        <div className="relative max-w-[1440px] mx-auto">
+          <div className="min-h-[72vh] lg:min-h-[85vh] flex items-center">
+            <div className="px-6 sm:px-10 lg:px-16 xl:px-20 py-12 lg:py-0 text-center lg:text-left max-w-2xl text-white">
               {current.badge && (
-                <p className="text-[11px] tracking-[0.28em] uppercase text-gray-400 mb-5 font-medium">
+                <p className="text-[11px] tracking-[0.28em] uppercase text-white/70 mb-5 font-medium">
                   {current.badge}
                 </p>
               )}
-              <h1 className="font-display text-[2.75rem] sm:text-5xl md:text-6xl lg:text-[4.25rem] font-medium leading-[1.05] text-slate-900">
+              <h1 className="font-display text-[2.75rem] sm:text-5xl md:text-6xl lg:text-[4.25rem] font-medium leading-[1.05] text-white">
                 {current.title}
                 {current.titleLine2 && (
                   <>
                     <br />
-                    <span className="italic text-slate-800">{current.titleLine2}</span>
+                    <span className="italic text-white">{current.titleLine2}</span>
                   </>
                 )}
               </h1>
-              <p className="mt-5 sm:mt-6 text-gray-500 max-w-md mx-auto lg:mx-0 text-[15px] leading-relaxed">
+              <p className="mt-5 sm:mt-6 text-white/80 max-w-md mx-auto lg:mx-0 text-[15px] leading-relaxed">
                 {current.subtitle}
               </p>
               <div className="mt-8 flex flex-wrap gap-3 justify-center lg:justify-start">
-                <Link to={current.buttonLink || '/shop'} className="btn-black">
+                <Link to={current.buttonLink || '/shop'} className="btn-black border border-white">
                   {current.buttonText || 'Shop Now'}
                 </Link>
-                <a href="https://wa.me/923338788861" target="_blank" rel="noreferrer" className="btn-outline">
+                <a
+                  href="https://wa.me/923338788861"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center border border-white/50 text-white px-7 py-3.5 text-xs font-semibold tracking-[0.15em] uppercase hover:bg-white/10 transition"
+                >
                   Order Bulk Now
                 </a>
               </div>
             </div>
-            <div className="order-1 lg:order-2 relative h-[48vh] sm:h-[56vh] lg:h-full min-h-[320px] lg:min-h-[85vh]">
-              {current.image && (
-                <img
-                  key={current.image}
-                  src={current.image}
-                  alt=""
-                  className="absolute inset-0 w-full h-full object-cover animate-fade-in"
-                  loading="eager"
-                />
-              )}
-              {slides.length > 1 && (
-                <>
-                  <button
-                    onClick={() => setHeroIndex((i) => (i - 1 + slides.length) % slides.length)}
-                    className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-md flex items-center justify-center hover:bg-white transition z-10"
-                    aria-label="Previous"
-                  >
-                    <ChevronLeft size={18} />
-                  </button>
-                  <button
-                    onClick={() => setHeroIndex((i) => (i + 1) % slides.length)}
-                    className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-md flex items-center justify-center hover:bg-white transition z-10"
-                    aria-label="Next"
-                  >
-                    <ChevronRight size={18} />
-                  </button>
-                  <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-10">
-                    {slides.map((_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setHeroIndex(i)}
-                        className={`h-1.5 rounded-full transition-all ${
-                          i === heroIndex ? 'w-8 bg-black' : 'w-1.5 bg-black/30'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
           </div>
         </div>
+        {slides.length > 1 && (
+          <>
+            <button
+              onClick={() => setHeroIndex((i) => (i - 1 + slides.length) % slides.length)}
+              className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-md flex items-center justify-center hover:bg-white transition z-10"
+              aria-label="Previous"
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button
+              onClick={() => setHeroIndex((i) => (i + 1) % slides.length)}
+              className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-md flex items-center justify-center hover:bg-white transition z-10"
+              aria-label="Next"
+            >
+              <ChevronRight size={18} />
+            </button>
+            <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-10">
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setHeroIndex(i)}
+                  className={`h-1.5 rounded-full transition-all ${
+                    i === heroIndex ? 'w-8 bg-white' : 'w-1.5 bg-white/40'
+                  }`}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </section>
 
       {/* Categories — circular cards with nav arrows */}

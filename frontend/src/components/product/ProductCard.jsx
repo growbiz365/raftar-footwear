@@ -47,7 +47,7 @@ export default function ProductCard({ product }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="relative overflow-hidden bg-[#f0ebe6] aspect-[3/4]">
+      <div className="relative overflow-hidden bg-[#f0ebe6] aspect-square">
         <Link to={`/product/${product.slug}`} className="block h-full relative">
           {/* Primary image */}
           <img
