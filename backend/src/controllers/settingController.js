@@ -36,7 +36,7 @@ const DEFAULTS = {
     enabled: false,
     title: 'ENJOY 10% OFF YOUR FIRST ORDER',
     subtitle: 'Stay Informed! Monthly Tips, Tracks and Discount.',
-    image: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771606/raftar-footwear/hero-image-final.png',
+    image: '',
     buttonText: 'Subscribe',
     delaySeconds: 4,
     couponCode: 'FIRST10'
@@ -45,10 +45,10 @@ const DEFAULTS = {
     enabled: true,
     intervalSeconds: 8,
     items: [
-      { name: "Women's Buckle Slide", city: 'Peshawar', time: '12 Minutes Ago', img: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771590/raftar-footwear/article-019-brown.webp' },
-      { name: "Men's Cross-Strap Slide", city: 'Lahore', time: '28 Minutes Ago', img: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771596/raftar-footwear/article-815.webp' },
-      { name: 'Massage Flip-Flop', city: 'Karachi', time: '45 Minutes Ago', img: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771593/raftar-footwear/article-05.webp' },
-      { name: "Men's Sports Slide", city: 'Islamabad', time: '1 Hour Ago', img: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771587/raftar-footwear/article-017.webp' }
+      { name: "Women's Buckle Slide", city: 'Peshawar', time: '12 Minutes Ago', img: '' },
+      { name: "Men's Cross-Strap Slide", city: 'Lahore', time: '28 Minutes Ago', img: '' },
+      { name: 'Massage Flip-Flop', city: 'Karachi', time: '45 Minutes Ago', img: '' },
+      { name: "Men's Sports Slide", city: 'Islamabad', time: '1 Hour Ago', img: '' }
     ]
   },
   exitPopup: {

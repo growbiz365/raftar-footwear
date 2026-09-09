@@ -64,6 +64,7 @@ export default function AdminProducts() {
   const [uploadProgress, setUploadProgress] = useState({ done: 0, total: 0 });
   const [urlDraft, setUrlDraft] = useState('');
   const photoInputRef = useRef(null);
+  const [selected, setSelected] = useState(new Set());
 
   const uploadImageFile = async (file) => {
     const fd = new FormData();
@@ -325,7 +326,6 @@ const removePhoto = (i) => setPhotos((arr) => arr.filter((_, idx) => idx !== i))
     try {
       if (useLocal) {
         const list = getLocalProducts().filter((p) => p._id !== id);
-        saveLocalProducts(list.filter((p) => !String(p._id).startsWith('static-') || p._id === id ? p._id !== id : true));
         const remaining = getMergedProducts().filter((p) => p._id !== id);
         const deleted = JSON.parse(localStorage.getItem('raftar_deleted_products') || '[]');
         if (String(id).startsWith('static-')) {
@@ -342,6 +342,32 @@ const removePhoto = (i) => setPhotos((arr) => arr.filter((_, idx) => idx !== i))
       setProducts((prev) => prev.filter((p) => p._id !== id));
       toast('Product deleted');
     }
+    setSelected((prev) => { const next = new Set(prev); next.delete(id); return next; });
+  };
+
+  const handleBulkDelete = async () => {
+    if (selected.size === 0) return;
+    const ok = await confirm(`Delete ${selected.size} selected product(s)? This cannot be undone.`);
+    if (!ok) return;
+    const ids = [...selected];
+    if (useLocal) {
+      let remaining = getMergedProducts().filter((p) => !ids.includes(p._id));
+      const deleted = JSON.parse(localStorage.getItem('raftar_deleted_products') || '[]');
+      const newDeleted = [...new Set([...deleted, ...ids.filter((id) => String(id).startsWith('static-'))])];
+      localStorage.setItem('raftar_deleted_products', JSON.stringify(newDeleted));
+      setProducts(remaining.filter((p) => !newDeleted.includes(p._id)));
+      toast(`${ids.length} product(s) deleted`);
+    } else {
+      try {
+        await Promise.all(ids.map((id) => api.delete(`/admin/products/${id}`)));
+        await load();
+        toast(`${ids.length} product(s) deleted`);
+      } catch {
+        setProducts((prev) => prev.filter((p) => !ids.includes(p._id)));
+        toast(`${ids.length} product(s) deleted`);
+      }
+    }
+    setSelected(new Set());
   };
 
   const filteredProducts = products.filter((p) => {
@@ -523,10 +549,39 @@ const removePhoto = (i) => setPhotos((arr) => arr.filter((_, idx) => idx !== i))
         </div>
       ) : (
         <>
+          {selected.size > 0 && (
+            <div className="flex items-center justify-between bg-rose-50 border border-rose-100 rounded-xl px-4 py-2.5 mb-3">
+              <p className="text-sm text-rose-700 font-medium">{selected.size} selected</p>
+              <div className="flex items-center gap-2">
+                <button onClick={() => setSelected(new Set())} className="px-3 py-1.5 text-sm text-gray-600 border rounded-lg bg-white hover:bg-gray-50">
+                  Clear
+                </button>
+                <button onClick={handleBulkDelete} className="px-3 py-1.5 text-sm text-white bg-rose-600 rounded-lg hover:bg-rose-700">
+                  Delete selected
+                </button>
+              </div>
+            </div>
+          )}
           <div className="bg-white rounded-xl border overflow-x-auto shadow-sm">
             <table className="w-full text-sm min-w-[860px]">
               <thead className="bg-gray-50 border-b">
                 <tr>
+                  <th className="px-4 py-3 w-8">
+                    <input
+                      type="checkbox"
+                      checked={pageProducts.length > 0 && pageProducts.every((p) => selected.has(p._id))}
+                      onChange={(e) => {
+                        setSelected((prev) => {
+                          const next = new Set(prev);
+                          if (e.target.checked) pageProducts.forEach((p) => next.add(p._id));
+                          else pageProducts.forEach((p) => next.delete(p._id));
+                          return next;
+                        });
+                      }}
+                      className="accent-[#0b4f86]"
+                      title="Select all on this page"
+                    />
+                  </th>
                   <th className="text-left px-4 py-3 font-medium">Product</th>
                   <th className="text-left px-4 py-3 font-medium">Category</th>
                   <th className="text-left px-4 py-3 font-medium">Colors</th>
@@ -549,6 +604,21 @@ const removePhoto = (i) => setPhotos((arr) => arr.filter((_, idx) => idx !== i))
                   const colorNames = (p.colorVariants || p.colors || []).map((c) => (typeof c === 'string' ? c : c.name));
                   return (
                     <tr key={p._id} className="border-b last:border-0 hover:bg-gray-50">
+                      <td className="px-4 py-3 w-8">
+                        <input
+                          type="checkbox"
+                          checked={selected.has(p._id)}
+                          onChange={(e) => {
+                            setSelected((prev) => {
+                              const next = new Set(prev);
+                              if (e.target.checked) next.add(p._id);
+                              else next.delete(p._id);
+                              return next;
+                            });
+                          }}
+                          className="accent-[#0b4f86]"
+                        />
+                      </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-3">
                           <img

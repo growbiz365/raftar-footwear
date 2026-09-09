@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { adminFetchOrders, adminUpdateOrderStatus } from '../../store/slices/adminSlice';
-import { ShoppingCart, Wallet, Clock, CheckCircle2, Search } from 'lucide-react';
+import { adminFetchOrders, adminUpdateOrderStatus, adminDeleteOrder } from '../../store/slices/adminSlice';
+import { ShoppingCart, Wallet, Clock, CheckCircle2, Search, Trash2 } from 'lucide-react';
 import { useToast } from '../../components/admin/Toast';
 
 const statuses = ['pending', 'processing', 'shipped', 'delivered', 'completed', 'cancelled'];
@@ -17,11 +17,12 @@ const STATUS_CLS = {
 
 export default function AdminOrders() {
   const dispatch = useDispatch();
-  const { toast } = useToast();
+  const { toast, confirm } = useToast();
   const { orders } = useSelector((s) => s.admin);
   const [query, setQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [page, setPage] = useState(0);
+  const [selected, setSelected] = useState(new Set());
   const PAGE_SIZE = 8;
 
   useEffect(() => {
@@ -63,6 +64,31 @@ export default function AdminOrders() {
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage = Math.min(page, totalPages - 1);
   const pageOrders = filtered.slice(safePage * PAGE_SIZE, safePage * PAGE_SIZE + PAGE_SIZE);
+
+  const handleDelete = async (id) => {
+    const ok = await confirm(`Delete order #${String(id).slice(-6).toUpperCase()}?`);
+    if (!ok) return;
+    try {
+      await dispatch(adminDeleteOrder(id)).unwrap();
+      toast('Order deleted');
+    } catch {
+      toast('Failed to delete order', 'error');
+    }
+    setSelected((prev) => { const next = new Set(prev); next.delete(id); return next; });
+  };
+
+  const handleBulkDelete = async () => {
+    if (selected.size === 0) return;
+    const ok = await confirm(`Delete ${selected.size} selected order(s)?`);
+    if (!ok) return;
+    try {
+      await Promise.all([...selected].map((id) => dispatch(adminDeleteOrder(id)).unwrap()));
+      toast(`${selected.size} order(s) deleted`);
+    } catch {
+      toast('Some orders could not be deleted', 'error');
+    }
+    setSelected(new Set());
+  };
 
   return (
     <div className="p-4 sm:p-6 lg:p-8">
@@ -107,20 +133,65 @@ export default function AdminOrders() {
       </div>
 
       <div className="bg-white rounded-xl shadow-sm overflow-x-auto">
+        {selected.size > 0 && (
+          <div className="flex items-center justify-between bg-rose-50 border-b border-rose-100 px-4 py-2.5">
+            <p className="text-sm text-rose-700 font-medium">{selected.size} selected</p>
+            <div className="flex items-center gap-2">
+              <button onClick={() => setSelected(new Set())} className="px-3 py-1.5 text-sm text-gray-600 border rounded-lg bg-white hover:bg-gray-50">
+                Clear
+              </button>
+              <button onClick={handleBulkDelete} className="px-3 py-1.5 text-sm text-white bg-rose-600 rounded-lg hover:bg-rose-700">
+                Delete selected
+              </button>
+            </div>
+          </div>
+        )}
         <table className="w-full text-sm min-w-[760px]">
           <thead className="bg-gray-50 border-b">
             <tr>
+              <th className="w-8 p-4">
+                <input
+                  type="checkbox"
+                  checked={pageOrders.length > 0 && pageOrders.every((o) => selected.has(o._id))}
+                  onChange={(e) => {
+                    setSelected((prev) => {
+                      const next = new Set(prev);
+                      if (e.target.checked) pageOrders.forEach((o) => next.add(o._id));
+                      else pageOrders.forEach((o) => next.delete(o._id));
+                      return next;
+                    });
+                  }}
+                  className="accent-[#0b4f86]"
+                  title="Select all on this page"
+                />
+              </th>
               <th className="text-left p-4 font-medium">Order ID</th>
               <th className="text-left p-4 font-medium">Customer</th>
               <th className="text-left p-4 font-medium">Items</th>
               <th className="text-left p-4 font-medium">Total</th>
               <th className="text-left p-4 font-medium">Status</th>
               <th className="text-left p-4 font-medium">Date</th>
+              <th className="text-right p-4 font-medium">Actions</th>
             </tr>
           </thead>
           <tbody>
             {pageOrders.map((o) => (
               <tr key={o._id} className="border-b last:border-0 hover:bg-gray-50 align-top">
+                <td className="p-4">
+                  <input
+                    type="checkbox"
+                    checked={selected.has(o._id)}
+                    onChange={(e) => {
+                      setSelected((prev) => {
+                        const next = new Set(prev);
+                        if (e.target.checked) next.add(o._id);
+                        else next.delete(o._id);
+                        return next;
+                      });
+                    }}
+                    className="accent-[#0b4f86]"
+                  />
+                </td>
                 <td className="p-4 font-medium">#{String(o._id).slice(-6).toUpperCase()}</td>
                 <td className="p-4">
                   {o.customer?.name || 'Guest'}
@@ -158,10 +229,15 @@ export default function AdminOrders() {
                   </select>
                 </td>
                 <td className="p-4 text-gray-500">{new Date(o.createdAt).toLocaleDateString()}</td>
+                <td className="p-4 text-right whitespace-nowrap">
+                  <button onClick={() => handleDelete(o._id)} className="p-1.5 hover:bg-rose-50 text-rose-600 rounded" title="Delete order">
+                    <Trash2 size={15} />
+                  </button>
+                </td>
               </tr>
             ))}
             {pageOrders.length === 0 && (
-              <tr><td colSpan={6} className="p-8 text-center text-gray-400">No orders found</td></tr>
+              <tr><td colSpan={8} className="p-8 text-center text-gray-400">No orders found</td></tr>
             )}
           </tbody>
         </table>

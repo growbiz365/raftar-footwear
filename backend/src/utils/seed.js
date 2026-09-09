@@ -4,21 +4,16 @@ const Category = require('../models/Category');
 const Setting = require('../models/Setting');
 const Blog = require('../models/Blog');
 
-// Real images from https://raftarfootwear.com/
+// Cloudinary base (cloud: dj5hgapcp, folder: raftar-footwear) without version.
+const C = 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear';
+
 const IMG = {
-  logo: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771608/raftar-footwear/logo.webp',
-  hero: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771606/raftar-footwear/hero-image-final.png',
-  factory: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771605/raftar-footwear/factory-image-e1785482188113.webp',
-  article019brown: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771590/raftar-footwear/article-019-brown.webp',
-  article815: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771596/raftar-footwear/article-815.webp',
-  article05: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771593/raftar-footwear/article-05.webp',
-  article019black: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771588/raftar-footwear/article-019-black.webp',
-  article017: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771587/raftar-footwear/article-017.webp',
-  article011: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771586/raftar-footwear/article-011.webp',
-  article025: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771591/raftar-footwear/article-025.webp',
-  article291: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771595/raftar-footwear/article-291.webp',
-  article027: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771592/raftar-footwear/article-027.webp',
-  articleWoven: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771597/raftar-footwear/article-woven.webp',
+  logo: '/images/raftar-logo.jpg',
+  hero: `${C}/Chappal/01/1.jpg`,
+  hero2: `${C}/Multiple%202/01/1.jpg`,
+  banner: `${C}/Panjadara/01/1.jpg`,
+  classy: `${C}/3trple%20Gir/01/2.jpg`,
+  popup: `${C}/Boot/01/1.jpg`,
 };
 
 async function seed() {
@@ -45,12 +40,14 @@ async function seed() {
     const catCount = await Category.countDocuments();
     if (catCount === 0) {
       await Category.insertMany([
-        { name: 'Women', slug: 'women', image: IMG.article019brown, count: 2, order: 1 },
-        { name: 'Men', slug: 'men', image: IMG.article815, count: 4, order: 2 },
-        { name: 'Children', slug: 'children', image: IMG.article025, count: 2, order: 3 },
-        { name: 'Slides', slug: 'slides', image: IMG.article017, count: 6, order: 4 },
-        { name: 'Chappals', slug: 'chappals', image: IMG.articleWoven, count: 2, order: 5 },
-        { name: 'Sports', slug: 'sports', image: IMG.article011, count: 3, order: 6 }
+        { name: 'Slides', slug: 'slides', image: `${C}/01/1.jpg`, count: 7, order: 1 },
+        { name: 'Chappals', slug: 'chappals', image: `${C}/Chappal/01/1.jpg`, count: 2, order: 2 },
+        { name: 'Boots', slug: 'boots', image: `${C}/Boot/01/1.jpg`, count: 5, order: 3 },
+        { name: 'Chappali Boots', slug: 'chappali-boots', image: `${C}/Chappali%20Boot/06/1.jpg`, count: 3, order: 4 },
+        { name: 'Panjadara', slug: 'panjadara', image: `${C}/Panjadara/01/1.jpg`, count: 4, order: 5 },
+        { name: '3trple Gir', slug: '3trple-gir', image: `${C}/3trple%20Gir/01/2.jpg`, count: 2, order: 6 },
+        { name: 'Multiple', slug: 'multiple', image: `${C}/Multiple/01/1.jpg`, count: 7, order: 7 },
+        { name: 'Multiple 2', slug: 'multiple-2', image: `${C}/Multiple%202/01/1.jpg`, count: 9, order: 8 }
       ]);
       console.log('✅ Categories seeded');
     }
@@ -63,7 +60,7 @@ async function seed() {
           name: "Women's Buckle Slide",
           slug: 'womens-buckle-slide',
           price: 220, compareAtPrice: null,
-          images: [IMG.article019brown],
+          images: [],
           colors: ['Brown', 'Tan'], sizes: ['13/5'],
           category: 'Women', tags: ['Sale', 'Best Seller', 'Footwear'], featured: true,
           description: 'Women\'s buckle slide chappal. Article 019. Comfortable plastic footwear for daily use. Size 13/5.',
@@ -73,7 +70,7 @@ async function seed() {
           name: "Men's Cross-Strap Slide",
           slug: 'mens-cross-strap-slide',
           price: 400, compareAtPrice: null,
-          images: [IMG.article815],
+          images: [],
           colors: ['Black', 'Brown'], sizes: ['7/10'],
           category: 'Men', tags: ['Best Seller', 'Footwear'], featured: true,
           description: 'Men\'s cross-strap slide. Article 815. Premium PVC design. Size 7/10.',
@@ -83,7 +80,7 @@ async function seed() {
           name: 'Massage Flip-Flop',
           slug: 'massage-flip-flop',
           price: 400, compareAtPrice: null,
-          images: [IMG.article05],
+          images: [],
           colors: ['Blue', 'Black'], sizes: ['7/10'],
           category: 'Men', tags: ['Footwear', 'Trending'], featured: true,
           description: 'Massage flip-flop with ergonomic sole. Article 05. Size 7/10.',
@@ -93,7 +90,7 @@ async function seed() {
           name: 'Black Buckle Slide',
           slug: 'black-buckle-slide',
           price: 320, compareAtPrice: null,
-          images: [IMG.article019black],
+          images: [],
           colors: ['Black'], sizes: ['6/9'],
           category: 'Women', tags: ['Footwear'], featured: true,
           description: 'Black buckle slide. Article 019. Size 6/9. Durable PCU material.',
@@ -103,7 +100,7 @@ async function seed() {
           name: "Men's Sports Slide",
           slug: 'mens-sports-slide',
           price: 200, compareAtPrice: 250,
-          images: [IMG.article017],
+          images: [],
           colors: ['Black', 'Gray'], sizes: ['7/10'],
           category: 'Men', tags: ['Sale', 'Footwear', 'Sports'], featured: true,
           description: 'Men\'s sports slide. Article 017. Lightweight and durable. Size 7/10.',
@@ -113,7 +110,7 @@ async function seed() {
           name: 'White Sports Slide',
           slug: 'white-sports-slide',
           price: 200, compareAtPrice: null,
-          images: [IMG.article011],
+          images: [],
           colors: ['White'], sizes: ['7/10'],
           category: 'Men', tags: ['Footwear', 'Sports'], featured: true,
           description: 'White sports slide. Article 011. Clean look for everyday wear. Size 7/10.',
@@ -123,7 +120,7 @@ async function seed() {
           name: "Children's Closed Clog",
           slug: 'childrens-closed-clog',
           price: 210, compareAtPrice: null,
-          images: [IMG.article025],
+          images: [],
           colors: ['Multi'], sizes: ['2/9'],
           category: 'Children', tags: ['Footwear'], featured: true,
           description: 'Children\'s closed clog. Article 025. Safe and comfortable. Size 2/9.',
@@ -133,7 +130,7 @@ async function seed() {
           name: "Children's Sports Slide",
           slug: 'childrens-sports-slide',
           price: 140, compareAtPrice: null,
-          images: [IMG.article291],
+          images: [],
           colors: ['Blue', 'Pink'], sizes: ['18/35'],
           category: 'Children', tags: ['Footwear', 'Sports'], featured: false,
           description: 'Children\'s sports slide. Article 291. Size 18/35.',
@@ -143,7 +140,7 @@ async function seed() {
           name: "Men's Double-Strap Slide",
           slug: 'mens-double-strap-slide',
           price: 410, compareAtPrice: null,
-          images: [IMG.article027],
+          images: [],
           colors: ['Black', 'Brown'], sizes: ['7/10'],
           category: 'Men', tags: ['Best Seller', 'Footwear'], featured: true,
           description: 'Men\'s double-strap slide. Article 027. Premium comfort. Size 7/10.',
@@ -153,7 +150,7 @@ async function seed() {
           name: 'Daily Use Woven Chappal',
           slug: 'daily-use-woven-chappal',
           price: 220, compareAtPrice: null,
-          images: [IMG.articleWoven],
+          images: [],
           colors: ['Brown', 'Black'], sizes: ['8/11'],
           category: 'Chappals', tags: ['Footwear'], featured: true,
           description: 'Daily use woven chappal. Article 07. Traditional comfort. Size 8/11.',
@@ -181,14 +178,14 @@ async function seed() {
         title: 'PCU & PVC Footwear',
         subtitle: 'Modern production in Peshawar — bulk supply for wholesalers',
         buttonText: 'View Products',
-        image: IMG.factory
+        image: IMG.banner
       },
       classySection: {
         title: 'Trusted Manufacturer',
         titleLine2: 'in Peshawar',
         text: 'Raftar Footwear Enterprises manufactures premium plastic chappals and PVC footwear for comfort, durability and everyday use.',
         buttonText: 'Shop Now',
-        image: IMG.factory
+        image: IMG.classy
       },
       logo: IMG.logo,
       siteName: 'Raftar Footwear',
@@ -196,7 +193,7 @@ async function seed() {
         enabled: true,
         title: 'ENJOY 10% OFF YOUR FIRST ORDER',
         subtitle: 'Stay Informed! Monthly Tips, Tracks and Discount.',
-        image: IMG.hero,
+        image: IMG.hero2,
         buttonText: 'Subscribe',
         delaySeconds: 4,
         couponCode: 'FIRST10'
@@ -205,10 +202,10 @@ async function seed() {
         enabled: true,
         intervalSeconds: 8,
         items: [
-          { name: "Women's Buckle Slide", city: 'Peshawar', time: '12 Minutes Ago', img: IMG.article019brown },
-          { name: "Men's Cross-Strap Slide", city: 'Lahore', time: '28 Minutes Ago', img: IMG.article815 },
-          { name: 'Massage Flip-Flop', city: 'Karachi', time: '45 Minutes Ago', img: IMG.article05 },
-          { name: "Men's Sports Slide", city: 'Islamabad', time: '1 Hour Ago', img: IMG.article017 }
+          { name: 'Chappal 01', city: 'Peshawar', time: '12 Minutes Ago', img: IMG.hero },
+          { name: 'Multiple 2 01', city: 'Lahore', time: '28 Minutes Ago', img: IMG.hero2 },
+          { name: 'Boot 01', city: 'Karachi', time: '45 Minutes Ago', img: IMG.popup },
+          { name: 'Panjadara 01', city: 'Islamabad', time: '1 Hour Ago', img: IMG.banner }
         ]
       },
       exitPopup: {
@@ -233,7 +230,7 @@ async function seed() {
           slug: 'why-wholesale-plastic-footwear',
           excerpt: 'Learn how dealers benefit from bulk PCU & PVC footwear from Peshawar manufacturers.',
           content: 'Raftar Footwear Enterprises supplies quality plastic chappals and slides across Pakistan. Our wholesale packs of 1, 6 and 12 pairs help dealers manage inventory efficiently while offering competitive prices.\n\nWe use reliable PCU and PVC materials designed for everyday comfort and durability.',
-          coverImage: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771605/raftar-footwear/factory-image-e1785482188113.webp',
+          coverImage: IMG.hero,
           tags: ['wholesale', 'footwear'],
           isPublished: true
         },
@@ -242,7 +239,7 @@ async function seed() {
           slug: 'pcu-vs-pvc-footwear',
           excerpt: 'A quick guide to materials used in plastic chappals and slides.',
           content: 'PCU and PVC are the standard materials for affordable, durable plastic footwear in Pakistan. Raftar specializes in both, with strict quality control at our Peshawar facility.',
-          coverImage: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771606/raftar-footwear/hero-image-final.png',
+          coverImage: IMG.banner,
           tags: ['materials', 'guide'],
           isPublished: true
         }

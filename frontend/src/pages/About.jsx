@@ -1,10 +1,5 @@
 import { Link } from 'react-router-dom';
 
-const IMG = {
-  factory: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771605/raftar-footwear/factory-image-e1785482188113.webp',
-  hero: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771606/raftar-footwear/hero-image-final.png',
-};
-
 export default function About() {
   return (
     <div>
@@ -18,7 +13,6 @@ export default function About() {
 
       <section className="max-w-[1100px] mx-auto px-4 sm:px-6 py-12 sm:py-16">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
-          <img src={IMG.factory} alt="Factory" className="rounded-xl w-full object-cover aspect-[4/3]" />
           <div>
             <h2 className="text-2xl sm:text-3xl font-medium mb-4">Who We Are</h2>
             <p className="text-gray-600 leading-relaxed mb-4">
@@ -30,6 +24,14 @@ export default function About() {
               We manufacture plastic chappal and footwear and deal in all kinds of PCU and PVC standard products designed for comfort, durability and everyday use.
             </p>
             <Link to="/shop" className="inline-block bg-black text-white px-6 py-3 rounded-lg text-sm font-medium hover:bg-gray-800">View Products</Link>
+          </div>
+          <div>
+            <img
+              src="https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Chappal/01/1.jpg"
+              alt="Raftar Footwear chappal"
+              className="w-full h-auto rounded-xl shadow-sm object-cover"
+              loading="lazy"
+            />
           </div>
         </div>
       </section>

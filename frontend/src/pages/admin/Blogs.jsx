@@ -25,6 +25,7 @@ export default function AdminBlogs() {
   const [useLocal, setUseLocal] = useState(false);
   const [query, setQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
+  const [selected, setSelected] = useState(new Set());
 
   const load = async () => {
     setLoading(true);
@@ -145,6 +146,30 @@ export default function AdminBlogs() {
     toast('Blog post deleted');
   };
 
+  const handleBulkDelete = async () => {
+    if (selected.size === 0) return;
+    const ok = await confirm(`Delete ${selected.size} selected blog post(s)?`);
+    if (!ok) return;
+    try {
+      if (useLocal) {
+        const list = getLocalBlogs().filter((b) => !selected.has(b._id));
+        saveLocalBlogs(list);
+        setBlogs(list);
+      } else {
+        await Promise.all([...selected].map((id) => api.delete(`/blogs/${id}`)));
+        await load();
+      }
+      toast(`${selected.size} blog post(s) deleted`);
+    } catch {
+      const list = blogs.filter((b) => !selected.has(b._id));
+      saveLocalBlogs(list);
+      setBlogs(list);
+      setUseLocal(true);
+      toast(`${selected.size} blog post(s) deleted`);
+    }
+    setSelected(new Set());
+  };
+
   const publishedCount = blogs.filter((b) => b.isPublished !== false).length;
   const draftCount = blogs.length - publishedCount;
 
@@ -227,9 +252,38 @@ export default function AdminBlogs() {
         </div>
       ) : (
         <div className="bg-white rounded-xl border overflow-hidden">
+          {selected.size > 0 && (
+            <div className="flex items-center justify-between bg-rose-50 border-b border-rose-100 px-4 py-2.5">
+              <p className="text-sm text-rose-700 font-medium">{selected.size} selected</p>
+              <div className="flex items-center gap-2">
+                <button onClick={() => setSelected(new Set())} className="px-3 py-1.5 text-sm text-gray-600 border rounded-lg bg-white hover:bg-gray-50">
+                  Clear
+                </button>
+                <button onClick={handleBulkDelete} className="px-3 py-1.5 text-sm text-white bg-rose-600 rounded-lg hover:bg-rose-700">
+                  Delete selected
+                </button>
+              </div>
+            </div>
+          )}
           <table className="w-full text-sm">
             <thead className="bg-gray-50 border-b">
               <tr>
+                <th className="w-8 px-4 py-3">
+                  <input
+                    type="checkbox"
+                    checked={filtered.length > 0 && filtered.every((b) => selected.has(b._id))}
+                    onChange={(e) => {
+                      setSelected((prev) => {
+                        const next = new Set(prev);
+                        if (e.target.checked) filtered.forEach((b) => next.add(b._id));
+                        else filtered.forEach((b) => next.delete(b._id));
+                        return next;
+                      });
+                    }}
+                    className="accent-[#0b4f86]"
+                    title="Select all"
+                  />
+                </th>
                 <th className="text-left px-4 py-3 font-medium">Title</th>
                 <th className="text-left px-4 py-3 font-medium hidden sm:table-cell">Author</th>
                 <th className="text-left px-4 py-3 font-medium hidden md:table-cell">Status</th>
@@ -239,6 +293,21 @@ export default function AdminBlogs() {
             <tbody>
               {filtered.map((b) => (
                 <tr key={b._id} className="border-b last:border-0 hover:bg-gray-50">
+                  <td className="px-4 py-3 w-8">
+                    <input
+                      type="checkbox"
+                      checked={selected.has(b._id)}
+                      onChange={(e) => {
+                        setSelected((prev) => {
+                          const next = new Set(prev);
+                          if (e.target.checked) next.add(b._id);
+                          else next.delete(b._id);
+                          return next;
+                        });
+                      }}
+                      className="accent-[#0b4f86]"
+                    />
+                  </td>
                   <td className="px-4 py-3">
                     <div className="font-medium">{b.title}</div>
                     <div className="text-xs text-gray-400 mt-0.5 line-clamp-1">{b.excerpt}</div>
@@ -266,7 +335,7 @@ export default function AdminBlogs() {
                 </tr>
               ))}
               {filtered.length === 0 && (
-                <tr><td colSpan={4} className="px-4 py-8 text-center text-gray-400">No posts matching your filters</td></tr>
+                <tr><td colSpan={5} className="px-4 py-8 text-center text-gray-400">No posts matching your filters</td></tr>
               )}
             </tbody>
           </table>

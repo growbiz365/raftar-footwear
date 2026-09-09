@@ -1,17 +1,22 @@
-# --- Environment files (never commit secrets) ---
-.env
-.env.*
-!.env.example
-
-# --- Node / build ---
+# dependencies
 node_modules/
-dist/
-build/
-.vite/
 
-# Pre-built React app is intentionally committed so Hostinger never runs Vite
-!frontend/dist/
 
-# --- Logs ---
+
+# env
+.env
+.env.local
+.env.*.local
+
+# logs
 *.log
 npm-debug.log*
+
+# os / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# misc
+frontend/KK Production/

@@ -11,6 +11,7 @@ export default function AdminCategories() {
   const [form, setForm] = useState({ name: '', description: '', image: '' });
   const [file, setFile] = useState(null);
   const [query, setQuery] = useState('');
+  const [selected, setSelected] = useState(new Set());
 
   const load = () => api.get('/admin/categories').then(r => setCategories(r.data?.data || [])).catch(() => {});
 
@@ -48,6 +49,20 @@ export default function AdminCategories() {
     await api.delete(`/admin/categories/${id}`);
     load();
     toast('Category deleted');
+  };
+
+  const handleBulkDelete = async () => {
+    if (selected.size === 0) return;
+    const ok = await confirm(`Delete ${selected.size} selected categor${selected.size > 1 ? 'ies' : 'y'}?`);
+    if (!ok) return;
+    try {
+      await Promise.all([...selected].map((id) => api.delete(`/admin/categories/${id}`)));
+      toast(`${selected.size} categor${selected.size > 1 ? 'ies' : 'y'} deleted`);
+    } catch {
+      toast('Some categories could not be deleted', 'error');
+    }
+    setSelected(new Set());
+    load();
   };
 
   return (
@@ -104,9 +119,56 @@ export default function AdminCategories() {
         </div>
       )}
 
+      {selected.size > 0 && (
+        <div className="flex items-center justify-between bg-rose-50 border border-rose-100 rounded-xl px-4 py-2.5 mb-4">
+          <p className="text-sm text-rose-700 font-medium">{selected.size} selected</p>
+          <div className="flex items-center gap-2">
+            <button onClick={() => setSelected(new Set())} className="px-3 py-1.5 text-sm text-gray-600 border rounded-lg bg-white hover:bg-gray-50">
+              Clear
+            </button>
+            <button onClick={handleBulkDelete} className="px-3 py-1.5 text-sm text-white bg-rose-600 rounded-lg hover:bg-rose-700">
+              Delete selected
+            </button>
+          </div>
+        </div>
+      )}
+
+      <div className="flex items-center gap-2 mb-4">
+        <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={filtered.length > 0 && filtered.every((c) => selected.has(c._id))}
+            onChange={(e) => {
+              setSelected((prev) => {
+                const next = new Set(prev);
+                if (e.target.checked) filtered.forEach((c) => next.add(c._id));
+                else filtered.forEach((c) => next.delete(c._id));
+                return next;
+              });
+            }}
+            className="accent-[#0b4f86]"
+          />
+          Select all
+        </label>
+      </div>
+
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {filtered.map(c => (
-          <div key={c._id} className="bg-white rounded-xl shadow-sm overflow-hidden flex">
+          <div key={c._id} className="bg-white rounded-xl shadow-sm overflow-hidden flex relative">
+            <input
+              type="checkbox"
+              checked={selected.has(c._id)}
+              onChange={(e) => {
+                setSelected((prev) => {
+                  const next = new Set(prev);
+                  if (e.target.checked) next.add(c._id);
+                  else next.delete(c._id);
+                  return next;
+                });
+              }}
+              className="accent-rose-600 absolute top-2 left-2 z-10"
+              title="Select"
+            />
             <img src={c.image || '/images/cat-women.svg'} alt="" className="w-24 h-24 object-cover" />
             <div className="p-4 flex-1 flex flex-col justify-between">
               <div>

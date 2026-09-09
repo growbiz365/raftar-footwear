@@ -36,6 +36,11 @@ export const adminUpdateOrderStatus = createAsyncThunk('admin/updateOrder', asyn
   return data.data;
 });
 
+export const adminDeleteOrder = createAsyncThunk('admin/deleteOrder', async (id) => {
+  await api.delete(`/admin/orders/${id}`);
+  return id;
+});
+
 const adminSlice = createSlice({
   name: 'admin',
   initialState: {
@@ -62,6 +67,9 @@ const adminSlice = createSlice({
       .addCase(adminUpdateOrderStatus.fulfilled, (state, action) => {
         const i = state.orders.findIndex(o => o._id === action.payload._id);
         if (i >= 0) state.orders[i] = action.payload;
+      })
+      .addCase(adminDeleteOrder.fulfilled, (state, action) => {
+        state.orders = state.orders.filter(o => o._id !== action.payload);
       });
   }
 });

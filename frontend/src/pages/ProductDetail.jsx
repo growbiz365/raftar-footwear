@@ -41,7 +41,7 @@ export default function ProductDetail() {
     return (
       <div className="max-w-[1400px] mx-auto px-4 py-20">
         <div className="grid lg:grid-cols-2 gap-12">
-          <div className="aspect-[3/4] bg-gray-100 animate-pulse rounded-xl" />
+          <div className="aspect-square bg-gray-100 animate-pulse rounded-xl" />
           <div className="space-y-4">
             <div className="h-8 bg-gray-100 animate-pulse rounded w-3/4" />
             <div className="h-6 bg-gray-100 animate-pulse rounded w-1/4" />
@@ -135,7 +135,7 @@ export default function ProductDetail() {
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-14">
         {/* Images */}
         <div>
-          <div className="aspect-[4/5] bg-gray-50 overflow-hidden rounded-2xl mb-4 border border-gray-100">
+          <div className="aspect-square bg-gray-50 overflow-hidden rounded-2xl mb-4 border border-gray-100">
             <img
               src={shownImg}
               alt={product.name}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../../services/api';
 import { Plus, Trash2, X, Pencil, Save, ChevronUp, ChevronDown, RotateCcw } from 'lucide-react';
-import { getLocalSettings, saveLocalSettings, IMG, STATIC_SETTINGS } from '../../data/catalog';
+import { getLocalSettings, saveLocalSettings, STATIC_SETTINGS } from '../../data/catalog';
 import ImageField from '../../components/admin/ImageField';
 import { useToast } from '../../components/admin/Toast';
 
@@ -26,12 +26,13 @@ const normalizeSlide = (s) => ({
 export default function AdminSettings() {
   const { toast, confirm } = useToast();
   const [promoBar, setPromoBar] = useState('');
-  const [slides, setSlides] = useState([{ ...emptySlide, image: IMG.hero }]);
+  const [slides, setSlides] = useState([{ ...emptySlide, image: '' }]);
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState('');
   const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState(null);
   const [draft, setDraft] = useState({ ...emptySlide });
+  const [selected, setSelected] = useState(new Set());
 
   const updraft = (k, v) => setDraft((d) => ({ ...d, [k]: v }));
 
@@ -40,9 +41,9 @@ export default function AdminSettings() {
     setModal({ mode: 'add' });
   };
 
-  const openEdit = (slide) => {
+  const openEdit = (slide, index) => {
     setDraft(normalizeSlide({ ...emptySlide, ...slide }));
-    setModal({ mode: 'edit' });
+    setModal({ mode: 'edit', index });
   };
 
   const saveSlide = () => {
@@ -62,7 +63,22 @@ export default function AdminSettings() {
     const ok = await confirm('Remove this hero slide?');
     if (!ok) return;
     setSlides((s) => s.filter((_, idx) => idx !== i));
+    setSelected((prev) => {
+      const next = new Set();
+      prev.forEach((x) => next.add(x > i ? x - 1 : x));
+      next.delete(i);
+      return next;
+    });
     toast('Hero slide removed');
+  };
+
+  const removeSelectedSlides = async () => {
+    if (selected.size === 0) return;
+    const ok = await confirm(`Remove ${selected.size} selected hero slide(s)?`);
+    if (!ok) return;
+    setSlides((s) => s.filter((_, idx) => !selected.has(idx)));
+    setSelected(new Set());
+    toast(`${selected.size} hero slide(s) removed`);
   };
 
   useEffect(() => {
@@ -79,7 +95,7 @@ export default function AdminSettings() {
         setPromoBar(local.promoBar || '');
         const h = local.hero || {};
         if (Array.isArray(h.slides) && h.slides.length) setSlides(h.slides.map(normalizeSlide));
-        else setSlides([normalizeSlide({ ...emptySlide, ...h, image: h.image || IMG.hero })]);
+        else setSlides([normalizeSlide({ ...emptySlide, ...h, image: h.image || '' })]);
       }
       setLoading(false);
     })();
@@ -220,13 +236,56 @@ export default function AdminSettings() {
           </button>
         </div>
 
+        {selected.size > 0 && (
+          <div className="flex items-center justify-between bg-rose-50 border border-rose-100 rounded-xl px-4 py-2.5 mb-3">
+            <p className="text-sm text-rose-700 font-medium">{selected.size} selected</p>
+            <div className="flex items-center gap-2">
+              <button onClick={() => setSelected(new Set())} className="px-3 py-1.5 text-sm text-gray-600 border rounded-lg bg-white hover:bg-gray-50">
+                Clear
+              </button>
+              <button onClick={removeSelectedSlides} className="px-3 py-1.5 text-sm text-white bg-rose-600 rounded-lg hover:bg-rose-700">
+                Remove selected
+              </button>
+            </div>
+          </div>
+        )}
+
+        <div className="flex items-center gap-2 mb-3">
+          <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={slides.length > 0 && slides.every((_, i) => selected.has(i))}
+              onChange={(e) => {
+                setSelected(e.target.checked ? new Set(slides.map((_, i) => i)) : new Set());
+              }}
+              className="accent-[#0b4f86]"
+            />
+            Select all slides
+          </label>
+        </div>
+
         <div className="space-y-4">
           {slides.map((slide, i) => (
             <div
               key={i}
               className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col sm:flex-row sm:items-center gap-4"
             >
-              <div className="relative w-full sm:w-44 h-28 rounded-xl overflow-hidden shrink-0 bg-gray-100">
+              <div className="flex items-center gap-3 shrink-0">
+                <input
+                  type="checkbox"
+                  checked={selected.has(i)}
+                  onChange={(e) => {
+                    setSelected((prev) => {
+                      const next = new Set(prev);
+                      if (e.target.checked) next.add(i);
+                      else next.delete(i);
+                      return next;
+                    });
+                  }}
+                  className="accent-rose-600"
+                  title="Select slide"
+                />
+                <div className="relative w-full sm:w-44 h-28 rounded-xl overflow-hidden shrink-0 bg-gray-100">
                 {slide.image ? (
                   <img
                     src={slide.image}
@@ -237,6 +296,7 @@ export default function AdminSettings() {
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-gray-300 text-xs">No image</div>
                 )}
+              </div>
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between gap-2">
@@ -277,7 +337,7 @@ export default function AdminSettings() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => openEdit(slide)}
+                  onClick={() => openEdit(slide, i)}
                   className="p-2 rounded-lg bg-[#0b4f86]/10 text-[#0b4f86] hover:bg-[#0b4f86]/20"
                   title="Edit slide"
                 >

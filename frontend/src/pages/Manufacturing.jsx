@@ -1,9 +1,5 @@
 import { Link } from 'react-router-dom';
 
-const IMG = {
-  factory: 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771605/raftar-footwear/factory-image-e1785482188113.webp',
-};
-
 const steps = [
   { n: '01', t: 'Raw Material Selection', d: 'Premium PCU and PVC materials are selected for production.' },
   { n: '02', t: 'Design & Mold Preparation', d: 'Accurate product designs and precision molds are prepared.' },
@@ -26,7 +22,6 @@ export default function Manufacturing() {
 
       <section className="max-w-[1100px] mx-auto px-4 sm:px-6 py-12 sm:py-16">
         <div className="grid lg:grid-cols-2 gap-10 items-center mb-16">
-          <img src={IMG.factory} alt="Manufacturing" className="rounded-xl w-full object-cover" />
           <div>
             <h2 className="text-2xl font-medium mb-4">Our Manufacturing Process</h2>
             <p className="text-gray-600 leading-relaxed mb-4">

@@ -29,6 +29,7 @@ router.patch('/products/:id/stock', productCtrl.updateStock);
 
 router.get('/orders', orderCtrl.getOrders);
 router.patch('/orders/:id/status', orderCtrl.updateOrderStatus);
+router.delete('/orders/:id', orderCtrl.deleteOrder);
 
 router.get('/categories', categoryCtrl.getCategories);
 router.post('/categories', handleSingleUpload, categoryCtrl.createCategory);

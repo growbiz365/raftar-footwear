@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCartOpen, setSearchOpen, selectCartCount } from '../../store/slices/cartSlice';
 import api from '../../services/api';
 
-const LOGO = 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1788771608/raftar-footwear/logo.webp';
+const LOGO = '/images/raftar-logo.jpg';
 const PHONE = '03338788861';
 
 export default function Header() {
@@ -13,26 +13,32 @@ export default function Header() {
   const location = useLocation();
   const navigate = useNavigate();
   const cartCount = useSelector(selectCartCount);
-  const wishlist = useSelector(s => s.cart.wishlist);
-  const isSearchOpen = useSelector(s => s.cart.isSearchOpen);
+  const wishlist = useSelector((s) => s.cart.wishlist);
+  const isSearchOpen = useSelector((s) => s.cart.isSearchOpen);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [allProducts, setAllProducts] = useState([]);
   const [openDropdown, setOpenDropdown] = useState(null);
-  const [promoBar, setPromoBar] = useState('★ Quality Footwear, Every Step of the Way. | Wholesale Packs: 1 · 6 · 12');
+  const [promoBar, setPromoBar] = useState(
+    'GET FLAT WHOLESALE RATES · PACKS 1 · 6 · 12 · CALL ' + PHONE
+  );
   const dropdownRef = useRef(null);
 
   useEffect(() => {
-    api.get('/settings').then(r => {
-      const d = r.data?.data;
-      if (d?.promoBar) setPromoBar(typeof d.promoBar === 'string' ? d.promoBar : d.promoBar);
-    }).catch(() => {});
+    api
+      .get('/settings')
+      .then((r) => {
+        const d = r.data?.data;
+        if (d?.promoBar) setPromoBar(typeof d.promoBar === 'string' ? d.promoBar : d.promoBar);
+      })
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
     if (!isSearchOpen) return;
     setSearchQuery('');
-    api.get('/products', { params: { limit: 200 } })
+    api
+      .get('/products', { params: { limit: 200 } })
       .then((r) => setAllProducts(r.data?.data || r.data || []))
       .catch(() => setAllProducts([]));
   }, [isSearchOpen]);
@@ -71,74 +77,87 @@ export default function Header() {
   }, []);
 
   const shopLinks = [
-    { label: 'All Products', to: '/shop' },
-    { label: "Men's Footwear", to: '/collections/men' },
-    { label: "Women's Footwear", to: '/collections/women' },
-    { label: "Children's Footwear", to: '/collections/children' },
-    { label: 'Slides', to: '/collections/slides' },
-    { label: 'Chappals', to: '/collections/chappals' },
+    { to: '/shop', label: 'All Products' },
+    { to: '/collections/men', label: 'Men' },
+    { to: '/collections/women', label: 'Women' },
+    { to: '/collections/children', label: 'Children' },
+    { to: '/collections/raftar', label: 'Raftar Footwear' },
+    { to: '/collections/superstar', label: 'Superstar Footwear' },
   ];
 
-  const navLink = (to, label) => (
-    <Link
-      to={to}
-      className={`py-2 text-sm font-semibold tracking-wide transition hover:text-[#0b4f86] ${
-        location.pathname === to || location.pathname.startsWith(to + '/') ? 'text-[#0b4f86]' : 'text-slate-700'
-      }`}
-    >
-      {label}
-    </Link>
-  );
+  const navClass = (path) => {
+    const active = location.pathname === path || location.pathname.startsWith(path + '/');
+    return `relative py-5 text-[13px] font-medium tracking-wide transition-colors ${
+      active ? 'text-black' : 'text-gray-600 hover:text-black'
+    } after:absolute after:left-0 after:bottom-3 after:h-[2px] after:bg-black after:transition-all after:duration-300 ${
+      active ? 'after:w-full' : 'after:w-0 hover:after:w-full'
+    }`;
+  };
 
   return (
     <>
-      {/* Top bar */}
-      <div className="bg-[#0b4f86] text-white text-center text-[10px] sm:text-xs py-1.5 px-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-        <a href={`tel:${PHONE}`} className="hover:underline flex items-center gap-1 font-semibold">
-          <Phone size={12} /> {PHONE}
-        </a>
-        <span className="hidden sm:inline">|</span>
-        <a href="https://wa.me/923338788861" target="_blank" rel="noreferrer" className="hover:underline hidden sm:inline">
-          WhatsApp Order
-        </a>
-        <span className="hidden md:inline">|</span>
-        <a href="mailto:info@raftarfootwear.com" className="hover:underline hidden md:inline">
-          info@raftarfootwear.com
-        </a>
-      </div>
-      <div className="bg-black text-white text-center text-[10px] sm:text-xs py-1.5 tracking-wide px-2 whitespace-nowrap overflow-hidden text-ellipsis">
-        {promoBar}
+      {/* Top promo bar — Revone black bar */}
+      <div className="bg-black text-white text-[11px] sm:text-xs">
+        <div className="max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-10 flex items-center justify-between gap-3 h-9">
+          <a
+            href={`tel:${PHONE}`}
+            className="hidden sm:inline-flex items-center gap-1.5 text-white/80 hover:text-white transition shrink-0"
+          >
+            <Phone size={12} />
+            Need Help? Call us at {PHONE}
+          </a>
+          <p className="flex-1 text-center font-medium tracking-wide uppercase truncate px-2">
+            {promoBar}
+          </p>
+          <span className="hidden md:inline text-white/50 shrink-0 tracking-wider">PKR</span>
+        </div>
       </div>
 
-      <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm" ref={dropdownRef}>
-        <div className="max-w-[1400px] mx-auto px-3 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-14 sm:h-16 lg:h-[72px]">
-            <button className="lg:hidden p-2 -ml-1" onClick={() => setMobileMenu(!mobileMenu)} aria-label="Menu">
+      {/* Main header — white, clean */}
+      <header className="sticky top-0 z-40 bg-white border-b border-gray-100" ref={dropdownRef}>
+        <div className="max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-10">
+          <div className="flex items-center justify-between h-[72px] sm:h-24 lg:h-24 gap-4">
+            {/* Mobile menu */}
+            <button
+              className="lg:hidden p-2 -ml-1 text-gray-800"
+              onClick={() => setMobileMenu(!mobileMenu)}
+              aria-label="Menu"
+            >
               {mobileMenu ? <X size={22} /> : <Menu size={22} />}
             </button>
 
-            <Link to="/" className="flex items-center">
-              <img src={LOGO} alt="Raftar Footwear" className="h-10 sm:h-12 lg:h-14 w-auto object-contain" loading="eager" decoding="async" />
+            {/* Logo */}
+            <Link to="/" className="flex items-center shrink-0">
+              <img
+                src={LOGO}
+                alt="Raftar Footwear"
+                className="h-16 sm:h-20 lg:h-24 w-auto object-contain max-w-[280px] sm:max-w-[340px] lg:max-w-[380px]"
+                loading="eager"
+                decoding="async"
+              />
             </Link>
 
-            <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
-              {navLink('/', 'Home')}
-              <div className="relative" onMouseEnter={() => setOpenDropdown('shop')} onMouseLeave={() => setOpenDropdown(null)}>
-                <Link
-                  to="/shop"
-                  className={`flex items-center gap-1 py-2 text-sm font-semibold transition hover:text-[#0b4f86] ${
-                    location.pathname === '/shop' ? 'text-[#0b4f86]' : 'text-slate-700'
-                  }`}
-                >
-                  Shop <ChevronDown size={14} />
+            {/* Desktop nav — center like Revone */}
+            <nav className="hidden lg:flex items-center gap-6 xl:gap-8 flex-1 justify-center">
+              <Link to="/" className={navClass('/')}>
+                Home
+              </Link>
+
+              <div
+                className="relative"
+                onMouseEnter={() => setOpenDropdown('shop')}
+                onMouseLeave={() => setOpenDropdown(null)}
+              >
+                <Link to="/shop" className={`${navClass('/shop')} inline-flex items-center gap-1`}>
+                  Shop <ChevronDown size={13} className="opacity-60" />
                 </Link>
                 {openDropdown === 'shop' && (
-                  <div className="absolute top-full left-0 mt-0 w-56 bg-white shadow-xl border rounded-b-lg py-2 z-50">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-0 w-52 bg-white shadow-xl border border-gray-100 py-2 z-50">
                     {shopLinks.map((l) => (
                       <Link
                         key={l.to}
                         to={l.to}
-                        className="block px-4 py-2.5 text-sm hover:bg-slate-50 hover:text-[#0b4f86]"
+                        className="block px-4 py-2.5 text-[13px] text-gray-700 hover:bg-gray-50 hover:text-black transition"
                         onClick={() => setOpenDropdown(null)}
                       >
                         {l.label}
@@ -147,38 +166,65 @@ export default function Header() {
                   </div>
                 )}
               </div>
-              {navLink('/collections/raftar', 'Raftar Footwear')}
-              {navLink('/collections/superstar', 'Superstar Footwear')}
-              {navLink('/blog', 'Blog')}
-              {navLink('/about', 'About')}
-              {navLink('/manufacturing', 'Manufacturing')}
-              {navLink('/contact', 'Contact')}
+
+              <Link to="/collections/raftar" className={navClass('/collections/raftar')}>
+                Raftar
+              </Link>
+              <Link to="/collections/superstar" className={navClass('/collections/superstar')}>
+                Superstar
+              </Link>
+              <Link to="/blog" className={navClass('/blog')}>
+                Blog
+              </Link>
+              <Link to="/about" className={navClass('/about')}>
+                About
+              </Link>
+              <Link to="/contact" className={navClass('/contact')}>
+                Contact
+              </Link>
+            </nav>
+
+            {/* Right actions */}
+            <div className="flex items-center gap-1 sm:gap-2 shrink-0">
               <a
-                href={`https://wa.me/923338788861`}
+                href="https://wa.me/923338788861"
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-xl bg-[#0b4f86] px-4 py-2.5 text-sm font-bold text-white shadow-lg hover:bg-[#083d6a] transition"
+                className="hidden lg:inline-flex items-center bg-black text-white text-xs font-semibold tracking-widest uppercase px-5 h-10 hover:bg-gray-800 transition"
               >
                 Order Bulk Now
               </a>
-            </nav>
-
-            <div className="flex items-center gap-2 sm:gap-3">
-              <button onClick={() => dispatch(setSearchOpen(true))} className="p-1.5 hover:opacity-70">
+              {/* Desktop search field */}
+              <button
+                onClick={() => dispatch(setSearchOpen(true))}
+                className="hidden md:flex items-center gap-2 h-9 px-3 min-w-[160px] bg-gray-50 border border-gray-100 text-gray-400 text-xs hover:border-gray-200 transition"
+              >
+                <Search size={14} />
+                <span>Search Products</span>
+              </button>
+              <button
+                onClick={() => dispatch(setSearchOpen(true))}
+                className="md:hidden p-2 text-gray-800 hover:opacity-70"
+                aria-label="Search"
+              >
                 <Search size={18} />
               </button>
-              <Link to="/wishlist" className="p-1.5 hover:opacity-70 relative hidden sm:block">
+              <Link to="/wishlist" className="p-2 text-gray-800 hover:opacity-70 relative hidden sm:inline-flex">
                 <Heart size={18} />
                 {wishlist.length > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 bg-[#0b4f86] text-white text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
+                  <span className="absolute top-0.5 right-0.5 bg-black text-white text-[9px] min-w-[14px] h-[14px] rounded-full flex items-center justify-center px-0.5">
                     {wishlist.length}
                   </span>
                 )}
               </Link>
-              <button onClick={() => dispatch(setCartOpen(true))} className="p-1.5 hover:opacity-70 relative">
+              <button
+                onClick={() => dispatch(setCartOpen(true))}
+                className="p-2 text-gray-800 hover:opacity-70 relative"
+                aria-label="Cart"
+              >
                 <ShoppingBag size={18} />
                 {cartCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 bg-[#0b4f86] text-white text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
+                  <span className="absolute top-0.5 right-0.5 bg-black text-white text-[9px] min-w-[14px] h-[14px] rounded-full flex items-center justify-center px-0.5">
                     {cartCount}
                   </span>
                 )}
@@ -187,73 +233,74 @@ export default function Header() {
           </div>
         </div>
 
+        {/* Mobile drawer */}
         {mobileMenu && (
-          <div className="lg:hidden border-t bg-white max-h-[80vh] overflow-y-auto">
-            <nav className="flex flex-col p-4 gap-1 text-sm font-semibold">
-              <Link to="/" onClick={() => setMobileMenu(false)} className="py-3 border-b">
-                Home
-              </Link>
-              <p className="py-2 text-xs text-gray-400 uppercase tracking-wider">Shop</p>
-              {shopLinks.map((l) => (
-                <Link key={l.to} to={l.to} onClick={() => setMobileMenu(false)} className="py-2 pl-3">
-                  {l.label}
+          <div className="lg:hidden border-t border-gray-100 bg-white max-h-[80vh] overflow-y-auto">
+            <nav className="flex flex-col p-4 gap-0.5 text-sm">
+              {[
+                ['/', 'Home'],
+                ['/shop', 'Shop'],
+                ['/collections/raftar', 'Raftar Footwear'],
+                ['/collections/superstar', 'Superstar Footwear'],
+                ['/blog', 'Blog'],
+                ['/about', 'About'],
+                ['/manufacturing', 'Manufacturing'],
+                ['/contact', 'Contact'],
+              ].map(([to, label]) => (
+                <Link
+                  key={to}
+                  to={to}
+                  onClick={() => setMobileMenu(false)}
+                  className="py-3 border-b border-gray-50 font-medium text-gray-800"
+                >
+                  {label}
                 </Link>
               ))}
-              <Link to="/collections/raftar" onClick={() => setMobileMenu(false)} className="py-3 border-t font-bold text-[#0b4f86]">
-                Raftar Footwear
-              </Link>
-              <Link to="/collections/superstar" onClick={() => setMobileMenu(false)} className="py-3 font-bold text-[#0b4f86]">
-                Superstar Footwear
-              </Link>
-              <Link to="/blog" onClick={() => setMobileMenu(false)} className="py-3 border-t">
-                Blog
-              </Link>
-              <Link to="/about" onClick={() => setMobileMenu(false)} className="py-3">
-                About
-              </Link>
-              <Link to="/manufacturing" onClick={() => setMobileMenu(false)} className="py-3">
-                Manufacturing
-              </Link>
-              <Link to="/contact" onClick={() => setMobileMenu(false)} className="py-3 border-b">
-                Contact
-              </Link>
               <a
-                href={`tel:${PHONE}`}
-                className="mt-2 flex items-center justify-center gap-2 bg-[#0b4f86] text-white text-center py-3 rounded-xl font-bold"
+                href={`https://wa.me/923338788861`}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 text-center bg-black text-white py-3 text-xs font-semibold tracking-widest uppercase"
               >
-                <Phone size={16} /> {PHONE}
+                Order Bulk Now
+              </a>
+              <a href={`tel:${PHONE}`} className="mt-2 text-center text-sm text-gray-500 py-2">
+                {PHONE}
               </a>
             </nav>
           </div>
         )}
       </header>
 
+      {/* Search overlay */}
       {isSearchOpen && (
-        <div className="fixed inset-0 z-[60] bg-black/50" onClick={() => dispatch(setSearchOpen(false))}>
+        <div
+          className="fixed inset-0 z-50 bg-black/40 backdrop-blur-[2px]"
+          onClick={() => dispatch(setSearchOpen(false))}
+        >
           <div
-            className="bg-white p-4 sm:p-6 max-w-2xl mx-auto mt-16 sm:mt-20 rounded-lg shadow-xl mx-3"
+            className="bg-white p-4 sm:p-6 max-w-2xl mx-auto mt-16 sm:mt-20 shadow-2xl mx-3"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center gap-3 border-b pb-3">
-              <Search size={20} className="text-gray-400" />
+            <div className="flex items-center gap-3 border-b border-gray-100 pb-3">
+              <Search size={18} className="text-gray-400" />
               <input
                 autoFocus
                 type="text"
-                placeholder="Search footwear..."
+                placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') goToSearch(searchQuery);
                 }}
-                className="flex-1 outline-none text-base"
+                className="flex-1 outline-none text-sm"
               />
-              <button onClick={() => dispatch(setSearchOpen(false))}>
-                <X size={20} />
+              <button onClick={() => dispatch(setSearchOpen(false))} aria-label="Close">
+                <X size={18} />
               </button>
             </div>
-
             {searchQuery.trim() && (
-              <div className="mt-3 max-h-80 overflow-y-auto divide-y divide-gray-100">
+              <div className="mt-3 max-h-80 overflow-y-auto divide-y divide-gray-50">
                 {suggestions.map((p) => (
                   <button
                     key={p._id}
@@ -261,22 +308,30 @@ export default function Header() {
                       navigate(`/product/${p.slug}`);
                       dispatch(setSearchOpen(false));
                     }}
-                    className="w-full flex items-center gap-3 py-2.5 text-left hover:bg-gray-50 rounded-lg px-2 transition"
+                    className="w-full flex items-center gap-3 py-2.5 text-left hover:bg-gray-50 px-2 transition"
                   >
-                    <img src={productImg(p)} alt="" className="w-12 h-12 rounded-lg object-cover bg-gray-100 shrink-0" />
+                    <img
+                      src={productImg(p)}
+                      alt=""
+                      className="w-12 h-12 object-cover bg-gray-100 shrink-0"
+                    />
                     <span className="flex-1 min-w-0">
                       <span className="block text-sm font-medium text-gray-900 truncate">{p.name}</span>
-                      {p.article && <span className="block text-xs text-gray-500">Article: {p.article}</span>}
+                      {p.article && (
+                        <span className="block text-xs text-gray-500">Article: {p.article}</span>
+                      )}
                     </span>
-                    <span className="text-sm font-semibold text-[#0b4f86] shrink-0">Rs {p.price?.toLocaleString?.() || p.price}</span>
+                    <span className="text-sm font-semibold shrink-0">
+                      Rs {p.price?.toLocaleString?.() || p.price}
+                    </span>
                   </button>
                 ))}
                 <button
                   type="button"
                   onClick={() => goToSearch(searchQuery)}
-                  className="w-full flex items-center justify-center gap-2 py-3 text-sm font-medium text-[#0b4f86] hover:bg-blue-50 rounded-lg transition"
+                  className="w-full py-3 text-sm font-medium text-center hover:bg-gray-50"
                 >
-                  <Search size={15} /> See all results for "{searchQuery}"
+                  See all results for “{searchQuery}”
                 </button>
               </div>
             )}
