@@ -1,9 +1,7 @@
 # dependencies
 node_modules/
 
-# builds
-dist/
-build/
+
 
 # env
 .env
