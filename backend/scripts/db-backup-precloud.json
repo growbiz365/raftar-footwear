@@ -1,0 +1,747 @@
+{
+  "products": [
+    {
+      "_id": "6a9fcc0ff8108f85794ca8d1",
+      "name": "Women's Buckle Slide",
+      "slug": "womens-buckle-slide",
+      "price": 220,
+      "compareAtPrice": null,
+      "images": [
+        "https://raftarfootwear.com/wp-content/uploads/2026/07/article-019-brown.webp"
+      ],
+      "colors": [
+        "Brown",
+        "Tan"
+      ],
+      "sizes": [
+        "13/5"
+      ],
+      "brand": "raftar",
+      "category": "Women",
+      "tags": [
+        "Sale",
+        "Best Seller",
+        "Footwear"
+      ],
+      "description": "Women's buckle slide chappal. Article 019. Comfortable plastic footwear for daily use. Size 13/5.",
+      "article": "",
+      "stock": 100,
+      "rating": 4.8,
+      "reviews": 45,
+      "featured": true,
+      "countdown": false,
+      "isActive": true,
+      "isWholesale": true,
+      "colorVariants": [],
+      "__v": 0,
+      "createdAt": "2026-09-08T08:49:19.754Z",
+      "updatedAt": "2026-09-08T08:49:19.754Z"
+    },
+    {
+      "_id": "6a9fcc0ff8108f85794ca8d2",
+      "name": "Men's Cross-Strap Slide",
+      "slug": "mens-cross-strap-slide",
+      "price": 400,
+      "compareAtPrice": null,
+      "images": [
+        "https://raftarfootwear.com/wp-content/uploads/2026/07/article-815.webp"
+      ],
+      "colors": [
+        "Black",
+        "Brown"
+      ],
+      "sizes": [
+        "7/10"
+      ],
+      "brand": "raftar",
+      "category": "Men",
+      "tags": [
+        "Best Seller",
+        "Footwear"
+      ],
+      "description": "Men's cross-strap slide. Article 815. Premium PVC design. Size 7/10.",
+      "article": "",
+      "stock": 80,
+      "rating": 4.7,
+      "reviews": 62,
+      "featured": true,
+      "countdown": false,
+      "isActive": true,
+      "isWholesale": true,
+      "colorVariants": [],
+      "__v": 0,
+      "createdAt": "2026-09-08T08:49:19.756Z",
+      "updatedAt": "2026-09-08T08:49:19.756Z"
+    },
+    {
+      "_id": "6a9fcc0ff8108f85794ca8d3",
+      "name": "Massage Flip-Flop",
+      "slug": "massage-flip-flop",
+      "price": 400,
+      "compareAtPrice": null,
+      "images": [
+        "https://raftarfootwear.com/wp-content/uploads/2026/07/article-05.webp"
+      ],
+      "colors": [
+        "Blue",
+        "Black"
+      ],
+      "sizes": [
+        "7/10"
+      ],
+      "brand": "raftar",
+      "category": "Men",
+      "tags": [
+        "Footwear",
+        "Trending"
+      ],
+      "description": "Massage flip-flop with ergonomic sole. Article 05. Size 7/10.",
+      "article": "",
+      "stock": 60,
+      "rating": 4.9,
+      "reviews": 38,
+      "featured": true,
+      "countdown": false,
+      "isActive": true,
+      "isWholesale": true,
+      "colorVariants": [],
+      "__v": 0,
+      "createdAt": "2026-09-08T08:49:19.756Z",
+      "updatedAt": "2026-09-08T08:49:19.756Z"
+    },
+    {
+      "_id": "6a9fcc0ff8108f85794ca8d4",
+      "name": "Black Buckle Slide",
+      "slug": "black-buckle-slide",
+      "price": 320,
+      "compareAtPrice": null,
+      "images": [
+        "https://raftarfootwear.com/wp-content/uploads/2026/07/article-019-black.webp"
+      ],
+      "colors": [
+        "Black"
+      ],
+      "sizes": [
+        "6/9"
+      ],
+      "brand": "raftar",
+      "category": "Women",
+      "tags": [
+        "Footwear"
+      ],
+      "description": "Black buckle slide. Article 019. Size 6/9. Durable PCU material.",
+      "article": "",
+      "stock": 90,
+      "rating": 4.6,
+      "reviews": 29,
+      "featured": true,
+      "countdown": false,
+      "isActive": true,
+      "isWholesale": true,
+      "colorVariants": [],
+      "__v": 0,
+      "createdAt": "2026-09-08T08:49:19.756Z",
+      "updatedAt": "2026-09-08T08:49:19.756Z"
+    },
+    {
+      "_id": "6a9fcc0ff8108f85794ca8d5",
+      "name": "Men's Sports Slide",
+      "slug": "mens-sports-slide",
+      "price": 200,
+      "compareAtPrice": 250,
+      "images": [
+        "https://raftarfootwear.com/wp-content/uploads/2026/07/article-017.webp"
+      ],
+      "colors": [
+        "Black",
+        "Gray"
+      ],
+      "sizes": [
+        "7/10"
+      ],
+      "brand": "raftar",
+      "category": "Men",
+      "tags": [
+        "Sale",
+        "Footwear",
+        "Sports"
+      ],
+      "description": "Men's sports slide. Article 017. Lightweight and durable. Size 7/10.",
+      "article": "",
+      "stock": 120,
+      "rating": 4.5,
+      "reviews": 55,
+      "featured": true,
+      "countdown": false,
+      "isActive": true,
+      "isWholesale": true,
+      "colorVariants": [],
+      "__v": 0,
+      "createdAt": "2026-09-08T08:49:19.757Z",
+      "updatedAt": "2026-09-08T08:49:19.757Z"
+    },
+    {
+      "_id": "6a9fcc0ff8108f85794ca8d6",
+      "name": "White Sports Slide",
+      "slug": "white-sports-slide",
+      "price": 200,
+      "compareAtPrice": null,
+      "images": [
+        "https://raftarfootwear.com/wp-content/uploads/2026/07/article-011.webp"
+      ],
+      "colors": [
+        "White"
+      ],
+      "sizes": [
+        "7/10"
+      ],
+      "brand": "raftar",
+      "category": "Men",
+      "tags": [
+        "Footwear",
+        "Sports"
+      ],
+      "description": "White sports slide. Article 011. Clean look for everyday wear. Size 7/10.",
+      "article": "",
+      "stock": 110,
+      "rating": 4.4,
+      "reviews": 41,
+      "featured": true,
+      "countdown": false,
+      "isActive": true,
+      "isWholesale": true,
+      "colorVariants": [],
+      "__v": 0,
+      "createdAt": "2026-09-08T08:49:19.757Z",
+      "updatedAt": "2026-09-08T08:49:19.757Z"
+    },
+    {
+      "_id": "6a9fcc0ff8108f85794ca8d7",
+      "name": "Children's Closed Clog",
+      "slug": "childrens-closed-clog",
+      "price": 210,
+      "compareAtPrice": null,
+      "images": [
+        "https://raftarfootwear.com/wp-content/uploads/2026/07/article-025.webp"
+      ],
+      "colors": [
+        "Multi"
+      ],
+      "sizes": [
+        "2/9"
+      ],
+      "brand": "raftar",
+      "category": "Children",
+      "tags": [
+        "Footwear"
+      ],
+      "description": "Children's closed clog. Article 025. Safe and comfortable. Size 2/9.",
+      "article": "",
+      "stock": 70,
+      "rating": 4.7,
+      "reviews": 22,
+      "featured": true,
+      "countdown": false,
+      "isActive": true,
+      "isWholesale": true,
+      "colorVariants": [],
+      "__v": 0,
+      "createdAt": "2026-09-08T08:49:19.758Z",
+      "updatedAt": "2026-09-08T08:49:19.758Z"
+    },
+    {
+      "_id": "6a9fcc0ff8108f85794ca8d8",
+      "name": "Children's Sports Slide",
+      "slug": "childrens-sports-slide",
+      "price": 140,
+      "compareAtPrice": null,
+      "images": [
+        "https://raftarfootwear.com/wp-content/uploads/2026/07/article-291.webp"
+      ],
+      "colors": [
+        "Blue",
+        "Pink"
+      ],
+      "sizes": [
+        "18/35"
+      ],
+      "brand": "raftar",
+      "category": "Children",
+      "tags": [
+        "Footwear",
+        "Sports"
+      ],
+      "description": "Children's sports slide. Article 291. Size 18/35.",
+      "article": "",
+      "stock": 14,
+      "rating": 4.5,
+      "reviews": 18,
+      "featured": false,
+      "countdown": false,
+      "isActive": true,
+      "isWholesale": true,
+      "colorVariants": [],
+      "__v": 0,
+      "createdAt": "2026-09-08T08:49:19.758Z",
+      "updatedAt": "2026-09-08T09:53:18.934Z"
+    },
+    {
+      "_id": "6a9fcc0ff8108f85794ca8d9",
+      "name": "Men's Double-Strap Slide",
+      "slug": "mens-double-strap-slide",
+      "price": 410,
+      "compareAtPrice": null,
+      "images": [
+        "https://raftarfootwear.com/wp-content/uploads/2026/07/article-027.webp"
+      ],
+      "colors": [
+        "Black",
+        "Brown"
+      ],
+      "sizes": [
+        "7/10"
+      ],
+      "brand": "raftar",
+      "category": "Men",
+      "tags": [
+        "Best Seller",
+        "Footwear"
+      ],
+      "description": "Men's double-strap slide. Article 027. Premium comfort. Size 7/10.",
+      "article": "",
+      "stock": 50,
+      "rating": 4.8,
+      "reviews": 33,
+      "featured": true,
+      "countdown": false,
+      "isActive": true,
+      "isWholesale": true,
+      "colorVariants": [],
+      "__v": 0,
+      "createdAt": "2026-09-08T08:49:19.758Z",
+      "updatedAt": "2026-09-08T08:49:19.758Z"
+    },
+    {
+      "_id": "6a9fcc0ff8108f85794ca8da",
+      "name": "Daily Use Woven Chappal",
+      "slug": "daily-use-woven-chappal",
+      "price": 220,
+      "compareAtPrice": null,
+      "images": [
+        "https://raftarfootwear.com/wp-content/uploads/2026/07/article-woven.webp"
+      ],
+      "colors": [
+        "Brown",
+        "Black"
+      ],
+      "sizes": [
+        "8/11"
+      ],
+      "brand": "raftar",
+      "category": "Chappals",
+      "tags": [
+        "Footwear"
+      ],
+      "description": "Daily use woven chappal. Article 07. Traditional comfort. Size 8/11.",
+      "article": "",
+      "stock": 95,
+      "rating": 4.6,
+      "reviews": 47,
+      "featured": true,
+      "countdown": false,
+      "isActive": true,
+      "isWholesale": true,
+      "colorVariants": [],
+      "__v": 0,
+      "createdAt": "2026-09-08T08:49:19.758Z",
+      "updatedAt": "2026-09-08T08:49:19.758Z"
+    },
+    {
+      "_id": "6a9fdead4242e355b5fac8a8",
+      "name": "Mubasher",
+      "price": 200,
+      "packPrices": {
+        "1": 200,
+        "6": 1140,
+        "12": 2160
+      },
+      "compareAtPrice": 400,
+      "images": [
+        "/uploads/1788862072147-08f4008a.jpg",
+        "/uploads/1788862104504-e388ee20.jpg"
+      ],
+      "colors": [
+        "blue",
+        "green"
+      ],
+      "colorVariants": [
+        {
+          "name": "blue",
+          "hex": "#0071e3",
+          "image": "/uploads/1788862072147-08f4008a.jpg"
+        },
+        {
+          "name": "green",
+          "hex": "#41af7f",
+          "image": "/uploads/1788862104504-e388ee20.jpg"
+        }
+      ],
+      "sizes": [
+        "7/10",
+        "3/10"
+      ],
+      "brand": "raftar",
+      "category": "Men",
+      "tags": [
+        "Footwear",
+        "Wholesale"
+      ],
+      "description": "asdasd",
+      "article": "23",
+      "stock": 100,
+      "rating": 0,
+      "reviews": 0,
+      "featured": true,
+      "countdown": false,
+      "isActive": true,
+      "isWholesale": true,
+      "createdAt": "2026-09-08T10:08:45.481Z",
+      "updatedAt": "2026-09-08T10:08:45.481Z",
+      "slug": "mubasher",
+      "__v": 0
+    },
+    {
+      "_id": "6a9ff765250cd19185fde655",
+      "name": "asdasd",
+      "price": 233,
+      "packPrices": {
+        "1": 233,
+        "6": 1328,
+        "12": 2516
+      },
+      "compareAtPrice": 233,
+      "images": [
+        "/uploads/1788868449849-2c92a8e1.jpg"
+      ],
+      "colors": [
+        "red"
+      ],
+      "colorVariants": [
+        {
+          "name": "red",
+          "hex": "#0071e3",
+          "image": "/uploads/1788868449849-2c92a8e1.jpg"
+        }
+      ],
+      "sizes": [
+        "7/10"
+      ],
+      "brand": "other",
+      "category": "Children",
+      "tags": [
+        "Footwear",
+        "Wholesale"
+      ],
+      "description": "dasd",
+      "article": "21",
+      "stock": 100,
+      "rating": 0,
+      "reviews": 0,
+      "featured": true,
+      "countdown": false,
+      "isActive": true,
+      "isWholesale": true,
+      "createdAt": "2026-09-08T11:54:13.218Z",
+      "updatedAt": "2026-09-08T11:54:13.218Z",
+      "slug": "asdasd",
+      "__v": 0
+    }
+  ],
+  "categories": [
+    {
+      "_id": "6a9fcb0f75a4815babb75e29",
+      "name": "Women",
+      "slug": "women",
+      "image": "https://raftarfootwear.com/wp-content/uploads/2026/07/article-019-brown.webp",
+      "description": "",
+      "count": 2,
+      "isActive": true,
+      "order": 1,
+      "__v": 0,
+      "createdAt": "2026-09-08T08:45:03.356Z",
+      "updatedAt": "2026-09-08T08:45:03.356Z"
+    },
+    {
+      "_id": "6a9fcb0f75a4815babb75e2a",
+      "name": "Men",
+      "slug": "men",
+      "image": "https://raftarfootwear.com/wp-content/uploads/2026/07/article-815.webp",
+      "description": "",
+      "count": 4,
+      "isActive": true,
+      "order": 2,
+      "__v": 0,
+      "createdAt": "2026-09-08T08:45:03.359Z",
+      "updatedAt": "2026-09-08T08:45:03.359Z"
+    },
+    {
+      "_id": "6a9fcb0f75a4815babb75e2b",
+      "name": "Children",
+      "slug": "children",
+      "image": "https://raftarfootwear.com/wp-content/uploads/2026/07/article-025.webp",
+      "description": "",
+      "count": 2,
+      "isActive": true,
+      "order": 3,
+      "__v": 0,
+      "createdAt": "2026-09-08T08:45:03.359Z",
+      "updatedAt": "2026-09-08T08:45:03.359Z"
+    },
+    {
+      "_id": "6a9fcb0f75a4815babb75e2c",
+      "name": "Slides",
+      "slug": "slides",
+      "image": "https://raftarfootwear.com/wp-content/uploads/2026/07/article-017.webp",
+      "description": "",
+      "count": 6,
+      "isActive": true,
+      "order": 4,
+      "__v": 0,
+      "createdAt": "2026-09-08T08:45:03.360Z",
+      "updatedAt": "2026-09-08T08:45:03.360Z"
+    },
+    {
+      "_id": "6a9fcb0f75a4815babb75e2d",
+      "name": "Chappals",
+      "slug": "chappals",
+      "image": "https://raftarfootwear.com/wp-content/uploads/2026/07/article-woven.webp",
+      "description": "",
+      "count": 2,
+      "isActive": true,
+      "order": 5,
+      "__v": 0,
+      "createdAt": "2026-09-08T08:45:03.360Z",
+      "updatedAt": "2026-09-08T08:45:03.360Z"
+    },
+    {
+      "_id": "6a9fcb0f75a4815babb75e2e",
+      "name": "Sports",
+      "slug": "sports",
+      "image": "https://raftarfootwear.com/wp-content/uploads/2026/07/article-011.webp",
+      "description": "",
+      "count": 3,
+      "isActive": true,
+      "order": 6,
+      "__v": 0,
+      "createdAt": "2026-09-08T08:45:03.360Z",
+      "updatedAt": "2026-09-08T08:45:03.360Z"
+    }
+  ],
+  "blogs": [
+    {
+      "_id": "6a9fa51b42983e33a5e1c6f4",
+      "title": "Why Wholesale Plastic Footwear Makes Sense",
+      "slug": "why-wholesale-plastic-footwear",
+      "excerpt": "Learn how dealers benefit from bulk PCU & PVC footwear from Peshawar manufacturers.",
+      "content": "Raftar Footwear Enterprises supplies quality plastic chappals and slides across Pakistan. Our wholesale packs of 1, 6 and 12 pairs help dealers manage inventory efficiently while offering competitive prices.\n\nWe use reliable PCU and PVC materials designed for everyday comfort and durability.",
+      "coverImage": "https://raftarfootwear.com/wp-content/uploads/2026/07/factory-image-e1785482188113.webp",
+      "author": "Raftar Footwear",
+      "tags": [
+        "wholesale",
+        "footwear"
+      ],
+      "isPublished": true,
+      "publishedAt": "2026-09-08T06:03:07.971Z",
+      "__v": 0,
+      "createdAt": "2026-09-08T06:03:07.973Z",
+      "updatedAt": "2026-09-08T06:03:07.973Z"
+    },
+    {
+      "_id": "6a9fa51b42983e33a5e1c6f5",
+      "title": "PCU vs PVC Footwear – What Dealers Should Know",
+      "slug": "pcu-vs-pvc-footwear",
+      "excerpt": "A quick guide to materials used in plastic chappals and slides.",
+      "content": "PCU and PVC are the standard materials for affordable, durable plastic footwear in Pakistan. Raftar specializes in both, with strict quality control at our Peshawar facility.",
+      "coverImage": "https://raftarfootwear.com/wp-content/uploads/2026/07/hero-image-final.png",
+      "author": "Raftar Footwear",
+      "tags": [
+        "materials",
+        "guide"
+      ],
+      "isPublished": true,
+      "publishedAt": "2026-09-08T06:03:07.972Z",
+      "__v": 0,
+      "createdAt": "2026-09-08T06:03:07.973Z",
+      "updatedAt": "2026-09-08T06:03:07.973Z"
+    }
+  ],
+  "settings": [
+    {
+      "_id": "6a9f9b769d1c9cda360dafc9",
+      "key": "hero",
+      "value": {
+        "badge": "RAFTAR FOOTWEAR",
+        "title": "Quality Plastic",
+        "titleLine2": "Footwear",
+        "subtitle": "Premium plastic chappals and PVC footwear for wholesalers, dealers & distributors across Pakistan.",
+        "buttonText": "Explore Products",
+        "buttonLink": "/shop",
+        "image": "https://raftarfootwear.com/wp-content/uploads/2026/07/hero-image-final.png",
+        "bgMode": "keep",
+        "bgColor": "",
+        "slides": [
+          {
+            "badge": "RAFTAR FOOTWEAR",
+            "title": "Quality Plastic",
+            "titleLine2": "Footwear",
+            "subtitle": "Premium plastic chappals and PVC footwear for wholesalers, dealers & distributors across Pakistan.",
+            "buttonText": "Explore Products",
+            "buttonLink": "/shop",
+            "image": "https://raftarfootwear.com/wp-content/uploads/2026/07/hero-image-final.png",
+            "bgMode": "keep",
+            "bgColor": ""
+          }
+        ]
+      },
+      "createdAt": "2026-09-08T05:21:58.878Z",
+      "updatedAt": "2026-09-08T09:16:05.358Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a9f9b769d1c9cda360dafcb",
+      "key": "promoBar",
+      "value": "★ Quality Footwear, Every Step of the Way  •  Bulk Orders for Dealers & Distributors  •  PCU & PVC Standard Products",
+      "createdAt": "2026-09-08T05:21:58.956Z",
+      "updatedAt": "2026-09-08T09:16:05.175Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a9fa51b590522e4ac1356f4",
+      "key": "exclusiveBanner",
+      "__v": 0,
+      "createdAt": "2026-09-08T06:03:07.366Z",
+      "updatedAt": "2026-09-08T08:50:18.680Z",
+      "value": {
+        "badge": "Manufacturer",
+        "title": "PCU & PVC Footwear",
+        "subtitle": "Modern production in Peshawar — bulk supply for wholesalers",
+        "buttonText": "View Products",
+        "image": "https://raftarfootwear.com/wp-content/uploads/2026/07/factory-image-e1785482188113.webp"
+      }
+    },
+    {
+      "_id": "6a9fa51b590522e4ac1356f5",
+      "key": "classySection",
+      "__v": 0,
+      "createdAt": "2026-09-08T06:03:07.444Z",
+      "updatedAt": "2026-09-08T08:50:18.757Z",
+      "value": {
+        "title": "Trusted Manufacturer",
+        "titleLine2": "in Peshawar",
+        "text": "Raftar Footwear Enterprises manufactures premium plastic chappals and PVC footwear for comfort, durability and everyday use.",
+        "buttonText": "Shop Now",
+        "image": "https://raftarfootwear.com/wp-content/uploads/2026/07/factory-image-e1785482188113.webp"
+      }
+    },
+    {
+      "_id": "6a9fa51b590522e4ac1356f6",
+      "key": "logo",
+      "__v": 0,
+      "createdAt": "2026-09-08T06:03:07.517Z",
+      "updatedAt": "2026-09-08T08:50:18.835Z",
+      "value": "https://raftarfootwear.com/wp-content/uploads/2026/07/logo.webp"
+    },
+    {
+      "_id": "6a9fa51b590522e4ac1356f7",
+      "key": "siteName",
+      "__v": 0,
+      "createdAt": "2026-09-08T06:03:07.593Z",
+      "updatedAt": "2026-09-08T08:50:18.910Z",
+      "value": "Raftar Footwear"
+    },
+    {
+      "_id": "6a9fa51b590522e4ac1356f8",
+      "key": "newsletterPopup",
+      "__v": 0,
+      "createdAt": "2026-09-08T06:03:07.668Z",
+      "updatedAt": "2026-09-08T08:50:18.986Z",
+      "value": {
+        "enabled": true,
+        "title": "ENJOY 10% OFF YOUR FIRST ORDER",
+        "subtitle": "Stay Informed! Monthly Tips, Tracks and Discount.",
+        "image": "https://raftarfootwear.com/wp-content/uploads/2026/07/hero-image-final.png",
+        "buttonText": "Subscribe",
+        "delaySeconds": 4,
+        "couponCode": "FIRST10"
+      }
+    },
+    {
+      "_id": "6a9fa51b590522e4ac1356f9",
+      "key": "salesPopup",
+      "__v": 0,
+      "createdAt": "2026-09-08T06:03:07.741Z",
+      "updatedAt": "2026-09-08T08:50:19.062Z",
+      "value": {
+        "enabled": true,
+        "intervalSeconds": 8,
+        "items": [
+          {
+            "name": "Women's Buckle Slide",
+            "city": "Peshawar",
+            "time": "12 Minutes Ago",
+            "img": "https://raftarfootwear.com/wp-content/uploads/2026/07/article-019-brown.webp"
+          },
+          {
+            "name": "Men's Cross-Strap Slide",
+            "city": "Lahore",
+            "time": "28 Minutes Ago",
+            "img": "https://raftarfootwear.com/wp-content/uploads/2026/07/article-815.webp"
+          },
+          {
+            "name": "Massage Flip-Flop",
+            "city": "Karachi",
+            "time": "45 Minutes Ago",
+            "img": "https://raftarfootwear.com/wp-content/uploads/2026/07/article-05.webp"
+          },
+          {
+            "name": "Men's Sports Slide",
+            "city": "Islamabad",
+            "time": "1 Hour Ago",
+            "img": "https://raftarfootwear.com/wp-content/uploads/2026/07/article-017.webp"
+          }
+        ]
+      }
+    },
+    {
+      "_id": "6a9fa51b590522e4ac1356fa",
+      "key": "exitPopup",
+      "__v": 0,
+      "createdAt": "2026-09-08T06:03:07.820Z",
+      "updatedAt": "2026-09-08T08:50:19.138Z",
+      "value": {
+        "enabled": false,
+        "title": "Wait! Before you leave...",
+        "subtitle": "Get 15% off your first bulk order",
+        "buttonText": "Claim Offer",
+        "couponCode": "BULK15"
+      }
+    },
+    {
+      "_id": "6a9fb819590522e4ac13584c",
+      "key": "popup",
+      "__v": 0,
+      "createdAt": "2026-09-08T07:24:09.675Z",
+      "updatedAt": "2026-09-08T08:53:29.962Z",
+      "value": {
+        "enabled": true,
+        "title": "Wholesale Special",
+        "message": "Order bulk packs of 6 or 12 pairs and get dealer pricing.",
+        "buttonText": "Order Bulk Now",
+        "redirectUrl": "https://wa.me/923338788861",
+        "image": "/uploads/1788857607681-a6b28f2a.jpg",
+        "delayMs": 2500
+      }
+    }
+  ],
+  "takenAt": "2026-09-08T12:07:57.649Z"
+}

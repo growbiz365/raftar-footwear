@@ -1,0 +1,1872 @@
+{
+  "version": 1,
+  "root": "/home/mubasher-khan/Downloads/raftar-footwear-mern/revone-mern",
+  "generatedAt": 1788851829265,
+  "files": {
+    "frontend/postcss.config.js": {
+      "path": "frontend/postcss.config.js",
+      "language": "javascript",
+      "role": "config",
+      "hash": "211016771cee108602ec598738d916b332ee0f02",
+      "size": 80,
+      "lines": 7,
+      "symbols": [],
+      "imports": [],
+      "indexedAt": 1788851817035
+    },
+    "frontend/tailwind.config.js": {
+      "path": "frontend/tailwind.config.js",
+      "language": "javascript",
+      "role": "config",
+      "hash": "fa511debfe619cb9a625b1c88a3e2493838896f4",
+      "size": 425,
+      "lines": 22,
+      "symbols": [],
+      "imports": [],
+      "indexedAt": 1788851817448
+    },
+    "frontend/vite.config.js": {
+      "path": "frontend/vite.config.js",
+      "language": "javascript",
+      "role": "config",
+      "hash": "6385e342e82bd1c1d69c581bfd240ce3fe1b2714",
+      "size": 222,
+      "lines": 13,
+      "symbols": [],
+      "imports": [
+        "vite",
+        "@vitejs/plugin-react"
+      ],
+      "indexedAt": 1788851817528
+    },
+    "frontend/src/data/catalog.js": {
+      "path": "frontend/src/data/catalog.js",
+      "language": "javascript",
+      "role": "other",
+      "hash": "bac41de7c0b20df35f95ea0377c21d56580acafe",
+      "size": 12521,
+      "lines": 394,
+      "symbols": [
+        {
+          "name": "IMG",
+          "kind": "constant",
+          "line": 6,
+          "signature": "export const IMG = {",
+          "exported": true
+        },
+        {
+          "name": "pack",
+          "kind": "function",
+          "line": 22,
+          "signature": "const pack = (unit) => ({",
+          "exported": false
+        },
+        {
+          "name": "STATIC_PRODUCTS",
+          "kind": "constant",
+          "line": 28,
+          "signature": "export const STATIC_PRODUCTS = [",
+          "exported": true
+        },
+        {
+          "name": "STATIC_CATEGORIES",
+          "kind": "constant",
+          "line": 274,
+          "signature": "export const STATIC_CATEGORIES = [",
+          "exported": true
+        },
+        {
+          "name": "STATIC_SETTINGS",
+          "kind": "constant",
+          "line": 284,
+          "signature": "export const STATIC_SETTINGS = {",
+          "exported": true
+        },
+        {
+          "name": "LOCAL_KEY",
+          "kind": "constant",
+          "line": 347,
+          "signature": "const LOCAL_KEY = 'raftar_admin_products';",
+          "exported": false
+        },
+        {
+          "name": "LOCAL_BLOG_KEY",
+          "kind": "constant",
+          "line": 348,
+          "signature": "const LOCAL_BLOG_KEY = 'raftar_admin_blogs';",
+          "exported": false
+        },
+        {
+          "name": "LOCAL_SETTINGS_KEY",
+          "kind": "constant",
+          "line": 349,
+          "signature": "const LOCAL_SETTINGS_KEY = 'raftar_admin_settings';",
+          "exported": false
+        },
+        {
+          "name": "getLocalProducts",
+          "kind": "function",
+          "line": 351,
+          "signature": "export function getLocalProducts() {",
+          "exported": true
+        },
+        {
+          "name": "saveLocalProducts",
+          "kind": "function",
+          "line": 359,
+          "signature": "export function saveLocalProducts(products) {",
+          "exported": true
+        },
+        {
+          "name": "getMergedProducts",
+          "kind": "function",
+          "line": 363,
+          "signature": "export function getMergedProducts() {",
+          "exported": true
+        },
+        {
+          "name": "getLocalBlogs",
+          "kind": "function",
+          "line": 371,
+          "signature": "export function getLocalBlogs() {",
+          "exported": true
+        },
+        {
+          "name": "saveLocalBlogs",
+          "kind": "function",
+          "line": 379,
+          "signature": "export function saveLocalBlogs(blogs) {",
+          "exported": true
+        },
+        {
+          "name": "getLocalSettings",
+          "kind": "function",
+          "line": 383,
+          "signature": "export function getLocalSettings() {",
+          "exported": true
+        },
+        {
+          "name": "saveLocalSettings",
+          "kind": "function",
+          "line": 391,
+          "signature": "export function saveLocalSettings(settings) {",
+          "exported": true
+        }
+      ],
+      "imports": [],
+      "indexedAt": 1788851817553
+    },
+    "frontend/src/App.jsx": {
+      "path": "frontend/src/App.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "0c7d73ba705b96252bfaa68020baec7c5ee686ba",
+      "size": 3097,
+      "lines": 70,
+      "symbols": [
+        {
+          "name": "StoreLayout",
+          "kind": "function",
+          "line": 26,
+          "signature": "function StoreLayout({ children }) {",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "react-router-dom",
+        "./components/layout/Header",
+        "./components/layout/Footer",
+        "./components/layout/CartDrawer",
+        "./components/layout/NewsletterPopup",
+        "./components/layout/SalesNotification",
+        "./components/layout/ExitPopup",
+        "./pages/Home",
+        "./pages/Shop",
+        "./pages/ProductDetail",
+        "./pages/About",
+        "./pages/Contact",
+        "./pages/Manufacturing",
+        "./pages/Blog",
+        "./pages/BlogPost",
+        "./pages/admin/AdminLayout",
+        "./pages/admin/Dashboard",
+        "./pages/admin/Products",
+        "./pages/admin/Orders",
+        "./pages/admin/Login",
+        "./pages/admin/Settings",
+        "./pages/admin/Categories",
+        "./pages/admin/Popups",
+        "./pages/admin/Blogs"
+      ],
+      "indexedAt": 1788851817555
+    },
+    "backend/src/routes/settingRoutes.js": {
+      "path": "backend/src/routes/settingRoutes.js",
+      "language": "javascript",
+      "role": "api",
+      "hash": "c0e120b40a5d7dd7197e1b3b8abe5202a5904ed0",
+      "size": 434,
+      "lines": 12,
+      "symbols": [],
+      "imports": [
+        "express",
+        "../controllers/settingController",
+        "../middleware/auth",
+        "../middleware/upload"
+      ],
+      "indexedAt": 1788851817556
+    },
+    "backend/src/routes/adminRoutes.js": {
+      "path": "backend/src/routes/adminRoutes.js",
+      "language": "javascript",
+      "role": "api",
+      "hash": "2ad101731cdb3fa98ef73e5c4bd34d95d968bbd1",
+      "size": 1782,
+      "lines": 42,
+      "symbols": [],
+      "imports": [
+        "express",
+        "../controllers/adminController",
+        "../controllers/productController",
+        "../controllers/orderController",
+        "../controllers/categoryController",
+        "../controllers/settingController",
+        "../middleware/auth",
+        "../middleware/upload"
+      ],
+      "indexedAt": 1788851817558
+    },
+    "backend/src/routes/authRoutes.js": {
+      "path": "backend/src/routes/authRoutes.js",
+      "language": "javascript",
+      "role": "api",
+      "hash": "8416577201d5958b303e95caf19205bff2bc4abf",
+      "size": 315,
+      "lines": 11,
+      "symbols": [],
+      "imports": [
+        "express",
+        "../controllers/authController",
+        "../middleware/auth"
+      ],
+      "indexedAt": 1788851817559
+    },
+    "backend/src/routes/blogRoutes.js": {
+      "path": "backend/src/routes/blogRoutes.js",
+      "language": "javascript",
+      "role": "api",
+      "hash": "24dd158a08a6cf2b2ddf2ab1b39a5a0bcd99a3cc",
+      "size": 436,
+      "lines": 13,
+      "symbols": [],
+      "imports": [
+        "express",
+        "../controllers/blogController",
+        "../middleware/auth"
+      ],
+      "indexedAt": 1788851817561
+    },
+    "backend/src/routes/orderRoutes.js": {
+      "path": "backend/src/routes/orderRoutes.js",
+      "language": "javascript",
+      "role": "api",
+      "hash": "9749de755024f8acdcafa800703d0b66e6eb289c",
+      "size": 420,
+      "lines": 12,
+      "symbols": [],
+      "imports": [
+        "express",
+        "../controllers/orderController",
+        "../middleware/auth"
+      ],
+      "indexedAt": 1788851817563
+    },
+    "backend/src/routes/categoryRoutes.js": {
+      "path": "backend/src/routes/categoryRoutes.js",
+      "language": "javascript",
+      "role": "api",
+      "hash": "4669493f7f93935e99d6c50a8870e663557be341",
+      "size": 542,
+      "lines": 13,
+      "symbols": [],
+      "imports": [
+        "express",
+        "../controllers/categoryController",
+        "../middleware/auth",
+        "../middleware/upload"
+      ],
+      "indexedAt": 1788851817564
+    },
+    "backend/src/routes/productRoutes.js": {
+      "path": "backend/src/routes/productRoutes.js",
+      "language": "javascript",
+      "role": "api",
+      "hash": "08ed5e9ada0b996858d22c3ef2d9e818c865541c",
+      "size": 656,
+      "lines": 15,
+      "symbols": [],
+      "imports": [
+        "express",
+        "../controllers/productController",
+        "../middleware/auth",
+        "../middleware/upload"
+      ],
+      "indexedAt": 1788851817565
+    },
+    "frontend/src/components/admin/ImageField.jsx": {
+      "path": "frontend/src/components/admin/ImageField.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "bd285797a7fff21288013fc5ec00cac904185139",
+      "size": 4458,
+      "lines": 128,
+      "symbols": [
+        {
+          "name": "async ",
+          "kind": "function",
+          "line": 15,
+          "signature": "const uploadFile = async (file) => {",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "react",
+        "lucide-react",
+        "../../services/api"
+      ],
+      "indexedAt": 1788851817567
+    },
+    "frontend/src/components/layout/ExitPopup.jsx": {
+      "path": "frontend/src/components/layout/ExitPopup.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "837d9166dd8f58d7c0fa5a27c46a87ed06eeecba",
+      "size": 2735,
+      "lines": 85,
+      "symbols": [
+        {
+          "name": "apply",
+          "kind": "function",
+          "line": 18,
+          "signature": "const apply = (c) => {",
+          "exported": false
+        },
+        {
+          "name": "dismiss",
+          "kind": "function",
+          "line": 40,
+          "signature": "const dismiss = () => {",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "react",
+        "lucide-react",
+        "../../services/api",
+        "../../data/catalog"
+      ],
+      "indexedAt": 1788851817568
+    },
+    "frontend/src/components/layout/SalesNotification.jsx": {
+      "path": "frontend/src/components/layout/SalesNotification.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "8a9ce7ede829af7c69c1ad78cac5f4949019d7b5",
+      "size": 61,
+      "lines": 2,
+      "symbols": [],
+      "imports": [],
+      "indexedAt": 1788851817569
+    },
+    "frontend/src/components/layout/Header.jsx": {
+      "path": "frontend/src/components/layout/Header.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "00f39ed04bb4338284b1fa0c594e4da0c6589325",
+      "size": 10166,
+      "lines": 235,
+      "symbols": [
+        {
+          "name": "LOGO",
+          "kind": "constant",
+          "line": 8,
+          "signature": "const LOGO = 'https://raftarfootwear.com/wp-content/uploads/2026/07/logo.webp';",
+          "exported": false
+        },
+        {
+          "name": "PHONE",
+          "kind": "constant",
+          "line": 9,
+          "signature": "const PHONE = '03338788861';",
+          "exported": false
+        },
+        {
+          "name": "wishlist",
+          "kind": "function",
+          "line": 15,
+          "signature": "const wishlist = useSelector(s => s.cart.wishlist);",
+          "exported": false
+        },
+        {
+          "name": "isSearchOpen",
+          "kind": "function",
+          "line": 16,
+          "signature": "const isSearchOpen = useSelector(s => s.cart.isSearchOpen);",
+          "exported": false
+        },
+        {
+          "name": "close",
+          "kind": "function",
+          "line": 36,
+          "signature": "const close = (e) => {",
+          "exported": false
+        },
+        {
+          "name": "navLink",
+          "kind": "function",
+          "line": 52,
+          "signature": "const navLink = (to, label) => (",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "react",
+        "react-router-dom",
+        "lucide-react",
+        "react-redux",
+        "../../store/slices/cartSlice",
+        "../../services/api"
+      ],
+      "indexedAt": 1788851817571
+    },
+    "frontend/src/components/layout/NewsletterPopup.jsx": {
+      "path": "frontend/src/components/layout/NewsletterPopup.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "d4c4144b23acd4867fad12e502369cbb7b069af1",
+      "size": 109,
+      "lines": 5,
+      "symbols": [],
+      "imports": [],
+      "indexedAt": 1788851817572
+    },
+    "frontend/src/components/layout/Footer.jsx": {
+      "path": "frontend/src/components/layout/Footer.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "68e4f9373b71e2ba18af94869bf1b0a3874b1ad0",
+      "size": 3425,
+      "lines": 68,
+      "symbols": [
+        {
+          "name": "LOGO",
+          "kind": "constant",
+          "line": 3,
+          "signature": "const LOGO = 'https://raftarfootwear.com/wp-content/uploads/2026/07/logo.webp';",
+          "exported": false
+        },
+        {
+          "name": "PHONE",
+          "kind": "constant",
+          "line": 4,
+          "signature": "const PHONE = '03338788861';",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "react-router-dom"
+      ],
+      "indexedAt": 1788851817574
+    },
+    "frontend/src/components/layout/CartDrawer.jsx": {
+      "path": "frontend/src/components/layout/CartDrawer.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "410ac943f0dc210abaa183efb769e4c36c69bbfe",
+      "size": 7125,
+      "lines": 169,
+      "symbols": [
+        {
+          "name": "WHATSAPP",
+          "kind": "constant",
+          "line": 11,
+          "signature": "const WHATSAPP = '923338788861';",
+          "exported": false
+        },
+        {
+          "name": "buildWhatsAppMessage",
+          "kind": "function",
+          "line": 19,
+          "signature": "const buildWhatsAppMessage = () => {",
+          "exported": false
+        },
+        {
+          "name": "lines",
+          "kind": "function",
+          "line": 20,
+          "signature": "const lines = items.map((item, i) => {",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "lucide-react",
+        "react-redux",
+        "../../store/slices/cartSlice"
+      ],
+      "indexedAt": 1788851817577
+    },
+    "frontend/src/components/product/ProductCard.jsx": {
+      "path": "frontend/src/components/product/ProductCard.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "1428d003031d507dad1f87cfcbaab4554a43b7bb",
+      "size": 4230,
+      "lines": 67,
+      "symbols": [],
+      "imports": [
+        "react-router-dom",
+        "lucide-react",
+        "react-redux",
+        "../../store/slices/cartSlice"
+      ],
+      "indexedAt": 1788851817579
+    },
+    "frontend/src/main.jsx": {
+      "path": "frontend/src/main.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "198a4f02b542898524c33ba602f641836306470d",
+      "size": 452,
+      "lines": 18,
+      "symbols": [],
+      "imports": [
+        "react",
+        "react-dom/client",
+        "react-router-dom",
+        "react-redux",
+        "./store",
+        "./App",
+        "./index.css"
+      ],
+      "indexedAt": 1788851817580
+    },
+    "backend/src/config/cloudinary.js": {
+      "path": "backend/src/config/cloudinary.js",
+      "language": "javascript",
+      "role": "config",
+      "hash": "350da348822961ab2909b0e2dfa74e95b6a841b0",
+      "size": 271,
+      "lines": 11,
+      "symbols": [],
+      "imports": [
+        "cloudinary"
+      ],
+      "indexedAt": 1788851817581
+    },
+    "backend/src/config/db.js": {
+      "path": "backend/src/config/db.js",
+      "language": "javascript",
+      "role": "config",
+      "hash": "4f9a807d5cd13c53f255fe20422976127f9fb41c",
+      "size": 441,
+      "lines": 19,
+      "symbols": [
+        {
+          "name": "async ",
+          "kind": "function",
+          "line": 3,
+          "signature": "const connectDB = async () => {",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "mongoose"
+      ],
+      "indexedAt": 1788851817582
+    },
+    "frontend/src/services/api.js": {
+      "path": "frontend/src/services/api.js",
+      "language": "javascript",
+      "role": "api",
+      "hash": "6cb288f05f7c565c16ec799a0c73c7a667d1180d",
+      "size": 570,
+      "lines": 26,
+      "symbols": [],
+      "imports": [
+        "axios"
+      ],
+      "indexedAt": 1788851817583
+    },
+    "frontend/src/store/index.js": {
+      "path": "frontend/src/store/index.js",
+      "language": "javascript",
+      "role": "other",
+      "hash": "5e9b52f92b640a62532aa24ddd8d1388b9367fc4",
+      "size": 403,
+      "lines": 15,
+      "symbols": [],
+      "imports": [
+        "@reduxjs/toolkit",
+        "./slices/productSlice",
+        "./slices/cartSlice",
+        "./slices/authSlice",
+        "./slices/adminSlice"
+      ],
+      "indexedAt": 1788851817585
+    },
+    "backend/src/middleware/upload.js": {
+      "path": "backend/src/middleware/upload.js",
+      "language": "javascript",
+      "role": "other",
+      "hash": "ba525fdfcaa603ef3f58d0087ff062aa51e3b2d8",
+      "size": 2191,
+      "lines": 63,
+      "symbols": [
+        {
+          "name": "compressAndUpload",
+          "kind": "function",
+          "line": 15,
+          "signature": "async function compressAndUpload(buffer, folder = 'revone') {",
+          "exported": false
+        },
+        {
+          "name": "handleSingleUpload",
+          "kind": "function",
+          "line": 33,
+          "signature": "function handleSingleUpload(req, res, next) {",
+          "exported": false
+        },
+        {
+          "name": "handleMultiUpload",
+          "kind": "function",
+          "line": 48,
+          "signature": "function handleMultiUpload(req, res, next) {",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "multer",
+        "sharp",
+        "../config/cloudinary"
+      ],
+      "indexedAt": 1788851817586
+    },
+    "backend/src/middleware/auth.js": {
+      "path": "backend/src/middleware/auth.js",
+      "language": "javascript",
+      "role": "other",
+      "hash": "8275033851647e2c38b87630b7d378c65cdca466",
+      "size": 878,
+      "lines": 25,
+      "symbols": [],
+      "imports": [
+        "jsonwebtoken",
+        "../models/User"
+      ],
+      "indexedAt": 1788851817588
+    },
+    "backend/src/controllers/productController.js": {
+      "path": "backend/src/controllers/productController.js",
+      "language": "javascript",
+      "role": "api",
+      "hash": "cc078356811fc8744a5ad080de26754147398913",
+      "size": 5676,
+      "lines": 139,
+      "symbols": [
+        {
+          "name": "parseBody",
+          "kind": "function",
+          "line": 4,
+          "signature": "function parseBody(body) {",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "../models/Product",
+        "../models/Category"
+      ],
+      "indexedAt": 1788851817589
+    },
+    "backend/src/controllers/orderController.js": {
+      "path": "backend/src/controllers/orderController.js",
+      "language": "javascript",
+      "role": "api",
+      "hash": "b04fe1b4b786a576bcd09b4a5890550e92ead21b",
+      "size": 1112,
+      "lines": 32,
+      "symbols": [],
+      "imports": [
+        "../models/Order"
+      ],
+      "indexedAt": 1788851817590
+    },
+    "backend/src/controllers/blogController.js": {
+      "path": "backend/src/controllers/blogController.js",
+      "language": "javascript",
+      "role": "api",
+      "hash": "f3485ffac6312846eb23e44f27e9e6ed1840daa9",
+      "size": 1710,
+      "lines": 53,
+      "symbols": [],
+      "imports": [
+        "../models/Blog"
+      ],
+      "indexedAt": 1788851817591
+    },
+    "backend/src/controllers/settingController.js": {
+      "path": "backend/src/controllers/settingController.js",
+      "language": "javascript",
+      "role": "api",
+      "hash": "cd7c1d77c2c0ad3e59addf87d80af4eab01465df",
+      "size": 3902,
+      "lines": 110,
+      "symbols": [
+        {
+          "name": "DEFAULTS",
+          "kind": "constant",
+          "line": 3,
+          "signature": "const DEFAULTS = {",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "../models/Setting"
+      ],
+      "indexedAt": 1788851817592
+    },
+    "backend/src/controllers/categoryController.js": {
+      "path": "backend/src/controllers/categoryController.js",
+      "language": "javascript",
+      "role": "api",
+      "hash": "8c8164e7d6ced90a786399a931d5a56609734c58",
+      "size": 1436,
+      "lines": 43,
+      "symbols": [],
+      "imports": [
+        "../models/Category"
+      ],
+      "indexedAt": 1788851817594
+    },
+    "backend/src/controllers/authController.js": {
+      "path": "backend/src/controllers/authController.js",
+      "language": "javascript",
+      "role": "api",
+      "hash": "3c09fee16286c9103fc53c20ac0967810e3e0ca6",
+      "size": 1716,
+      "lines": 46,
+      "symbols": [
+        {
+          "name": "signToken",
+          "kind": "function",
+          "line": 4,
+          "signature": "const signToken = (id, role, email) =>",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "jsonwebtoken",
+        "../models/User"
+      ],
+      "indexedAt": 1788851817594
+    },
+    "backend/src/controllers/adminController.js": {
+      "path": "backend/src/controllers/adminController.js",
+      "language": "javascript",
+      "role": "api",
+      "hash": "5d8e46dbf0b1652d8e94c238696328c57c8fa8af",
+      "size": 2265,
+      "lines": 75,
+      "symbols": [
+        {
+          "name": "images",
+          "kind": "function",
+          "line": 51,
+          "signature": "const images = (result.resources || []).map(r => ({",
+          "exported": false
+        },
+        {
+          "name": "images",
+          "kind": "function",
+          "line": 63,
+          "signature": "const images = (result.resources || []).map(r => ({",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "../models/Product",
+        "../models/User",
+        "../models/Order",
+        "../models/Category",
+        "../config/cloudinary"
+      ],
+      "indexedAt": 1788851817612
+    },
+    "backend/src/server.js": {
+      "path": "backend/src/server.js",
+      "language": "javascript",
+      "role": "api",
+      "hash": "cbf099442391ec66838b48a6453f7fa41478b734",
+      "size": 1210,
+      "lines": 35,
+      "symbols": [
+        {
+          "name": "PORT",
+          "kind": "constant",
+          "line": 9,
+          "signature": "const PORT = process.env.PORT || 5000;",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "dotenv",
+        "express",
+        "cors",
+        "morgan",
+        "./config/db",
+        "./utils/seed",
+        "./routes/productRoutes",
+        "./routes/authRoutes",
+        "./routes/categoryRoutes",
+        "./routes/orderRoutes",
+        "./routes/settingRoutes",
+        "./routes/adminRoutes",
+        "./routes/blogRoutes"
+      ],
+      "indexedAt": 1788851817613
+    },
+    "frontend/src/pages/Shop.jsx": {
+      "path": "frontend/src/pages/Shop.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "ac82293cab872ca7aea789ea2d9da1847ee1bf45",
+      "size": 2163,
+      "lines": 64,
+      "symbols": [
+        {
+          "name": "SkeletonCard",
+          "kind": "function",
+          "line": 7,
+          "signature": "function SkeletonCard() {",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "react",
+        "react-router-dom",
+        "react-redux",
+        "../store/slices/productSlice",
+        "../components/product/ProductCard"
+      ],
+      "indexedAt": 1788851817614
+    },
+    "frontend/src/pages/About.jsx": {
+      "path": "frontend/src/pages/About.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "65ca8f693310798dfa8d05ee9d8ec8267eb3f6c9",
+      "size": 4931,
+      "lines": 87,
+      "symbols": [
+        {
+          "name": "IMG",
+          "kind": "constant",
+          "line": 3,
+          "signature": "const IMG = {",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "react-router-dom"
+      ],
+      "indexedAt": 1788851817615
+    },
+    "frontend/src/pages/Home.jsx": {
+      "path": "frontend/src/pages/Home.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "974306b9a93a8e9e264fc9f985db729d19b27744",
+      "size": 11857,
+      "lines": 281,
+      "symbols": [
+        {
+          "name": "SkeletonCard",
+          "kind": "function",
+          "line": 10,
+          "signature": "function SkeletonCard() {",
+          "exported": false
+        },
+        {
+          "name": "t",
+          "kind": "function",
+          "line": 57,
+          "signature": "const t = setInterval(() => setHeroIndex((i) => (i + 1) % slides.length), 5000);",
+          "exported": false
+        },
+        {
+          "name": "topSellers",
+          "kind": "function",
+          "line": 64,
+          "signature": "const topSellers = list.filter((p) => p.featured).slice(0, 8);",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "react",
+        "react-router-dom",
+        "react-redux",
+        "../store/slices/productSlice",
+        "../components/product/ProductCard",
+        "lucide-react",
+        "../services/api",
+        "../data/catalog"
+      ],
+      "indexedAt": 1788851817617
+    },
+    "frontend/src/pages/Manufacturing.jsx": {
+      "path": "frontend/src/pages/Manufacturing.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "266f5903bb9b43cc3484cbde9de568d568e220e6",
+      "size": 3604,
+      "lines": 70,
+      "symbols": [
+        {
+          "name": "IMG",
+          "kind": "constant",
+          "line": 3,
+          "signature": "const IMG = {",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "react-router-dom"
+      ],
+      "indexedAt": 1788851817618
+    },
+    "frontend/src/pages/ProductDetail.jsx": {
+      "path": "frontend/src/pages/ProductDetail.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "fbc6f15289e149f6f715e9f43479711a2c1f18ad",
+      "size": 13848,
+      "lines": 349,
+      "symbols": [
+        {
+          "name": "PACKS",
+          "kind": "constant",
+          "line": 10,
+          "signature": "const PACKS = [1, 6, 12];",
+          "exported": false
+        },
+        {
+          "name": "WHATSAPP",
+          "kind": "constant",
+          "line": 11,
+          "signature": "const WHATSAPP = '923338788861';",
+          "exported": false
+        },
+        {
+          "name": "PHONE",
+          "kind": "constant",
+          "line": 12,
+          "signature": "const PHONE = '03338788861';",
+          "exported": false
+        },
+        {
+          "name": "allProducts",
+          "kind": "function",
+          "line": 23,
+          "signature": "const allProducts = useSelector((s) => s.products.items);",
+          "exported": false
+        },
+        {
+          "name": "parts",
+          "kind": "function",
+          "line": 71,
+          "signature": "const parts = c.replace(/([a-z])([A-Z])/g, '$1 $2').split(/[\\s/|]+/).map((s) => s.trim()).filter(Boolean);",
+          "exported": false
+        },
+        {
+          "name": "variants",
+          "kind": "function",
+          "line": 74,
+          "signature": "const variants = rawColors.map((c) =>",
+          "exported": false
+        },
+        {
+          "name": "currentVariant",
+          "kind": "function",
+          "line": 80,
+          "signature": "const currentVariant = variants.find((v) => v.name === selectedColor) || variants[0];",
+          "exported": false
+        },
+        {
+          "name": "handleAdd",
+          "kind": "function",
+          "line": 95,
+          "signature": "const handleAdd = () => {",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "react",
+        "react-router-dom",
+        "lucide-react",
+        "react-redux",
+        "../store/slices/productSlice",
+        "../store/slices/cartSlice",
+        "../components/product/ProductCard"
+      ],
+      "indexedAt": 1788851817620
+    },
+    "frontend/src/pages/BlogPost.jsx": {
+      "path": "frontend/src/pages/BlogPost.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "40564b1b4cca8ac8f7831566a9cfe4f4b7e9a372",
+      "size": 2847,
+      "lines": 82,
+      "symbols": [
+        {
+          "name": "local",
+          "kind": "function",
+          "line": 17,
+          "signature": "const local = getLocalBlogs().find((b) => b.slug === slug || b._id === slug);",
+          "exported": false
+        },
+        {
+          "name": "local",
+          "kind": "function",
+          "line": 21,
+          "signature": "const local = getLocalBlogs().find((b) => b.slug === slug || b._id === slug);",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../services/api",
+        "../data/catalog"
+      ],
+      "indexedAt": 1788851817621
+    },
+    "frontend/src/pages/Contact.jsx": {
+      "path": "frontend/src/pages/Contact.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "54b51943e0b515220705a847393c44346ac3a8fe",
+      "size": 3978,
+      "lines": 71,
+      "symbols": [],
+      "imports": [
+        "react"
+      ],
+      "indexedAt": 1788851817622
+    },
+    "frontend/src/pages/Blog.jsx": {
+      "path": "frontend/src/pages/Blog.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "b90dccfa685bcafc40bba8cb87f67258e3209a59",
+      "size": 3178,
+      "lines": 83,
+      "symbols": [],
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../services/api",
+        "../data/catalog"
+      ],
+      "indexedAt": 1788851817623
+    },
+    "frontend/src/store/slices/adminSlice.js": {
+      "path": "frontend/src/store/slices/adminSlice.js",
+      "language": "javascript",
+      "role": "other",
+      "hash": "e528d5d8b88c1749dd6a249b3bf50b244d3c16bd",
+      "size": 2582,
+      "lines": 70,
+      "symbols": [
+        {
+          "name": "fetchDashboard",
+          "kind": "function",
+          "line": 4,
+          "signature": "export const fetchDashboard = createAsyncThunk('admin/dashboard', async () => {",
+          "exported": true
+        },
+        {
+          "name": "adminFetchProducts",
+          "kind": "function",
+          "line": 9,
+          "signature": "export const adminFetchProducts = createAsyncThunk('admin/products', async () => {",
+          "exported": true
+        },
+        {
+          "name": "adminCreateProduct",
+          "kind": "function",
+          "line": 14,
+          "signature": "export const adminCreateProduct = createAsyncThunk('admin/createProduct', async (product) => {",
+          "exported": true
+        },
+        {
+          "name": "adminUpdateProduct",
+          "kind": "function",
+          "line": 19,
+          "signature": "export const adminUpdateProduct = createAsyncThunk('admin/updateProduct', async ({ id, ...product }) => {",
+          "exported": true
+        },
+        {
+          "name": "adminDeleteProduct",
+          "kind": "function",
+          "line": 24,
+          "signature": "export const adminDeleteProduct = createAsyncThunk('admin/deleteProduct', async (id) => {",
+          "exported": true
+        },
+        {
+          "name": "adminFetchOrders",
+          "kind": "function",
+          "line": 29,
+          "signature": "export const adminFetchOrders = createAsyncThunk('admin/orders', async () => {",
+          "exported": true
+        },
+        {
+          "name": "adminUpdateOrderStatus",
+          "kind": "function",
+          "line": 34,
+          "signature": "export const adminUpdateOrderStatus = createAsyncThunk('admin/updateOrder', async ({ id, status }) => {",
+          "exported": true
+        },
+        {
+          "name": "i",
+          "kind": "function",
+          "line": 55,
+          "signature": "const i = state.products.findIndex(p => p._id === action.payload._id);",
+          "exported": false
+        },
+        {
+          "name": "i",
+          "kind": "function",
+          "line": 63,
+          "signature": "const i = state.orders.findIndex(o => o._id === action.payload._id);",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "@reduxjs/toolkit",
+        "../../services/api"
+      ],
+      "indexedAt": 1788851817624
+    },
+    "frontend/src/store/slices/cartSlice.js": {
+      "path": "frontend/src/store/slices/cartSlice.js",
+      "language": "javascript",
+      "role": "other",
+      "hash": "b135aa68b9343e3a52807010ef253652dedccd05",
+      "size": 3528,
+      "lines": 121,
+      "symbols": [
+        {
+          "name": "load",
+          "kind": "function",
+          "line": 3,
+          "signature": "const load = (key, fallback) => {",
+          "exported": false
+        },
+        {
+          "name": "idx",
+          "kind": "function",
+          "line": 85,
+          "signature": "const idx = state.wishlist.findIndex((p) => p._id === product._id);",
+          "exported": false
+        },
+        {
+          "name": "selectCartCount",
+          "kind": "function",
+          "line": 113,
+          "signature": "export const selectCartCount = (state) =>",
+          "exported": true
+        },
+        {
+          "name": "selectCartTotal",
+          "kind": "function",
+          "line": 115,
+          "signature": "export const selectCartTotal = (state) =>",
+          "exported": true
+        },
+        {
+          "name": "selectIsInWishlist",
+          "kind": "function",
+          "line": 117,
+          "signature": "export const selectIsInWishlist = (id) => (state) =>",
+          "exported": true
+        }
+      ],
+      "imports": [
+        "@reduxjs/toolkit"
+      ],
+      "indexedAt": 1788851817625
+    },
+    "frontend/src/store/slices/authSlice.js": {
+      "path": "frontend/src/store/slices/authSlice.js",
+      "language": "javascript",
+      "role": "other",
+      "hash": "3d3f28299af1a60a308a35cf3467050fd113c6e6",
+      "size": 2210,
+      "lines": 69,
+      "symbols": [
+        {
+          "name": "login",
+          "kind": "function",
+          "line": 4,
+          "signature": "export const login = createAsyncThunk('auth/login', async ({ email, password }, { rejectWithValue }) => {",
+          "exported": true
+        },
+        {
+          "name": "register",
+          "kind": "function",
+          "line": 15,
+          "signature": "export const register = createAsyncThunk('auth/register', async (form, { rejectWithValue }) => {",
+          "exported": true
+        },
+        {
+          "name": "loadUser",
+          "kind": "function",
+          "line": 26,
+          "signature": "const loadUser = () => {",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "@reduxjs/toolkit",
+        "../../services/api"
+      ],
+      "indexedAt": 1788851817627
+    },
+    "frontend/src/store/slices/productSlice.js": {
+      "path": "frontend/src/store/slices/productSlice.js",
+      "language": "javascript",
+      "role": "other",
+      "hash": "38219e39e8bd536c6c41f2fd6aaf09bdd1539b05",
+      "size": 3434,
+      "lines": 108,
+      "symbols": [
+        {
+          "name": "fetchProduct",
+          "kind": "function",
+          "line": 37,
+          "signature": "export const fetchProduct = createAsyncThunk('products/fetchOne', async (idOrSlug) => {",
+          "exported": true
+        },
+        {
+          "name": "fetchCategories",
+          "kind": "function",
+          "line": 48,
+          "signature": "export const fetchCategories = createAsyncThunk('products/fetchCategories', async () => {",
+          "exported": true
+        }
+      ],
+      "imports": [
+        "@reduxjs/toolkit",
+        "../../services/api",
+        "../../data/catalog"
+      ],
+      "indexedAt": 1788851817629
+    },
+    "frontend/src/pages/admin/Dashboard.jsx": {
+      "path": "frontend/src/pages/admin/Dashboard.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "2f6b93c4bdbfa08d3108c6b4d5e566771e332d9e",
+      "size": 3395,
+      "lines": 79,
+      "symbols": [],
+      "imports": [
+        "react",
+        "react-redux",
+        "../../store/slices/adminSlice",
+        "lucide-react"
+      ],
+      "indexedAt": 1788851817631
+    },
+    "backend/src/models/Setting.js": {
+      "path": "backend/src/models/Setting.js",
+      "language": "javascript",
+      "role": "model",
+      "hash": "a9a787c3980af27fb0f92c5b57f51ed22d0ff16e",
+      "size": 271,
+      "lines": 9,
+      "symbols": [],
+      "imports": [
+        "mongoose"
+      ],
+      "indexedAt": 1788851817632
+    },
+    "frontend/src/pages/admin/Popups.jsx": {
+      "path": "frontend/src/pages/admin/Popups.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "ecf9a6b6dcde184819a7c6461f9990882f3b6c52",
+      "size": 7155,
+      "lines": 187,
+      "symbols": [
+        {
+          "name": "async ",
+          "kind": "function",
+          "line": 42,
+          "signature": "const save = async () => {",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "react",
+        "../../services/api",
+        "../../data/catalog",
+        "../../components/admin/ImageField"
+      ],
+      "indexedAt": 1788851817633
+    },
+    "backend/src/models/Category.js": {
+      "path": "backend/src/models/Category.js",
+      "language": "javascript",
+      "role": "model",
+      "hash": "d4f0b02b7626279ad4ceeae3b65d0b2c060e002a",
+      "size": 680,
+      "lines": 21,
+      "symbols": [],
+      "imports": [
+        "mongoose"
+      ],
+      "indexedAt": 1788851817634
+    },
+    "frontend/src/pages/admin/AdminLayout.jsx": {
+      "path": "frontend/src/pages/admin/AdminLayout.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "c76febdbe5705fb68d244ac09bee37ed84999e9d",
+      "size": 3745,
+      "lines": 87,
+      "symbols": [
+        {
+          "name": "isActive",
+          "kind": "function",
+          "line": 28,
+          "signature": "const isActive = (item) =>",
+          "exported": false
+        },
+        {
+          "name": "Sidebar",
+          "kind": "component",
+          "line": 31,
+          "signature": "const Sidebar = () => (",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "react-router-dom",
+        "react-redux",
+        "../../store/slices/authSlice",
+        "lucide-react",
+        "react"
+      ],
+      "indexedAt": 1788851817636
+    },
+    "backend/src/models/User.js": {
+      "path": "backend/src/models/User.js",
+      "language": "javascript",
+      "role": "model",
+      "hash": "8c0725bbbd95b93fbfa1883028d6a37487961c62",
+      "size": 709,
+      "lines": 22,
+      "symbols": [],
+      "imports": [
+        "mongoose",
+        "bcryptjs"
+      ],
+      "indexedAt": 1788851817637
+    },
+    "backend/src/models/Order.js": {
+      "path": "backend/src/models/Order.js",
+      "language": "javascript",
+      "role": "model",
+      "hash": "5aefa0cfcaa4d4797a4ed1144f40ce6b34a4b798",
+      "size": 660,
+      "lines": 29,
+      "symbols": [],
+      "imports": [
+        "mongoose"
+      ],
+      "indexedAt": 1788851817639
+    },
+    "frontend/src/pages/admin/Blogs.jsx": {
+      "path": "frontend/src/pages/admin/Blogs.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "6e46afd52aad5f4fdcdb964a0186c1af16ec50b1",
+      "size": 11936,
+      "lines": 314,
+      "symbols": [
+        {
+          "name": "async ",
+          "kind": "function",
+          "line": 25,
+          "signature": "const load = async () => {",
+          "exported": false
+        },
+        {
+          "name": "openNew",
+          "kind": "function",
+          "line": 45,
+          "signature": "const openNew = () => {",
+          "exported": false
+        },
+        {
+          "name": "openEdit",
+          "kind": "function",
+          "line": 51,
+          "signature": "const openEdit = (b) => {",
+          "exported": false
+        },
+        {
+          "name": "async ",
+          "kind": "function",
+          "line": 66,
+          "signature": "const handleSave = async (e) => {",
+          "exported": false
+        },
+        {
+          "name": "async ",
+          "kind": "function",
+          "line": 122,
+          "signature": "const handleDelete = async (id) => {",
+          "exported": false
+        },
+        {
+          "name": "list",
+          "kind": "function",
+          "line": 125,
+          "signature": "const list = getLocalBlogs().filter((b) => b._id !== id);",
+          "exported": false
+        },
+        {
+          "name": "list",
+          "kind": "function",
+          "line": 133,
+          "signature": "const list = blogs.filter((b) => b._id !== id);",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "react",
+        "lucide-react",
+        "../../services/api",
+        "../../data/catalog"
+      ],
+      "indexedAt": 1788851817640
+    },
+    "backend/src/models/Product.js": {
+      "path": "backend/src/models/Product.js",
+      "language": "javascript",
+      "role": "model",
+      "hash": "0498524bf20724e2e19f3296a28491f22918a492",
+      "size": 1803,
+      "lines": 53,
+      "symbols": [],
+      "imports": [
+        "mongoose"
+      ],
+      "indexedAt": 1788851817641
+    },
+    "frontend/src/pages/admin/Categories.jsx": {
+      "path": "frontend/src/pages/admin/Categories.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "044c39e1846e26205e818315cf4f690f6e603cc8",
+      "size": 3969,
+      "lines": 85,
+      "symbols": [
+        {
+          "name": "load",
+          "kind": "function",
+          "line": 12,
+          "signature": "const load = () => api.get('/admin/categories').then(r => setCategories(r.data?.data || [])).catch(() => {});",
+          "exported": false
+        },
+        {
+          "name": "async ",
+          "kind": "function",
+          "line": 16,
+          "signature": "const handleCreate = async (e) => {",
+          "exported": false
+        },
+        {
+          "name": "async ",
+          "kind": "function",
+          "line": 30,
+          "signature": "const handleDelete = async (id) => {",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "react",
+        "react-redux",
+        "../../services/api",
+        "lucide-react"
+      ],
+      "indexedAt": 1788851817643
+    },
+    "backend/src/models/Blog.js": {
+      "path": "backend/src/models/Blog.js",
+      "language": "javascript",
+      "role": "model",
+      "hash": "7d2548d082ba25735fb99413dd36e1f8850400d0",
+      "size": 767,
+      "lines": 23,
+      "symbols": [],
+      "imports": [
+        "mongoose"
+      ],
+      "indexedAt": 1788851817648
+    },
+    "frontend/src/pages/admin/Login.jsx": {
+      "path": "frontend/src/pages/admin/Login.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "a45893b3ac2278d7951ce8682641b042059ca9ed",
+      "size": 2722,
+      "lines": 59,
+      "symbols": [
+        {
+          "name": "async ",
+          "kind": "function",
+          "line": 17,
+          "signature": "const handleSubmit = async (e) => {",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "react",
+        "react-router-dom",
+        "react-redux",
+        "../../store/slices/authSlice"
+      ],
+      "indexedAt": 1788851817649
+    },
+    "frontend/src/pages/admin/Orders.jsx": {
+      "path": "frontend/src/pages/admin/Orders.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "eac9de81cc0daebe1d307b2d05dfadecc8e1a9d7",
+      "size": 2293,
+      "lines": 51,
+      "symbols": [],
+      "imports": [
+        "react",
+        "react-redux",
+        "../../store/slices/adminSlice"
+      ],
+      "indexedAt": 1788851818928
+    },
+    "frontend/src/pages/admin/Products.jsx": {
+      "path": "frontend/src/pages/admin/Products.jsx",
+      "language": "javascriptreact",
+      "role": "component",
+      "hash": "34d87561e1f66e0cc368a46615633a728fd30fe8",
+      "size": 25680,
+      "lines": 594,
+      "symbols": [
+        {
+          "name": "async ",
+          "kind": "function",
+          "line": 37,
+          "signature": "const load = async () => {",
+          "exported": false
+        },
+        {
+          "name": "openNew",
+          "kind": "function",
+          "line": 55,
+          "signature": "const openNew = () => {",
+          "exported": false
+        },
+        {
+          "name": "openEdit",
+          "kind": "function",
+          "line": 65,
+          "signature": "const openEdit = (p) => {",
+          "exported": false
+        },
+        {
+          "name": "addVariant",
+          "kind": "function",
+          "line": 94,
+          "signature": "const addVariant = () => setVariants((v) => [...v, { ...emptyVariant }]);",
+          "exported": false
+        },
+        {
+          "name": "removeVariant",
+          "kind": "function",
+          "line": 95,
+          "signature": "const removeVariant = (i) => setVariants((v) => v.filter((_, idx) => idx !== i));",
+          "exported": false
+        },
+        {
+          "name": "updateVariant",
+          "kind": "function",
+          "line": 96,
+          "signature": "const updateVariant = (i, key, val) =>",
+          "exported": false
+        },
+        {
+          "name": "addImageUrl",
+          "kind": "function",
+          "line": 99,
+          "signature": "const addImageUrl = () => setImageUrls((u) => [...u, '']);",
+          "exported": false
+        },
+        {
+          "name": "removeImageUrl",
+          "kind": "function",
+          "line": 100,
+          "signature": "const removeImageUrl = (i) => setImageUrls((u) => u.filter((_, idx) => idx !== i));",
+          "exported": false
+        },
+        {
+          "name": "async ",
+          "kind": "function",
+          "line": 102,
+          "signature": "const handleSubmit = async (e) => {",
+          "exported": false
+        },
+        {
+          "name": "cleanImages",
+          "kind": "function",
+          "line": 110,
+          "signature": "const cleanImages = imageUrls.map((u) => u.trim()).filter(Boolean);",
+          "exported": false
+        },
+        {
+          "name": "async ",
+          "kind": "function",
+          "line": 197,
+          "signature": "const handleDelete = async (id) => {",
+          "exported": false
+        },
+        {
+          "name": "list",
+          "kind": "function",
+          "line": 201,
+          "signature": "const list = getLocalProducts().filter((p) => p._id !== id);",
+          "exported": false
+        },
+        {
+          "name": "remaining",
+          "kind": "function",
+          "line": 204,
+          "signature": "const remaining = getMergedProducts().filter((p) => p._id !== id);",
+          "exported": false
+        },
+        {
+          "name": "async ",
+          "kind": "function",
+          "line": 221,
+          "signature": "const updateStock = async (id, stock) => {",
+          "exported": false
+        },
+        {
+          "name": "updated",
+          "kind": "function",
+          "line": 225,
+          "signature": "const updated = list.map((p) => (p._id === id ? { ...p, stock: n } : p));",
+          "exported": false
+        },
+        {
+          "name": "base",
+          "kind": "function",
+          "line": 227,
+          "signature": "const base = getMergedProducts().find((p) => p._id === id);",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "react",
+        "../../services/api",
+        "lucide-react",
+        "../../data/catalog",
+        "../../components/admin/ImageField"
+      ],
+      "indexedAt": 1788851819001
+    },
+    "frontend/src/pages/admin/Settings.jsx": {
+      "path": "frontend/src/pages/admin/Settings.jsx",
+      "language": "javascriptreact",
+      "role": "config",
+      "hash": "3b939c2c52a13bfa34a14cfad95631d792c7b882",
+      "size": 11822,
+      "lines": 282,
+      "symbols": [
+        {
+          "name": "updateSlide",
+          "kind": "function",
+          "line": 45,
+          "signature": "const updateSlide = (i, key, val) =>",
+          "exported": false
+        },
+        {
+          "name": "moveSlide",
+          "kind": "function",
+          "line": 48,
+          "signature": "const moveSlide = (i, dir) => {",
+          "exported": false
+        },
+        {
+          "name": "async ",
+          "kind": "function",
+          "line": 58,
+          "signature": "const save = async () => {",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "react",
+        "../../services/api",
+        "lucide-react",
+        "../../data/catalog",
+        "../../components/admin/ImageField"
+      ],
+      "indexedAt": 1788851819041
+    },
+    "backend/src/utils/seed.js": {
+      "path": "backend/src/utils/seed.js",
+      "language": "javascript",
+      "role": "util",
+      "hash": "bf6fe03b810b64684d267248dc825fe9bc90a87e",
+      "size": 12302,
+      "lines": 300,
+      "symbols": [
+        {
+          "name": "IMG",
+          "kind": "constant",
+          "line": 8,
+          "signature": "const IMG = {",
+          "exported": false
+        },
+        {
+          "name": "seed",
+          "kind": "function",
+          "line": 24,
+          "signature": "async function seed() {",
+          "exported": false
+        }
+      ],
+      "imports": [
+        "../models/User",
+        "../models/Product",
+        "../models/Category",
+        "../models/Setting",
+        "../models/Blog"
+      ],
+      "indexedAt": 1788851819064
+    }
+  },
+  "architecture": [
+    {
+      "role": "api",
+      "label": "APIs & Routes",
+      "files": [
+        "backend/src/controllers/adminController.js",
+        "backend/src/controllers/authController.js",
+        "backend/src/controllers/blogController.js",
+        "backend/src/controllers/categoryController.js",
+        "backend/src/controllers/orderController.js",
+        "backend/src/controllers/productController.js",
+        "backend/src/controllers/settingController.js",
+        "backend/src/routes/adminRoutes.js",
+        "backend/src/routes/authRoutes.js",
+        "backend/src/routes/blogRoutes.js",
+        "backend/src/routes/categoryRoutes.js",
+        "backend/src/routes/orderRoutes.js",
+        "backend/src/routes/productRoutes.js",
+        "backend/src/routes/settingRoutes.js",
+        "backend/src/server.js",
+        "frontend/src/services/api.js"
+      ]
+    },
+    {
+      "role": "component",
+      "label": "Components",
+      "files": [
+        "frontend/src/App.jsx",
+        "frontend/src/components/admin/ImageField.jsx",
+        "frontend/src/components/layout/CartDrawer.jsx",
+        "frontend/src/components/layout/ExitPopup.jsx",
+        "frontend/src/components/layout/Footer.jsx",
+        "frontend/src/components/layout/Header.jsx",
+        "frontend/src/components/layout/NewsletterPopup.jsx",
+        "frontend/src/components/layout/SalesNotification.jsx",
+        "frontend/src/components/product/ProductCard.jsx",
+        "frontend/src/main.jsx",
+        "frontend/src/pages/About.jsx",
+        "frontend/src/pages/Blog.jsx",
+        "frontend/src/pages/BlogPost.jsx",
+        "frontend/src/pages/Contact.jsx",
+        "frontend/src/pages/Home.jsx",
+        "frontend/src/pages/Manufacturing.jsx",
+        "frontend/src/pages/ProductDetail.jsx",
+        "frontend/src/pages/Shop.jsx",
+        "frontend/src/pages/admin/AdminLayout.jsx",
+        "frontend/src/pages/admin/Blogs.jsx",
+        "frontend/src/pages/admin/Categories.jsx",
+        "frontend/src/pages/admin/Dashboard.jsx",
+        "frontend/src/pages/admin/Login.jsx",
+        "frontend/src/pages/admin/Orders.jsx",
+        "frontend/src/pages/admin/Popups.jsx",
+        "frontend/src/pages/admin/Products.jsx"
+      ]
+    },
+    {
+      "role": "model",
+      "label": "Database Models",
+      "files": [
+        "backend/src/models/Blog.js",
+        "backend/src/models/Category.js",
+        "backend/src/models/Order.js",
+        "backend/src/models/Product.js",
+        "backend/src/models/Setting.js",
+        "backend/src/models/User.js"
+      ]
+    },
+    {
+      "role": "util",
+      "label": "Shared Utilities",
+      "files": [
+        "backend/src/utils/seed.js"
+      ]
+    },
+    {
+      "role": "config",
+      "label": "Configuration",
+      "files": [
+        "backend/src/config/cloudinary.js",
+        "backend/src/config/db.js",
+        "frontend/postcss.config.js",
+        "frontend/src/pages/admin/Settings.jsx",
+        "frontend/tailwind.config.js",
+        "frontend/vite.config.js"
+      ]
+    },
+    {
+      "role": "other",
+      "label": "Other",
+      "files": [
+        "backend/src/middleware/auth.js",
+        "backend/src/middleware/upload.js",
+        "frontend/src/data/catalog.js",
+        "frontend/src/store/index.js",
+        "frontend/src/store/slices/adminSlice.js",
+        "frontend/src/store/slices/authSlice.js",
+        "frontend/src/store/slices/cartSlice.js",
+        "frontend/src/store/slices/productSlice.js"
+      ]
+    }
+  ]
+}

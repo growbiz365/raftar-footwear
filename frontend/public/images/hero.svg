@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
+  <defs>
+    <linearGradient id="hero" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5ebe0"/>
+      <stop offset="100%" style="stop-color:#e8d5c4"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#hero)"/>
+  <circle cx="400" cy="320" r="90" fill="#d4b5a0"/>
+  <ellipse cx="400" cy="620" rx="140" ry="220" fill="#c9a88a"/>
+  <text x="400" y="900" font-family="system-ui,sans-serif" font-size="24" fill="rgba(0,0,0,0.3)" text-anchor="middle">Hero Model</text>
+</svg>
