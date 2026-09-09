@@ -8,7 +8,7 @@
 const C = 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear';
 
 export const IMG = {
-  logo: '/images/raftar-logo.jpg',
+  logo: '/images/fixlogo.jpg',
   hero: `${C}/Chappal/01/1.jpg`,
   hero2: `${C}/Multiple%202/01/1.jpg`,
   banner: `${C}/Panjadara/01/1.jpg`,

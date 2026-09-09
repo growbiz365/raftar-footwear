@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCartOpen, setSearchOpen, selectCartCount } from '../../store/slices/cartSlice';
 import api from '../../services/api';
 
-const LOGO = '/images/raftar-logo.jpg';
+const LOGO = '/images/fixlogo.jpg';
 const PHONE = '03338788861';
 
 export default function Header() {
@@ -19,6 +19,7 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const [allProducts, setAllProducts] = useState([]);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [logo, setLogo] = useState(LOGO);
   const [promoBar, setPromoBar] = useState(
     'GET FLAT WHOLESALE RATES · PACKS 1 · 6 · 12 · CALL ' + PHONE
   );
@@ -30,6 +31,7 @@ export default function Header() {
       .then((r) => {
         const d = r.data?.data;
         if (d?.promoBar) setPromoBar(typeof d.promoBar === 'string' ? d.promoBar : d.promoBar);
+        if (typeof d?.logo === 'string' && d.logo) setLogo(d.logo);
       })
       .catch(() => {});
   }, []);
@@ -101,7 +103,7 @@ export default function Header() {
         <div className="max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-10 flex items-center justify-between gap-3 h-9">
           <a
             href={`tel:${PHONE}`}
-            className="hidden sm:inline-flex items-center gap-1.5 text-white/80 hover:text-white transition shrink-0"
+            className="hidden sm:inline-flex items-center gap-1.5 text-white transition shrink-0 font-medium tracking-wide uppercase"
           >
             <Phone size={12} />
             Need Help? Call us at {PHONE}
@@ -109,14 +111,14 @@ export default function Header() {
           <p className="flex-1 text-center font-medium tracking-wide uppercase truncate px-2">
             {promoBar}
           </p>
-          <span className="hidden md:inline text-white/50 shrink-0 tracking-wider">PKR</span>
+          <span className="hidden md:inline text-white shrink-0 font-medium tracking-wide uppercase">PKR</span>
         </div>
       </div>
 
       {/* Main header — white, clean */}
       <header className="sticky top-0 z-40 bg-white border-b border-gray-100" ref={dropdownRef}>
         <div className="max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-10">
-          <div className="flex items-center justify-between h-[72px] sm:h-24 lg:h-24 gap-4">
+          <div className="flex items-center justify-between h-[76px] sm:h-24 lg:h-24 gap-4">
             {/* Mobile menu */}
             <button
               className="lg:hidden p-2 -ml-1 text-gray-800"
@@ -129,9 +131,9 @@ export default function Header() {
             {/* Logo */}
             <Link to="/" className="flex items-center shrink-0">
               <img
-                src={LOGO}
+                src={logo}
                 alt="Raftar Footwear"
-                className="h-16 sm:h-20 lg:h-24 w-auto object-contain max-w-[280px] sm:max-w-[340px] lg:max-w-[380px]"
+                className="h-14 sm:h-16 lg:h-20 w-auto object-contain max-w-[280px] sm:max-w-[320px] lg:max-w-[400px]"
                 loading="eager"
                 decoding="async"
               />
