@@ -7,6 +7,7 @@ import { addToCart, toggleWishlist, selectIsInWishlist } from '../store/slices/c
 import { fetchProducts } from '../store/slices/productSlice';
 import ProductCard from '../components/product/ProductCard';
 import { openWhatsApp, embedImageInText, messageAlreadySent, markWhatsAppSent } from '../utils/whatsapp';
+import { safeImage } from '../utils/img';
 
 const PACKS = [1, 6, 12];
 const WHATSAPP = '923338788861';
@@ -80,8 +81,8 @@ export default function ProductDetail() {
 
   const currentVariant = variants.find((v) => v.name === selectedColor) || variants[0];
   const allImages = [
-    ...variants.map((v) => v.image).filter(Boolean),
-    ...(product.images || []),
+    ...variants.map((v) => safeImage(v.image)).filter(Boolean),
+    ...(product.images || []).map(safeImage),
   ].filter((img, i, arr) => img && arr.indexOf(img) === i);
   const displayImages = [
     ...(currentVariant?.image ? [currentVariant.image] : []),

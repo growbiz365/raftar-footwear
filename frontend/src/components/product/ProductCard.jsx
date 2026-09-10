@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Heart, Eye, ShoppingBag } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, toggleWishlist, selectIsInWishlist } from '../../store/slices/cartSlice';
+import { safeImage } from '../../utils/img';
 
 export default function ProductCard({ product }) {
   const dispatch = useDispatch();
@@ -39,7 +40,9 @@ export default function ProductCard({ product }) {
     activeVariant?.image ||
     primaryImage;
 
-  const displayImage = hovered && secondaryImage !== primaryImage ? secondaryImage : primaryImage;
+  const displayImage = safeImage(
+    hovered && secondaryImage !== primaryImage ? secondaryImage : primaryImage
+  );
 
   return (
     <div
