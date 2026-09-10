@@ -20,6 +20,13 @@ router.post('/upload-image', handleSingleUpload, (req, res) => {
   res.json({ success: true, data: { url: req.uploadedUrl } });
 });
 
+router.post('/upload-multiple', handleMultiUpload, (req, res) => {
+  if (!req.uploadedUrls?.length) {
+    return res.status(400).json({ success: false, message: 'No images uploaded' });
+  }
+  res.json({ success: true, data: { urls: req.uploadedUrls } });
+});
+
 
 router.get('/products', productCtrl.getProducts);
 router.post('/products', handleMultiUpload, productCtrl.createProduct);
