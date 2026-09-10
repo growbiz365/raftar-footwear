@@ -81,9 +81,15 @@ export default function Home() {
   const s = settings || STATIC_SETTINGS;
   const hero = s.hero || STATIC_SETTINGS.hero;
 
+  // Hero images must always come from Cloudinary — never localhost paths
+  const CLOUD_HERO_IMG =
+    'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Chappal/01/1.jpg';
+  const heroImage = (img) =>
+    img && !img.startsWith('/') && !img.startsWith('data:') ? img : CLOUD_HERO_IMG;
+
   const slides =
     Array.isArray(hero.slides) && hero.slides.length > 0
-      ? hero.slides
+      ? hero.slides.map((sl) => ({ ...sl, image: heroImage(sl.image) }))
       : [
           {
             badge: hero.badge || 'PLASTIC FOOTWEAR MANUFACTURER',
@@ -94,7 +100,7 @@ export default function Home() {
               'Premium PCU & PVC chappals and slides for wholesalers, dealers & distributors across Pakistan.',
             buttonText: hero.buttonText || 'Shop Now',
             buttonLink: hero.buttonLink || '/shop',
-            image: hero.image || '',
+            image: heroImage(hero.image),
             bgColor: hero.bgColor || '#faf7f5',
           },
         ];
