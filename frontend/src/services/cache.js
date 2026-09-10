@@ -1,4 +1,4 @@
-const PREFIX = 'rc2_';
+const PREFIX = 'rc3_';
 
 export const CACHE_TTL = 5 * 60 * 1000;
 

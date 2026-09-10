@@ -18,8 +18,17 @@ const UPLOAD_TO_CLOUDINARY = {
 const WP_RE = /https:\/\/raftarfootwear\.com\/wp-content\/uploads\/[0-9]{4}\/[0-9]{2}\/([^/\s"')]+)/g;
 const UP_RE = /\/uploads\/([\w.-]+\.(?:jpg|png|webp))/g;
 
+// Some older uploads stored the image as a data URL whose
+// `data:image/jpeg;base64,` prefix was lost — leaving a bare base64 string
+// that the browser tries to request as a relative URL. Restore the prefix
+// for common image signatures so these render correctly again.
+const BARE_BASE64_RE = /^(\/9j\/|iVBORw0KGgo|UklGR|R0lGOD)/;
+
 function cloudifyString(str) {
   if (typeof str !== 'string') return str;
+  if (BARE_BASE64_RE.test(str)) {
+    return `data:image/jpeg;base64,${str}`;
+  }
   if (str.includes('wp-content')) {
     str = str.replace(WP_RE, (full, file) => {
       const base = file.replace(/\.[^.]+$/, '');
