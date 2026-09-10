@@ -92,24 +92,40 @@ export default function AdminProducts() {
     setError('');
     setUploadProgress({ done: 0, total: selected.length });
     setUploadingFiles(true);
+    let urls = [];
     try {
-      const urls = [];
+      // Preferred: one batch request — files are uploaded sequentially
+      // server-side with a per-file Cloudinary→data-URL fallback.
+      const fd = new FormData();
+      selected.forEach((f) => fd.append('images', f));
+      const { data } = await api.post('/admin/upload-multiple', fd, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      urls = (data?.data?.urls || []).filter(Boolean);
+      setUploadProgress((p) => ({ ...p, done: selected.length }));
+    } catch (e) {
+      // Batch endpoint unavailable → fall back to per-file uploads.
       for (const f of selected) {
-        urls.push(await uploadImageFile(f));
+        try {
+          urls.push(await uploadImageFile(f));
+        } catch (err2) {
+          console.warn('Upload failed for one file:', err2?.message);
+        }
         setUploadProgress((p) => ({ ...p, done: p.done + 1 }));
       }
+    }
+    if (urls.length) {
       setPhotos((arr) => {
         const base = arr.length === 1 && !arr[0].url ? [] : arr.slice();
-        const added = urls.filter(Boolean).map((url) => ({ url, color: '', single: false }));
+        const added = urls.map((url) => ({ url, color: '', single: false }));
         return [...added, ...base];
       });
-    } catch (e2) {
-      setError(e2.message || 'One or more images failed to upload');
-    } finally {
-      setUploadingFiles(false);
-      setUploadProgress({ done: 0, total: 0 });
-      e.target.value = '';
+    } else {
+      setError('No images could be uploaded. Try again or upload one at a time.');
     }
+    setUploadingFiles(false);
+    setUploadProgress({ done: 0, total: 0 });
+    e.target.value = '';
   };
 
   const loadCategoryOptions = async () => {

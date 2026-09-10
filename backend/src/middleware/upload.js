@@ -63,17 +63,19 @@ function handleMultiUpload(req, res, next) {
     if (err) return res.status(400).json({ success: false, message: err.message });
     if (!req.files?.length) return next();
     try {
-      req.uploadedUrls = await Promise.all(
-        req.files.map(async (f) => {
-          const compressed = await compressToJpeg(f.buffer);
-          try {
-            return await uploadToCloudinary(compressed);
-          } catch (e) {
-            console.warn('Cloudinary upload failed — inlining image as data URL:', e.message);
-            return toDataUrl(compressed);
-          }
-        })
-      );
+      // Process sequentially so one slow/failed file never kills the rest of
+      // the batch. Each file falls back to a data URL when Cloudinary fails.
+      const urls = [];
+      for (const f of req.files) {
+        const compressed = await compressToJpeg(f.buffer);
+        try {
+          urls.push(await uploadToCloudinary(compressed));
+        } catch (e) {
+          console.warn('Cloudinary upload failed — inlining image as data URL:', e.message);
+          urls.push(toDataUrl(compressed));
+        }
+      }
+      req.uploadedUrls = urls;
       next();
     } catch (e) {
       console.error('Image processing error:', e.message);
