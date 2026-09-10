@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import api from '../../services/api';
-import { Plus, Trash2, X, Search, Layers, Package, AlertTriangle } from 'lucide-react';
+import { Plus, Trash2, X, Pencil, Search, Layers, Package, AlertTriangle } from 'lucide-react';
 import { useToast } from '../../components/admin/Toast';
 
 export default function AdminCategories() {
   const { toast, confirm } = useToast();
   const [categories, setCategories] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [editId, setEditId] = useState(null);
   const [form, setForm] = useState({ name: '', description: '', image: '' });
   const [file, setFile] = useState(null);
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState(new Set());
+  const [saving, setSaving] = useState(false);
 
   const load = () => api.get('/admin/categories').then(r => setCategories(r.data?.data || [])).catch(() => {});
 
@@ -28,19 +30,43 @@ export default function AdminCategories() {
 
   const filtered = categories.filter((c) => (c.name || '').toLowerCase().includes(query.trim().toLowerCase()));
 
-  const handleCreate = async (e) => {
+  const openCreate = () => {
+    setEditId(null);
+    setForm({ name: '', description: '', image: '' });
+    setFile(null);
+    setShowForm(true);
+  };
+
+  const openEdit = (c) => {
+    setEditId(c._id);
+    setForm({ name: c.name || '', description: c.description || '', image: c.image || '' });
+    setFile(null);
+    setShowForm(true);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSaving(true);
     const fd = new FormData();
     fd.append('name', form.name);
     fd.append('description', form.description);
     if (form.image) fd.append('image', form.image);
     if (file) fd.append('image', file);
-    await api.post('/admin/categories', fd, { headers: { 'Content-Type': 'multipart/form-data' } });
-    setShowForm(false);
-    setForm({ name: '', description: '', image: '' });
-    setFile(null);
-    load();
-    toast('Category created');
+    try {
+      if (editId) {
+        await api.put(`/admin/categories/${editId}`, fd, { headers: { 'Content-Type': 'multipart/form-data' } });
+      } else {
+        await api.post('/admin/categories', fd, { headers: { 'Content-Type': 'multipart/form-data' } });
+      }
+      setShowForm(false);
+      setForm({ name: '', description: '', image: '' });
+      setFile(null);
+      load();
+      toast(editId ? 'Category updated' : 'Category created');
+    } catch (err) {
+      toast(err.response?.data?.message || 'Save failed', 'error');
+    }
+    setSaving(false);
   };
 
   const handleDelete = async (id) => {
@@ -69,7 +95,7 @@ export default function AdminCategories() {
     <div className="p-4 sm:p-6 lg:p-8">
       <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
         <h1 className="text-2xl font-semibold">Categories ({categories.length})</h1>
-        <button onClick={() => setShowForm(true)} className="flex items-center gap-2 bg-black text-white px-4 py-2.5 rounded-lg text-sm font-medium">
+        <button onClick={openCreate} className="flex items-center gap-2 bg-black text-white px-4 py-2.5 rounded-lg text-sm font-medium">
           <Plus size={16} /> Add Category
         </button>
       </div>
@@ -102,18 +128,23 @@ export default function AdminCategories() {
         <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
           <div className="bg-white rounded-xl p-6 w-full max-w-md">
             <div className="flex justify-between mb-6">
-              <h2 className="text-lg font-medium">New Category</h2>
+              <h2 className="text-lg font-medium">{editId ? 'Edit Category' : 'New Category'}</h2>
               <button onClick={() => setShowForm(false)}><X size={20} /></button>
             </div>
-            <form onSubmit={handleCreate} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <input placeholder="Name" required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
                 className="w-full border rounded-lg px-4 py-2.5 text-sm outline-none focus:border-black" />
               <input placeholder="Image URL (or upload below)" value={form.image} onChange={e => setForm({ ...form, image: e.target.value })}
                 className="w-full border rounded-lg px-4 py-2.5 text-sm outline-none focus:border-black" />
               <input type="file" accept="image/*" onChange={e => setFile(e.target.files[0])} className="text-sm" />
+              {form.image && (
+                <img src={form.image} alt="" className="h-24 w-24 rounded-lg object-cover border border-gray-200" />
+              )}
               <textarea placeholder="Description" value={form.description} onChange={e => setForm({ ...form, description: e.target.value })}
                 className="w-full border rounded-lg px-4 py-2.5 text-sm outline-none focus:border-black" rows={2} />
-              <button type="submit" className="w-full bg-black text-white py-3 rounded-lg text-sm font-medium">Create</button>
+              <button type="submit" disabled={saving} className="w-full bg-black text-white py-3 rounded-lg text-sm font-medium disabled:opacity-60">
+                {saving ? 'Saving…' : editId ? 'Save changes' : 'Create'}
+              </button>
             </form>
           </div>
         </div>
@@ -176,9 +207,14 @@ export default function AdminCategories() {
                 <p className="text-xs text-gray-500">{c.count || 0} products</p>
                 {c.description && <p className="text-xs text-gray-400 mt-1 line-clamp-2">{c.description}</p>}
               </div>
-              <button onClick={() => handleDelete(c._id)} className="text-rose-500 text-xs self-end flex items-center gap-1">
-                <Trash2 size={14} /> Delete
-              </button>
+              <div className="flex items-center gap-3 mt-2 self-end">
+                <button onClick={() => openEdit(c)} className="text-[#0b4f86] text-xs flex items-center gap-1">
+                  <Pencil size={13} /> Edit
+                </button>
+                <button onClick={() => handleDelete(c._id)} className="text-rose-500 text-xs flex items-center gap-1">
+                  <Trash2 size={14} /> Delete
+                </button>
+              </div>
             </div>
           </div>
         ))}
