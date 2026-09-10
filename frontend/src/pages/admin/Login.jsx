@@ -11,7 +11,7 @@ export default function AdminLogin() {
   const { loading, error, user } = useSelector(s => s.auth);
 
   if (user?.role === 'admin') {
-    return <Navigate to="/admin/v1/admin" replace />;
+    return <Navigate to="/admin/v1/dashboard" replace />;
   }
 
   const handleSubmit = async (e) => {
@@ -20,7 +20,7 @@ export default function AdminLogin() {
     const result = await dispatch(login({ email, password }));
     if (login.fulfilled.match(result)) {
       if (result.payload.user.role === 'admin') {
-        navigate('/admin/v1/admin', { replace: true });
+        navigate('/admin/v1/dashboard', { replace: true });
       } else {
         dispatch(clearError());
       }

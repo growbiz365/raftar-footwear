@@ -17,9 +17,17 @@ const emptySlide = {
   bgColor: '',
 };
 
+const CLOUD_HERO_IMG =
+  'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Chappal/01/1.jpg';
+
+// Hero images must always be Cloudinary — never localhost /uploads, /images or data: URLs
+const heroImg = (u) =>
+  u && (u.startsWith('/') || u.startsWith('data:')) ? CLOUD_HERO_IMG : u;
+
 const normalizeSlide = (s) => ({
   ...emptySlide,
   ...s,
+  image: heroImg(s?.image || ''),
   bgMode: s?.bgMode || (s?.bgColor ? 'custom' : 'keep'),
 });
 

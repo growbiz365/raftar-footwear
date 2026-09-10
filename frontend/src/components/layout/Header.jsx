@@ -129,7 +129,11 @@ export default function Header() {
             </button>
 
             {/* Logo */}
-            <Link to="/" className="flex items-center shrink-0">
+            <Link
+              to="/"
+              onClick={() => window.scrollTo(0, 0)}
+              className="flex items-center shrink-0"
+            >
               <img
                 src={logo}
                 alt="Raftar Footwear"

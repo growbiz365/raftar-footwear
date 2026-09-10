@@ -13,18 +13,18 @@ export default function AdminLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   if (!user || user.role !== 'admin') {
-    return <Navigate to="/admin/v1/admin/login" replace />;
+    return <Navigate to="/admin/v1/dashboard/login" replace />;
   }
 
   const nav = [
-    { to: '/admin/v1/admin', label: 'Dashboard', icon: LayoutDashboard, exact: true },
-    { to: '/admin/v1/admin/products', label: 'Products', icon: Package },
-    { to: '/admin/v1/admin/categories', label: 'Categories', icon: FolderOpen },
-    { to: '/admin/v1/admin/orders', label: 'Orders', icon: ShoppingCart },
-    { to: '/admin/v1/admin/blogs', label: 'Blog', icon: FileText },
-    { to: '/admin/v1/admin/settings/home-sections', label: 'Home Sections', icon: Home },
-    { to: '/admin/v1/admin/settings', label: 'Site Settings', icon: Settings, exact: true },
-    { to: '/admin/v1/admin/popups', label: 'Popups', icon: Megaphone },
+    { to: '/admin/v1/dashboard', label: 'Dashboard', icon: LayoutDashboard, exact: true },
+    { to: '/admin/v1/dashboard/products', label: 'Products', icon: Package },
+    { to: '/admin/v1/dashboard/categories', label: 'Categories', icon: FolderOpen },
+    { to: '/admin/v1/dashboard/orders', label: 'Orders', icon: ShoppingCart },
+    { to: '/admin/v1/dashboard/blogs', label: 'Blog', icon: FileText },
+    { to: '/admin/v1/dashboard/settings/home-sections', label: 'Home Sections', icon: Home },
+    { to: '/admin/v1/dashboard/settings', label: 'Site Settings', icon: Settings, exact: true },
+    { to: '/admin/v1/dashboard/popups', label: 'Popups', icon: Megaphone },
   ];
 
   const isActive = (item) =>
@@ -50,7 +50,7 @@ export default function AdminLayout() {
         </Link>
       </nav>
       <div className="p-3 border-t">
-        <button onClick={() => { dispatch(logout()); navigate('/admin/v1/admin/login'); }}
+        <button onClick={() => { dispatch(logout()); navigate('/admin/v1/dashboard/login'); }}
           className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-rose-600 hover:bg-rose-50 w-full">
           <LogOut size={18} /> Logout
         </button>

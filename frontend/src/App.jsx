@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import CartDrawer from './components/layout/CartDrawer';
@@ -61,10 +61,8 @@ export default function App() {
       <Route path="/blog/:slug" element={<StoreLayout><BlogPost /></StoreLayout>} />
       <Route path="/wishlist" element={<StoreLayout><Wishlist /></StoreLayout>} />
 
-      <Route path="/admin" element={<Navigate to="/admin/v1/admin" replace />} />
-      <Route path="/admin/login" element={<Navigate to="/admin/v1/admin/login" replace />} />
-      <Route path="/admin/v1/admin/login" element={<AdminLogin />} />
-      <Route path="/admin/v1/admin" element={<AdminLayout />}>
+      <Route path="/admin/v1/dashboard/login" element={<AdminLogin />} />
+      <Route path="/admin/v1/dashboard" element={<AdminLayout />}>
         <Route index element={<AdminDashboard />} />
         <Route path="products" element={<AdminProducts />} />
         <Route path="categories" element={<AdminCategories />} />
