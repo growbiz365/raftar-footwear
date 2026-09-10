@@ -100,7 +100,8 @@ export default function AdminProducts() {
       }
       setPhotos((arr) => {
         const base = arr.length === 1 && !arr[0].url ? [] : arr.slice();
-        return [...base, ...urls.filter(Boolean).map((url) => ({ url, color: '', single: false }))];
+        const added = urls.filter(Boolean).map((url) => ({ url, color: '', single: false }));
+        return [...added, ...base];
       });
     } catch (e2) {
       setError(e2.message || 'One or more images failed to upload');
@@ -185,6 +186,22 @@ export default function AdminProducts() {
 
 const removePhoto = (i) => setPhotos((arr) => arr.filter((_, idx) => idx !== i));
 
+  // Local-mode save: upsert the product by id or slug so edits to catalog
+  // products (which live outside getLocalProducts) still overwrite the old copy.
+  const applyLocalSave = (payload, editId) => {
+    let list = getLocalProducts();
+    const current = products.find((p) => p._id === editId);
+    const slug = current?.slug || payload.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    const match = (p) => p._id === editId || (slug && p.slug === slug);
+    if (editId && list.some(match)) {
+      list = list.map((p) => (match(p) ? { ...p, ...payload, _id: editId, slug } : p));
+    } else {
+      list.unshift({ ...payload, _id: editId || 'local-' + Date.now(), slug, isActive: true });
+    }
+    saveLocalProducts(list);
+    setProducts(getMergedProducts());
+  };
+
   const makePhotoMain = (url) =>
     setPhotos((arr) => {
       const target = arr.find((p) => p.url === url);
@@ -195,7 +212,10 @@ const removePhoto = (i) => setPhotos((arr) => arr.filter((_, idx) => idx !== i))
   const appendPhoto = (u) => {
     const t = (u || '').trim();
     if (!t) return;
-    setPhotos((arr) => (arr.length === 1 && !arr[0].url ? [{ url: t, color: '', single: false }] : [...arr, { url: t, color: '', single: false }]));
+    setPhotos((arr) => {
+      const base = arr.length === 1 && !arr[0].url ? [] : arr.slice();
+      return [{ url: t, color: '', single: false }, ...base];
+    });
   };
 
   const setPhotoColor = (i, color) =>
@@ -217,7 +237,7 @@ const removePhoto = (i) => setPhotos((arr) => arr.filter((_, idx) => idx !== i))
     }
     setPhotos((arr) => {
       const base = arr.length === 1 && !arr[0].url ? [] : arr.slice();
-      return [...base, { url, color: singleColor, colorName: singleName, single: true }];
+      return [{ url, color: singleColor, colorName: singleName, single: true }, ...base];
     });
     setSingleFile(null);
     setSingleUrl('');
@@ -261,15 +281,7 @@ const removePhoto = (i) => setPhotos((arr) => arr.filter((_, idx) => idx !== i))
 
     try {
       if (useLocal) {
-        let list = getLocalProducts();
-        if (editId) {
-          list = list.map((p) => (p._id === editId ? { ...p, ...payload, _id: editId, slug: p.slug } : p));
-        } else {
-          const slug = payload.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-          list.unshift({ ...payload, _id: 'local-' + Date.now(), slug, isActive: true });
-        }
-        saveLocalProducts(list);
-        setProducts(getMergedProducts());
+        applyLocalSave(payload, editId);
       } else {
         const fd = new FormData();
         Object.entries(payload).forEach(([k, v]) => {
@@ -281,11 +293,12 @@ const removePhoto = (i) => setPhotos((arr) => arr.filter((_, idx) => idx !== i))
             fd.append(k, v);
           }
         });
-        // Also send comma strings for backend parseBody compatibility
-        fd.set('colors', payload.colors.join(','));
-        fd.set('sizes', payload.sizes.join(','));
-        fd.set('tags', payload.tags.join(','));
-        fd.set('images', payload.images.join(','));
+        // Send arrays as JSON — comma-joining breaks data-URL/base64 values
+        // that contain commas (images, colors, tags, sizes).
+        fd.set('colors', JSON.stringify(payload.colors));
+        fd.set('sizes', JSON.stringify(payload.sizes));
+        fd.set('tags', JSON.stringify(payload.tags));
+        fd.set('images', JSON.stringify(payload.images));
 
         if (editId) {
           await api.put(`/admin/products/${editId}`, fd, { headers: { 'Content-Type': 'multipart/form-data' } });
@@ -299,15 +312,7 @@ const removePhoto = (i) => setPhotos((arr) => arr.filter((_, idx) => idx !== i))
     } catch (err) {
       // fallback local
       try {
-        let list = getLocalProducts();
-        const slug = payload.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-        if (editId) {
-          list = list.map((p) => (p._id === editId ? { ...p, ...payload } : p));
-        } else {
-          list.unshift({ ...payload, _id: 'local-' + Date.now(), slug, isActive: true });
-        }
-        saveLocalProducts(list);
-        setProducts(getMergedProducts());
+        applyLocalSave(payload, editId);
         setUseLocal(true);
         setShowForm(false);
         toast(editId ? 'Product updated (local mode)' : 'Product created (local mode)');
