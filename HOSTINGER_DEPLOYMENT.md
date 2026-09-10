@@ -1,6 +1,6 @@
 # Hostinger Deployment Guide — Raftar Footwear (MERN)
 
-## Overview
+## Overvie
 
 This document explains how Raftar Footwear (MongoDB + Express + React/Vite + Node.js) is configured for a **single combined deployment** on Hostinger's shared hosting. Both the frontend (React/Vite) and backend (Express API) run in one Node.js app.
 
