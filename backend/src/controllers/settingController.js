@@ -95,6 +95,12 @@ const DEFAULTS = {
       { quote: 'Comfortable, stylish and great margins. Superstar packs move fast — easy WhatsApp reorders.', name: 'Herman', city: 'Peshawar', role: 'Regional stockist' },
       { quote: 'Ordered bulk for our store. Quality PVC and on-time delivery across Pakistan. Highly recommend.', name: 'Kylie', city: 'Karachi', role: 'Footwear store' }
     ]
+  },
+  shopBanners: {
+    banners: [
+      { eyebrow: 'Market Crash Prices!', line1: 'Step Into The', line2: 'Extraordinary', cta: 'Shop Women', link: '/collections/women', bgColor: '#0f172a', image: 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Chappali%20Boot/06/1.jpg' },
+      { eyebrow: 'All time Best Seller', line1: 'Style That', line2: 'Moves You First', cta: 'Shop Men', link: '/collections/men', bgColor: '#1e293b', image: 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Boot/04/6.jpg' }
+    ]
   }
 };
 

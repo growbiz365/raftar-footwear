@@ -81,6 +81,29 @@ export default function Home() {
   const s = settings || STATIC_SETTINGS;
   const hero = s.hero || STATIC_SETTINGS.hero;
 
+  const SHOP_BANNERS = [
+    {
+      eyebrow: 'Market Crash Prices!',
+      line1: 'Step Into The',
+      line2: 'Extraordinary',
+      cta: 'Shop Women',
+      link: '/collections/women',
+      bgColor: '#0f172a',
+      image: 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Chappali%20Boot/06/1.jpg',
+    },
+    {
+      eyebrow: 'All time Best Seller',
+      line1: 'Style That',
+      line2: 'Moves You First',
+      cta: 'Shop Men',
+      link: '/collections/men',
+      bgColor: '#1e293b',
+      image: 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Boot/04/6.jpg',
+    },
+  ];
+  const banners =
+    Array.isArray(s.shopBanners?.banners) && s.shopBanners.banners.length ? s.shopBanners.banners : SHOP_BANNERS;
+
   // Hero images must always come from Cloudinary — never localhost paths
   const CLOUD_HERO_IMG =
     'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Chappal/01/1.jpg';
@@ -380,52 +403,45 @@ export default function Home() {
       {/* Dual banners — matching Revone layout & heights */}
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-12 sm:py-20">
         <div className="grid md:grid-cols-2 gap-4 sm:gap-6 reveal">
-          <Link
-            to="/collections/women"
-            className="group relative min-h-[320px] sm:min-h-[420px] lg:min-h-[480px] overflow-hidden bg-slate-900"
-          >
-            <img
-              src="https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Chappali%20Boot/06/1.jpg"
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
-            <div className="relative z-10 h-full flex flex-col justify-end p-6 sm:p-10 text-white">
-              <p className="text-[11px] tracking-[0.22em] uppercase text-white/70 mb-2">Market Crash Prices!</p>
-              <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium mb-5 leading-[1.1]">
-                Step Into The
-                <br />
-                Extraordinary
-              </h3>
-              <span className="inline-flex text-xs font-semibold tracking-[0.15em] uppercase border-b border-white pb-1 w-fit group-hover:border-rose-300 transition">
-                Shop Women
-              </span>
-            </div>
-          </Link>
-          <Link
-            to="/collections/men"
-            className="group relative min-h-[320px] sm:min-h-[420px] lg:min-h-[480px] overflow-hidden bg-slate-800"
-          >
-            <img
-              src="https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Boot/04/6.jpg"
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
-            <div className="relative z-10 h-full flex flex-col justify-end p-6 sm:p-10 text-white">
-              <p className="text-[11px] tracking-[0.22em] uppercase text-white/70 mb-2">All time Best Seller</p>
-              <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium mb-5 leading-[1.1]">
-                Style That
-                <br />
-                Moves You First
-              </h3>
-              <span className="inline-flex text-xs font-semibold tracking-[0.15em] uppercase border-b border-white pb-1 w-fit group-hover:border-rose-300 transition">
-                Shop Men
-              </span>
-            </div>
-          </Link>
+          {banners.map((b, i) => (
+            <Link
+              key={i}
+              to={b.link || '/collections/raftar'}
+              className="group relative min-h-[320px] sm:min-h-[420px] lg:min-h-[480px] overflow-hidden bg-slate-900"
+              style={b.bgColor ? { backgroundColor: b.bgColor } : undefined}
+            >
+              {b.image ? (
+                <img
+                  src={b.image}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover"
+                  loading="lazy"
+                />
+              ) : (
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900" />
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+              <div className="relative z-10 h-full flex flex-col justify-end p-6 sm:p-10 text-white">
+                {b.eyebrow && (
+                  <p className="text-[11px] tracking-[0.22em] uppercase text-white/70 mb-2">{b.eyebrow}</p>
+                )}
+                <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium mb-5 leading-[1.1]">
+                  {b.line1 || 'Shop'}
+                  {b.line2 && (
+                    <>
+                      <br />
+                      {b.line2}
+                    </>
+                  )}
+                </h3>
+                {b.cta && (
+                  <span className="inline-flex text-xs font-semibold tracking-[0.15em] uppercase border-b border-white pb-1 w-fit group-hover:border-rose-300 transition">
+                    {b.cta}
+                  </span>
+                )}
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
