@@ -119,12 +119,14 @@ export default function CartDrawer() {
 
         <div className="flex-1 overflow-y-auto p-5">
           {items.length === 0 ? (
-            <div className="text-center py-20">
-              <p className="text-gray-500 mb-4">Your cart is empty</p>
-              <button onClick={() => dispatch(setCartOpen(false))} className="text-sm underline text-[#0b4f86]">
-                Continue Shopping
-              </button>
-            </div>
+            placed ? null : (
+              <div className="text-center py-20">
+                <p className="text-gray-500 mb-4">Your cart is empty</p>
+                <button onClick={() => dispatch(setCartOpen(false))} className="text-sm underline text-[#0b4f86]">
+                  Continue Shopping
+                </button>
+              </div>
+            )
           ) : (
             <div className="space-y-5">
               {items.map((item) => {
@@ -217,15 +219,25 @@ export default function CartDrawer() {
           )}
         </div>
 
-        {items.length > 0 && (
+        {(placed || items.length > 0) && (
           <div className="border-t p-5 space-y-3 pb-[calc(1.25rem+env(safe-area-inset-bottom))] sm:pb-5">
             {placed ? (
               <div className="text-center py-6">
                 <CheckCircle2 size={44} className="mx-auto text-emerald-500 mb-3" />
                 <p className="font-semibold text-lg">Order Placed!</p>
                 <p className="text-sm text-gray-500 mt-1 mb-6">
-                  Your order details have been sent. We will contact you shortly to confirm.
+                  Thank you! Your order has been placed. It will be delivered within a few days. For more details, please contact us on WhatsApp.
                 </p>
+                <a
+                  href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
+                    `Hi Raftar Footwear! I just placed an order for Rs ${total.toLocaleString()}. Kindly confirm the delivery details.`
+                  )}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-center gap-2 w-full bg-[#25D366] hover:bg-[#1da851] text-white py-3 rounded-xl text-sm font-semibold transition mb-3"
+                >
+                  <MessageCircle size={18} /> Contact on WhatsApp
+                </a>
                 <button
                   onClick={finish}
                   className="w-full border border-[#0b4f86] text-[#0b4f86] py-3 rounded-xl text-sm font-semibold hover:bg-blue-50 transition"

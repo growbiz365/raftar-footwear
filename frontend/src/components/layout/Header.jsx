@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCartOpen, setSearchOpen, selectCartCount } from '../../store/slices/cartSlice';
 import api from '../../services/api';
 
-const LOGO = '/images/fixlogo.jpg';
+const LOGO = '/images/raftar-logo.jpeg';
 const PHONE = '03338788861';
 
 export default function Header() {
@@ -31,7 +31,7 @@ export default function Header() {
       .then((r) => {
         const d = r.data?.data;
         if (d?.promoBar) setPromoBar(typeof d.promoBar === 'string' ? d.promoBar : d.promoBar);
-        if (typeof d?.logo === 'string' && d.logo) setLogo(d.logo);
+        if (typeof d?.logo === 'string' && d.logo && !d.logo.includes('/uploads/')) setLogo(d.logo);
       })
       .catch(() => {});
   }, []);

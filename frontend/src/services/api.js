@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { cacheKey, cacheGet, cacheSet, clearCache } from './cache';
 
+// Settings endpoints are edited from the admin dashboard, so never serve them
+// from the response cache — otherwise saved changes show up late.
+const NO_CACHE_RE = /\/settings(\?|$|\/)/;
+
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api',
   headers: {
@@ -14,7 +18,7 @@ api.interceptors.request.use((config) => {
   if (token) config.headers.Authorization = `Bearer ${token}`;
 
   const method = (config.method || 'get').toLowerCase();
-  if (method === 'get') {
+  if (method === 'get' && !NO_CACHE_RE.test(config.url || '')) {
     const key = cacheKey(config);
     config._cacheKey = key;
     const hit = cacheGet(key);

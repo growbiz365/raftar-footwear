@@ -24,6 +24,7 @@ import AdminProducts from './pages/admin/Products';
 import AdminOrders from './pages/admin/Orders';
 import AdminLogin from './pages/admin/Login';
 import AdminSettings from './pages/admin/Settings';
+import AdminHomeSections from './pages/admin/HomeSections';
 import AdminCategories from './pages/admin/Categories';
 import AdminPopups from './pages/admin/Popups';
 import AdminBlogs from './pages/admin/Blogs';
@@ -69,6 +70,7 @@ export default function App() {
         <Route path="categories" element={<AdminCategories />} />
         <Route path="orders" element={<AdminOrders />} />
         <Route path="settings" element={<AdminSettings />} />
+        <Route path="settings/home-sections" element={<AdminHomeSections />} />
         <Route path="popups" element={<AdminPopups />} />
         <Route path="blogs" element={<AdminBlogs />} />
       </Route>

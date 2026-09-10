@@ -41,11 +41,21 @@ export default function Home() {
   const [tab, setTab] = useState('best');
   const [countdown, setCountdown] = useState({ d: 0, h: 0, m: 0, s: 0 });
 
+  const countdownEndIso = settings?.saleCountdown?.endDate || null;
+
   useEffect(() => {
-    // Sale ends ~90 days from a fixed base for demo consistency
-    const end = new Date();
-    end.setDate(end.getDate() + 90);
-    end.setHours(23, 59, 59, 0);
+    const resolveTarget = () => {
+      if (countdownEndIso) {
+        const d = new Date(countdownEndIso);
+        if (!isNaN(d.getTime())) return d;
+      }
+      // Fallback: sale ends ~90 days from now (demo consistency)
+      const end = new Date();
+      end.setDate(end.getDate() + 90);
+      end.setHours(23, 59, 59, 0);
+      return end;
+    };
+    const end = resolveTarget();
     const tick = () => {
       const diff = Math.max(0, end - Date.now());
       const d = Math.floor(diff / 86400000);
@@ -57,7 +67,7 @@ export default function Home() {
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, []);
+  }, [countdownEndIso]);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -97,6 +107,36 @@ export default function Home() {
 
   const current = slides[heroIndex] || slides[0];
   const list = Array.isArray(products) ? products : [];
+
+  const promo = s.promoTiles || {};
+  const promoEyebrow = promo.eyebrow || 'Big offers on your favorite! 💖';
+  const promoTitle = promo.title || 'Where Style Meets Comfort';
+  const promoDefaultTiles = [
+    { title: "Women's Favorite Styles", subtitle: 'Upto 50% Off', cta: 'Shop Now', to: '/collections/women', img: 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Multiple/03/13.jpg' },
+    { title: 'Say Hello To Slides', subtitle: 'Volume packs ready', cta: 'Shop Now', to: '/collections/slides', img: 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/01/2.jpg' },
+    { title: 'Big Buckle Styles', subtitle: 'Flat wholesale rates', cta: 'Shop Now', to: '/collections/raftar', img: 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Panjadara/03/7.jpg' },
+    { title: 'Kids & Everyday', subtitle: 'Comfort first', cta: 'Shop Now', to: '/collections/children', img: 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/05/1.jpg' },
+  ];
+  const tiles = Array.isArray(promo.tiles) && promo.tiles.length ? promo.tiles : promoDefaultTiles;
+
+  const sale = s.saleCountdown || {};
+  const saleBadge = sale.badge || 'Limited time';
+  const saleTitle = sale.title || 'Biggest sale of the year';
+  const saleSubtitle = sale.subtitle || 'Shop before time runs out. Up to 70% OFF wholesale packs';
+  const saleCta = sale.buttonText || 'Shop Now';
+  const saleLink = sale.buttonLink || '/shop';
+  const saleBg = sale.bgImg || 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Chappal/02/5.jpg';
+
+  const tdata = s.testimonials || {};
+  const tEyebrow = tdata.eyebrow || 'Happy Clients';
+  const tTitle = tdata.title || 'We Work To Keep Dealers Happy';
+  const tItems = Array.isArray(tdata.items) && tdata.items.length
+    ? tdata.items
+    : [
+        { quote: 'True to size and durable for daily wear. Our customers reorder the Raftar slides every season.', name: 'Cory', city: 'Lahore', role: 'Fashion retailer' },
+        { quote: 'Comfortable, stylish and great margins. Superstar packs move fast — easy WhatsApp reorders.', name: 'Herman', city: 'Peshawar', role: 'Regional stockist' },
+        { quote: 'Ordered bulk for our store. Quality PVC and on-time delivery across Pakistan. Highly recommend.', name: 'Kylie', city: 'Karachi', role: 'Footwear store' },
+      ];
   const featured = list.filter((p) => p.featured);
   const best = (featured.length ? featured : list).slice(0, 8);
   const topRated = [...list].sort((a, b) => (b.rating || 0) - (a.rating || 0)).slice(0, 8);
@@ -386,16 +426,11 @@ export default function Home() {
       {/* 4 promo tiles — Big offers */}
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 pb-16 sm:pb-24">
         <div className="text-center mb-10 sm:mb-12 reveal">
-          <p className="section-eyebrow">Big offers on your favorite! 💖</p>
-          <h2 className="section-title">Where Style Meets Comfort</h2>
+          <p className="section-eyebrow">{promoEyebrow}</p>
+          <h2 className="section-title">{promoTitle}</h2>
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 reveal" style={{ transitionDelay: '80ms' }}>
-{[ 
-            { title: "Women's Favorite Styles", subtitle: 'Upto 50% Off', cta: 'Shop Now', to: '/collections/women', img: 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Multiple/03/13.jpg' },
-            { title: 'Say Hello To Slides', subtitle: 'Volume packs ready', cta: 'Shop Now', to: '/collections/slides', img: 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/01/2.jpg' },
-            { title: 'Big Buckle Styles', subtitle: 'Flat wholesale rates', cta: 'Shop Now', to: '/collections/raftar', img: 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Panjadara/03/7.jpg' },
-            { title: 'Kids & Everyday', subtitle: 'Comfort first', cta: 'Shop Now', to: '/collections/children', img: 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/05/1.jpg' },
-          ].map((tile) => (
+{tiles.map((tile) => (
             <Link
               key={tile.title}
               to={tile.to}
@@ -425,19 +460,19 @@ export default function Home() {
       {/* Biggest sale + countdown — Revone style */}
       <section className="relative py-20 sm:py-28 overflow-hidden bg-slate-950 text-white text-center px-4">
         <img
-          src="https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Chappal/02/5.jpg"
+          src={saleBg}
           alt=""
           className="absolute inset-0 w-full h-full object-cover"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/70 to-black/80" />
         <div className="relative z-10 max-w-3xl mx-auto reveal">
-          <p className="text-[11px] tracking-[0.28em] uppercase text-white/60 mb-3">Limited time</p>
+          <p className="text-[11px] tracking-[0.28em] uppercase text-white/60 mb-3">{saleBadge}</p>
           <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-medium mb-3 leading-tight">
-            Biggest sale of the year
+            {saleTitle}
           </h2>
           <p className="text-white/70 text-sm sm:text-base mb-8">
-            Shop before time runs out. Up to 70% OFF wholesale packs
+            {saleSubtitle}
           </p>
           <div className="flex justify-center gap-3 sm:gap-5 mb-10">
             {[
@@ -459,8 +494,8 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <Link to="/shop" className="btn-black border border-white hover:bg-white hover:text-black">
-            Shop Now
+          <Link to={saleLink} className="btn-black border border-white hover:bg-white hover:text-black">
+            {saleCta}
           </Link>
         </div>
       </section>
@@ -468,46 +503,35 @@ export default function Home() {
       {/* Testimonials — Happy Clients */}
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-16 sm:py-24">
         <div className="text-center mb-12 reveal">
-          <p className="section-eyebrow">Happy Clients</p>
-          <h2 className="section-title">We Work To Keep Dealers Happy</h2>
+          <p className="section-eyebrow">{tEyebrow}</p>
+          <h2 className="section-title">{tTitle}</h2>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 reveal" style={{ transitionDelay: '80ms' }}>
-          {[
-            {
-              quote:
-                'True to size and durable for daily wear. Our customers reorder the Raftar slides every season.',
-              name: 'Cory · Lahore',
-              role: 'Fashion retailer',
-            },
-            {
-              quote:
-                'Comfortable, stylish and great margins. Superstar packs move fast — easy WhatsApp reorders.',
-              name: 'Herman · Peshawar',
-              role: 'Regional stockist',
-            },
-            {
-              quote:
-                'Ordered bulk for our store. Quality PVC and on-time delivery across Pakistan. Highly recommend.',
-              name: 'Kylie · Karachi',
-              role: 'Footwear store',
-            },
-          ].map((t) => (
+          {tItems.map((t, idx) => {
+            const person = t.name || '';
+            const city = t.city && !String(person).includes(t.city) ? ` · ${t.city}` : '';
+            return (
             <div
-              key={t.name}
+              key={idx}
               className="bg-[var(--rev-cream)] p-6 sm:p-8 border border-transparent hover:border-gray-200 transition flex flex-col"
             >
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-14 h-14 rounded-full bg-[#f0ebe6] flex items-center justify-center text-lg font-bold text-slate-700 shrink-0">
-                  {t.name[0]}
+                <div className="w-14 h-14 rounded-full bg-[#f0ebe6] flex items-center justify-center text-lg font-bold text-slate-700 shrink-0 overflow-hidden">
+                  {t.img ? (
+                    <img src={t.img} alt="" className="w-full h-full object-cover" />
+                  ) : (
+                    (person[0] || '?').toUpperCase()
+                  )}
                 </div>
                 <div>
-                  <p className="text-xs font-bold tracking-wider uppercase text-slate-900">{t.name}</p>
-                  <p className="text-[11px] text-gray-400 mt-0.5">{t.role}</p>
+                  <p className="text-xs font-bold tracking-wider uppercase text-slate-900">{person}{city}</p>
+                  <p className="text-[11px] text-gray-400 mt-0.5">{t.role || ''}</p>
                 </div>
               </div>
-              <p className="text-gray-600 text-sm leading-relaxed italic flex-1">“{t.quote}”</p>
+              <p className="text-gray-600 text-sm leading-relaxed italic flex-1">“{t.quote || ''}”</p>
             </div>
-          ))}
+          );
+          })}
         </div>
       </section>
 

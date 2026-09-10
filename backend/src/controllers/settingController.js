@@ -67,7 +67,35 @@ const DEFAULTS = {
     image: '',
     delayMs: 2500
   },
-  promoBar: '★ Quality Footwear, Every Step of the Way. | Wholesale Packs: 1 · 6 · 12 pairs'
+  promoBar: '★ Quality Footwear, Every Step of the Way. | Wholesale Packs: 1 · 6 · 12 pairs',
+  promoTiles: {
+    eyebrow: 'Big offers on your favorite! 💖',
+    title: 'Where Style Meets Comfort',
+    tiles: [
+      { title: "Women's Favorite Styles", subtitle: 'Upto 50% Off', cta: 'Shop Now', to: '/collections/women', img: 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Multiple/03/13.jpg' },
+      { title: 'Say Hello To Slides', subtitle: 'Volume packs ready', cta: 'Shop Now', to: '/collections/slides', img: 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/01/2.jpg' },
+      { title: 'Big Buckle Styles', subtitle: 'Flat wholesale rates', cta: 'Shop Now', to: '/collections/raftar', img: 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Panjadara/03/7.jpg' },
+      { title: 'Kids & Everyday', subtitle: 'Comfort first', cta: 'Shop Now', to: '/collections/children', img: 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/05/1.jpg' }
+    ]
+  },
+  saleCountdown: {
+    badge: 'Limited time',
+    title: 'Biggest sale of the year',
+    subtitle: 'Shop before time runs out. Up to 70% OFF wholesale packs',
+    buttonText: 'Shop Now',
+    buttonLink: '/shop',
+    bgImg: '',
+    endDate: null
+  },
+  testimonials: {
+    eyebrow: 'Happy Clients',
+    title: 'We Work To Keep Dealers Happy',
+    items: [
+      { quote: 'True to size and durable for daily wear. Our customers reorder the Raftar slides every season.', name: 'Cory', city: 'Lahore', role: 'Fashion retailer' },
+      { quote: 'Comfortable, stylish and great margins. Superstar packs move fast — easy WhatsApp reorders.', name: 'Herman', city: 'Peshawar', role: 'Regional stockist' },
+      { quote: 'Ordered bulk for our store. Quality PVC and on-time delivery across Pakistan. Highly recommend.', name: 'Kylie', city: 'Karachi', role: 'Footwear store' }
+    ]
+  }
 };
 
 exports.getSettings = async (req, res) => {

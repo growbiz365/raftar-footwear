@@ -1,8 +1,5 @@
 const multer = require('multer');
 const sharp = require('sharp');
-const fs = require('fs');
-const path = require('path');
-const crypto = require('crypto');
 const cloudinary = require('../config/cloudinary');
 
 const storage = multer.memoryStorage();
@@ -14,9 +11,6 @@ const upload = multer({
     else cb(new Error('Only images allowed'), false);
   }
 });
-
-const UPLOAD_DIR = path.join(__dirname, '..', 'uploads');
-if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 
 async function compressToJpeg(buffer) {
   return sharp(buffer)
@@ -38,11 +32,10 @@ function uploadToCloudinary(buffer, folder = 'revone') {
   });
 }
 
-// Persistent local fallback so images never break when Cloudinary is offline.
-function saveLocal(buffer) {
-  const name = `${Date.now()}-${crypto.randomBytes(4).toString('hex')}.jpg`;
-  fs.writeFileSync(path.join(UPLOAD_DIR, name), buffer);
-  return `/uploads/${name}`;
+// Portable fallback when Cloudinary is offline: inline the image as a data URL so
+// it persists in the DB and works from any host (no server-local file to 404).
+function toDataUrl(buffer) {
+  return `data:image/jpeg;base64,${buffer.toString('base64')}`;
 }
 
 function handleSingleUpload(req, res, next) {
@@ -58,8 +51,8 @@ function handleSingleUpload(req, res, next) {
     try {
       req.uploadedUrl = await uploadToCloudinary(compressed);
     } catch (e) {
-      console.error('Cloudinary upload error:', e.message, '— storing locally');
-      req.uploadedUrl = saveLocal(compressed);
+      console.warn('Cloudinary upload failed — inlining image as data URL:', e.message);
+      req.uploadedUrl = toDataUrl(compressed);
     }
     next();
   });
@@ -76,8 +69,8 @@ function handleMultiUpload(req, res, next) {
           try {
             return await uploadToCloudinary(compressed);
           } catch (e) {
-            console.error('Cloudinary upload error:', e.message, '— storing locally');
-            return saveLocal(compressed);
+            console.warn('Cloudinary upload failed — inlining image as data URL:', e.message);
+            return toDataUrl(compressed);
           }
         })
       );

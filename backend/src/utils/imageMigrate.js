@@ -32,10 +32,23 @@ function cloudifyString(str) {
   return str;
 }
 
+function isPlainObject(value) {
+  if (value === null || typeof value !== 'object') return false;
+  const proto = Object.getPrototypeOf(value);
+  return proto === Object.prototype || proto === null;
+}
+
 function cloudify(value) {
   if (Array.isArray(value)) return value.map(cloudify);
+  if (value instanceof Date || value instanceof RegExp || Buffer.isBuffer(value)) return value;
   if (value && typeof value === 'object') {
-    for (const k of Object.keys(value)) value[k] = cloudify(value[k]);
+    if (typeof value.toObject === 'function') {
+      return cloudify(value.toObject({ depopulate: true }));
+    }
+    if (isPlainObject(value)) {
+      for (const k of Object.keys(value)) value[k] = cloudify(value[k]);
+      return value;
+    }
     return value;
   }
   return cloudifyString(value);
