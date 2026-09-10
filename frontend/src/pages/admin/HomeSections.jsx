@@ -6,6 +6,7 @@ import { useToast } from '../../components/admin/Toast';
 
 const emptyTile = { title: '', subtitle: '', cta: 'Shop Now', to: '/collections/raftar', img: '' };
 const emptyTestimonial = { quote: '', name: '', city: '', role: '', img: '' };
+const emptyBanner = { eyebrow: '', line1: '', line2: '', cta: '', link: '/collections/raftar', bgColor: '', image: '' };
 
 const inputCls =
   'w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#0b4f86]/20 focus:border-[#0b4f86]';
@@ -36,6 +37,7 @@ export default function AdminHomeSections() {
     endDate: '',
   });
   const [testimonials, setTestimonials] = useState({ eyebrow: '', title: '', items: [] });
+  const [banners, setBanners] = useState([]);
 
   const [modal, setModal] = useState(null);
   const [draft, setDraft] = useState({});
@@ -72,6 +74,12 @@ export default function AdminHomeSections() {
           title: t.title || '',
           items: Array.isArray(t.items) ? t.items.map((x) => ({ ...emptyTestimonial, ...x })) : [],
         });
+
+        setBanners(
+          Array.isArray(d.shopBanners?.banners)
+            ? d.shopBanners.banners.map((b) => ({ ...emptyBanner, ...b }))
+            : []
+        );
       } catch {
         toast('Could not load settings — is the backend running?', 'info');
       }
@@ -95,6 +103,14 @@ export default function AdminHomeSections() {
     setDraft({ ...emptyTestimonial, ...item });
     setModal({ type: 'testimonial', index });
   };
+  const openAddBanner = () => {
+    setDraft({ ...emptyBanner });
+    setModal({ type: 'banner' });
+  };
+  const openEditBanner = (item, index) => {
+    setDraft({ ...emptyBanner, ...item });
+    setModal({ type: 'banner', index });
+  };
 
   const saveDraft = () => {
     const isEdit = modal?.index != null;
@@ -104,6 +120,9 @@ export default function AdminHomeSections() {
         ...p,
         tiles: isEdit ? p.tiles.map((x, i) => (i === modal.index ? t : x)) : [...p.tiles, t],
       }));
+    } else if (modal.type === 'banner') {
+      const t = { ...emptyBanner, ...draft };
+      setBanners((p) => (isEdit ? p.map((x, i) => (i === modal.index ? t : x)) : [...p, t]));
     } else {
       const t = { ...emptyTestimonial, ...draft };
       setTestimonials((p) => ({
@@ -120,6 +139,9 @@ export default function AdminHomeSections() {
   const removeTestimonial = (i) => {
     setTestimonials((p) => ({ ...p, items: p.items.filter((_, idx) => idx !== i) }));
   };
+  const removeBanner = (i) => {
+    setBanners((p) => p.filter((_, idx) => idx !== i));
+  };
   const moveTile = (i, dir) =>
     setPromo((p) => {
       const next = [...p.tiles];
@@ -135,6 +157,14 @@ export default function AdminHomeSections() {
       if (j < 0 || j >= next.length) return p;
       [next[i], next[j]] = [next[j], next[i]];
       return { ...p, items: next };
+    });
+  const moveBanner = (i, dir) =>
+    setBanners((p) => {
+      const next = [...p];
+      const j = i + dir;
+      if (j < 0 || j >= next.length) return p;
+      [next[i], next[j]] = [next[j], next[i]];
+      return next;
     });
 
   const save = async () => {
@@ -159,6 +189,11 @@ export default function AdminHomeSections() {
           eyebrow: testimonials.eyebrow,
           title: testimonials.title,
           items: testimonials.items.filter((t) => t.quote || t.name),
+        },
+      });
+      await api.put('/admin/settings/shopBanners', {
+        value: {
+          banners: banners.filter((b) => b.image || b.line1 || b.eyebrow),
         },
       });
       setMsg('✓ Home sections saved — refresh the storefront to see changes');
@@ -187,7 +222,7 @@ export default function AdminHomeSections() {
         <div>
           <h1 className="text-2xl font-semibold">Home Sections</h1>
           <p className="text-sm text-gray-500 mt-1">
-            Offer tiles, sale countdown &amp; testimonials — upload images by file or paste URL
+            Offer tiles, shop banners, sale countdown &amp; testimonials — upload images by file or paste URL
           </p>
         </div>
         <button
@@ -430,6 +465,72 @@ export default function AdminHomeSections() {
         </div>
       </section>
 
+      {/* Shop banners */}
+      <section className="bg-white border border-gray-200 rounded-2xl p-5 sm:p-6 mb-6 shadow-sm">
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-gray-400">Shop banners</h2>
+          <button
+            type="button"
+            onClick={openAddBanner}
+            className="flex items-center gap-1.5 bg-white border border-gray-200 hover:border-[#0b4f86] text-[#0b4f86] px-4 py-2 rounded-xl text-sm font-medium transition"
+          >
+            <Plus size={16} /> Add banner
+          </button>
+        </div>
+        <p className="text-xs text-gray-500 mb-4">
+          The two large “Shop Women / Shop Men” cards on the homepage (Market Crash Prices! · All time Best Seller)
+        </p>
+
+        <div className="space-y-3">
+          {banners.map((b, i) => (
+            <div key={i} className="border border-gray-200 rounded-xl p-4 flex gap-4 items-center">
+              <div className="w-20 h-16 sm:w-24 sm:h-20 rounded-lg overflow-hidden bg-gray-100 shrink-0">
+                {b.image ? (
+                  <img
+                    src={b.image}
+                    alt=""
+                    className="w-full h-full object-cover"
+                    onError={(e) => { e.target.style.display = 'none'; }}
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-gray-300 text-xs">No image</div>
+                )}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="font-semibold text-slate-800 truncate">
+                    {[b.line1, b.line2].filter(Boolean).join(' ') || b.cta || 'Untitled banner'}
+                  </span>
+                  <span className={`text-[10px] px-2 py-0.5 rounded-full shrink-0 ${b.image || b.line1 || b.eyebrow ? 'bg-emerald-50 text-emerald-600' : 'bg-gray-100 text-gray-500'}`}>
+                    {b.image || b.line1 || b.eyebrow ? 'Active' : 'Empty'}
+                  </span>
+                </div>
+                <p className="text-sm text-gray-500 mt-0.5 truncate">
+                  {[b.eyebrow, b.cta].filter(Boolean).join(' · ') || 'No text'}
+                </p>
+              </div>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button type="button" onClick={() => moveBanner(i, -1)} disabled={i === 0} className="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-30" title="Move up">
+                  <ChevronUp size={16} />
+                </button>
+                <button type="button" onClick={() => moveBanner(i, 1)} disabled={i === banners.length - 1} className="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-30" title="Move down">
+                  <ChevronDown size={16} />
+                </button>
+                <button type="button" onClick={() => openEditBanner(b, i)} className="p-2 rounded-lg bg-[#0b4f86]/10 text-[#0b4f86] hover:bg-[#0b4f86]/20" title="Edit banner">
+                  <Pencil size={15} />
+                </button>
+                <button type="button" onClick={() => removeBanner(i)} className="p-2 rounded-lg text-rose-500 hover:bg-rose-50" title="Remove banner">
+                  <Trash2 size={16} />
+                </button>
+              </div>
+            </div>
+          ))}
+          {banners.length === 0 && (
+            <p className="text-sm text-gray-400 text-center py-6 border border-dashed rounded-xl">No banners yet — add one</p>
+          )}
+        </div>
+      </section>
+
       <div className="flex justify-end sticky bottom-4">
         <button
           onClick={save}
@@ -448,7 +549,9 @@ export default function AdminHomeSections() {
               <h2 className="text-lg font-semibold">
                 {modal.type === 'tile'
                   ? modal.index != null ? 'Edit tile' : 'Add tile'
-                  : modal.index != null ? 'Edit testimonial' : 'Add testimonial'}
+                  : modal.type === 'banner'
+                    ? modal.index != null ? 'Edit banner' : 'Add banner'
+                    : modal.index != null ? 'Edit testimonial' : 'Add testimonial'}
               </h2>
               <button onClick={() => setModal(null)} className="p-1 hover:bg-gray-100 rounded">
                 <Plus size={20} className="rotate-45" />
@@ -496,6 +599,63 @@ export default function AdminHomeSections() {
                       className={inputCls}
                       value={draft.to || ''}
                       onChange={(e) => updraft('to', e.target.value)}
+                      placeholder="/collections/women"
+                    />
+                  </div>
+                </div>
+              </div>
+            ) : modal.type === 'banner' ? (
+              <div className="p-5 space-y-3">
+                <ImageField
+                  label="Banner image (file upload or URL)"
+                  value={draft.image || ''}
+                  onChange={(v) => updraft('image', v)}
+                />
+                <div>
+                  <label className={labelCls}>Eyebrow / top tagline</label>
+                  <input
+                    className={inputCls}
+                    value={draft.eyebrow || ''}
+                    onChange={(e) => updraft('eyebrow', e.target.value)}
+                    placeholder="Market Crash Prices!"
+                  />
+                </div>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className={labelCls}>Title line 1</label>
+                    <input
+                      className={inputCls}
+                      value={draft.line1 || ''}
+                      onChange={(e) => updraft('line1', e.target.value)}
+                      placeholder="Step Into The"
+                    />
+                  </div>
+                  <div>
+                    <label className={labelCls}>Title line 2</label>
+                    <input
+                      className={inputCls}
+                      value={draft.line2 || ''}
+                      onChange={(e) => updraft('line2', e.target.value)}
+                      placeholder="Extraordinary"
+                    />
+                  </div>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className={labelCls}>Button text</label>
+                    <input
+                      className={inputCls}
+                      value={draft.cta || ''}
+                      onChange={(e) => updraft('cta', e.target.value)}
+                      placeholder="Shop Women"
+                    />
+                  </div>
+                  <div>
+                    <label className={labelCls}>Link to</label>
+                    <input
+                      className={inputCls}
+                      value={draft.link || ''}
+                      onChange={(e) => updraft('link', e.target.value)}
                       placeholder="/collections/women"
                     />
                   </div>
