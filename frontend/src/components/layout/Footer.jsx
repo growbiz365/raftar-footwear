@@ -1,18 +1,30 @@
 import { Link } from 'react-router-dom';
+import { useSettings } from '../../store/settingsContext';
+import { DEFAULT_LOGO } from '../../data/catalog';
 
 const PHONE = '03338788861';
 
 export default function Footer() {
+  const { settings } = useSettings();
+  const logo =
+    typeof settings?.logo === 'string' && settings.logo.trim()
+      ? settings.logo.trim()
+      : DEFAULT_LOGO;
+
   return (
     <footer className="bg-slate-900 text-white pt-10 sm:pt-16 pb-24 md:pb-6">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           <div>
             <div className="mb-4">
-              <h2 className="font-display text-2xl font-bold leading-none tracking-tight text-white">
-                RAFTAR
-                <span className="block text-[#38bdf8]">FOOTWEAR</span>
-              </h2>
+              <Link to="/" className="inline-block">
+                <img
+                  src={logo}
+                  alt="Raftar Footwear"
+                  className="h-12 sm:h-14 w-auto object-contain max-w-[220px]"
+                  loading="lazy"
+                />
+              </Link>
               <p className="text-[10px] tracking-[0.25em] text-slate-500 mt-2 uppercase">
                 Enterprises · Peshawar
               </p>

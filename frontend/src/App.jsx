@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
@@ -8,26 +9,69 @@ import ExitPopup from './components/layout/ExitPopup';
 import MobileTabBar from './components/layout/MobileTabBar';
 import ScrollToTop from './components/layout/ScrollToTop';
 import FloatingWhatsApp from './components/layout/FloatingWhatsApp';
-import Home from './pages/Home';
-import Shop from './pages/Shop';
-import ProductDetail from './pages/ProductDetail';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import NotFound from './pages/NotFound';
-import Manufacturing from './pages/Manufacturing';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import Wishlist from './pages/Wishlist';
-import AdminLayout from './pages/admin/AdminLayout';
-import AdminDashboard from './pages/admin/Dashboard';
-import AdminProducts from './pages/admin/Products';
-import AdminOrders from './pages/admin/Orders';
-import AdminLogin from './pages/admin/Login';
-import AdminSettings from './pages/admin/Settings';
-import AdminHomeSections from './pages/admin/HomeSections';
-import AdminCategories from './pages/admin/Categories';
-import AdminPopups from './pages/admin/Popups';
-import AdminBlogs from './pages/admin/Blogs';
+import FaviconSync from './components/layout/FaviconSync';
+
+// Route pages are code-split so the initial bundle stays small and the first
+// page paints fast; each page loads only when its route is opened.
+const Home = lazy(() => import('./pages/Home'));
+const Shop = lazy(() => import('./pages/Shop'));
+const ProductDetail = lazy(() => import('./pages/ProductDetail'));
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+const Manufacturing = lazy(() => import('./pages/Manufacturing'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
+const Wishlist = lazy(() => import('./pages/Wishlist'));
+const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
+const AdminDashboard = lazy(() => import('./pages/admin/Dashboard'));
+const AdminProducts = lazy(() => import('./pages/admin/Products'));
+const AdminOrders = lazy(() => import('./pages/admin/Orders'));
+const AdminLogin = lazy(() => import('./pages/admin/Login'));
+const AdminSettings = lazy(() => import('./pages/admin/Settings'));
+const AdminHomeSections = lazy(() => import('./pages/admin/HomeSections'));
+const AdminCategories = lazy(() => import('./pages/admin/Categories'));
+const AdminPopups = lazy(() => import('./pages/admin/Popups'));
+const AdminBlogs = lazy(() => import('./pages/admin/Blogs'));
+
+function PageFallback() {
+  return (
+    <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="w-9 h-9 border-2 border-gray-200 border-t-[#0b4f86] rounded-full animate-spin" />
+    </div>
+  );
+}
+
+function lazyPage(Comp) {
+  return function LazyPage(props) {
+    return (
+      <Suspense fallback={<PageFallback />}>
+        <Comp {...props} />
+      </Suspense>
+    );
+  };
+}
+
+const HomePage = lazyPage(Home);
+const ShopPage = lazyPage(Shop);
+const ProductDetailPage = lazyPage(ProductDetail);
+const AboutPage = lazyPage(About);
+const ContactPage = lazyPage(Contact);
+const NotFoundPage = lazyPage(NotFound);
+const ManufacturingPage = lazyPage(Manufacturing);
+const BlogPage = lazyPage(Blog);
+const BlogPostPage = lazyPage(BlogPost);
+const WishlistPage = lazyPage(Wishlist);
+const AdminLayoutPage = lazyPage(AdminLayout);
+const AdminLoginPage = lazyPage(AdminLogin);
+const AdminDashboardPage = lazyPage(AdminDashboard);
+const AdminProductsPage = lazyPage(AdminProducts);
+const AdminOrdersPage = lazyPage(AdminOrders);
+const AdminSettingsPage = lazyPage(AdminSettings);
+const AdminHomeSectionsPage = lazyPage(AdminHomeSections);
+const AdminCategoriesPage = lazyPage(AdminCategories);
+const AdminPopupsPage = lazyPage(AdminPopups);
+const AdminBlogsPage = lazyPage(AdminBlogs);
 
 function StoreLayout({ children }) {
   return (
@@ -48,32 +92,33 @@ function StoreLayout({ children }) {
 export default function App() {
   return (
     <>
+      <FaviconSync />
       <ScrollToTop />
       <Routes>
-      <Route path="/" element={<StoreLayout><Home /></StoreLayout>} />
-      <Route path="/shop" element={<StoreLayout><Shop /></StoreLayout>} />
-      <Route path="/product/:slug" element={<StoreLayout><ProductDetail /></StoreLayout>} />
-      <Route path="/collections/:category" element={<StoreLayout><Shop /></StoreLayout>} />
-      <Route path="/about" element={<StoreLayout><About /></StoreLayout>} />
-      <Route path="/contact" element={<StoreLayout><Contact /></StoreLayout>} />
-      <Route path="/manufacturing" element={<StoreLayout><Manufacturing /></StoreLayout>} />
-      <Route path="/blog" element={<StoreLayout><Blog /></StoreLayout>} />
-      <Route path="/blog/:slug" element={<StoreLayout><BlogPost /></StoreLayout>} />
-      <Route path="/wishlist" element={<StoreLayout><Wishlist /></StoreLayout>} />
+      <Route path="/" element={<StoreLayout><HomePage /></StoreLayout>} />
+      <Route path="/shop" element={<StoreLayout><ShopPage /></StoreLayout>} />
+      <Route path="/product/:slug" element={<StoreLayout><ProductDetailPage /></StoreLayout>} />
+      <Route path="/collections/:category" element={<StoreLayout><ShopPage /></StoreLayout>} />
+      <Route path="/about" element={<StoreLayout><AboutPage /></StoreLayout>} />
+      <Route path="/contact" element={<StoreLayout><ContactPage /></StoreLayout>} />
+      <Route path="/manufacturing" element={<StoreLayout><ManufacturingPage /></StoreLayout>} />
+      <Route path="/blog" element={<StoreLayout><BlogPage /></StoreLayout>} />
+      <Route path="/blog/:slug" element={<StoreLayout><BlogPostPage /></StoreLayout>} />
+      <Route path="/wishlist" element={<StoreLayout><WishlistPage /></StoreLayout>} />
 
-      <Route path="/admin/v1/dashboard/login" element={<AdminLogin />} />
-      <Route path="/admin/v1/dashboard" element={<AdminLayout />}>
-        <Route index element={<AdminDashboard />} />
-        <Route path="products" element={<AdminProducts />} />
-        <Route path="categories" element={<AdminCategories />} />
-        <Route path="orders" element={<AdminOrders />} />
-        <Route path="settings" element={<AdminSettings />} />
-        <Route path="settings/home-sections" element={<AdminHomeSections />} />
-        <Route path="popups" element={<AdminPopups />} />
-        <Route path="blogs" element={<AdminBlogs />} />
+      <Route path="/admin/v1/dashboard/login" element={<AdminLoginPage />} />
+      <Route path="/admin/v1/dashboard" element={<AdminLayoutPage />}>
+        <Route index element={<AdminDashboardPage />} />
+        <Route path="products" element={<AdminProductsPage />} />
+        <Route path="categories" element={<AdminCategoriesPage />} />
+        <Route path="orders" element={<AdminOrdersPage />} />
+        <Route path="settings" element={<AdminSettingsPage />} />
+        <Route path="settings/home-sections" element={<AdminHomeSectionsPage />} />
+        <Route path="popups" element={<AdminPopupsPage />} />
+        <Route path="blogs" element={<AdminBlogsPage />} />
       </Route>
 
-      <Route path="*" element={<StoreLayout><NotFound /></StoreLayout>} />
+      <Route path="*" element={<StoreLayout><NotFoundPage /></StoreLayout>} />
     </Routes>
     </>
   );
