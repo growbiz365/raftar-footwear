@@ -13,6 +13,15 @@ const orderSchema = new mongoose.Schema({
     packSize: Number
   }],
   total: { type: Number, required: true },
+  orderNo: { type: String, default: null },
+  payment: {
+    method: { type: String, enum: ['cod', 'easypaisa', 'jazzcash', 'bank', 'other', ''], default: '' },
+    label: String,
+    accountNumber: String,
+    txnId: String,
+    note: String,
+    proofImage: String
+  },
   status: {
     type: String,
     enum: ['pending', 'processing', 'shipped', 'delivered', 'completed', 'cancelled'],

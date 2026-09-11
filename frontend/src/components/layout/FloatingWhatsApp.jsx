@@ -1,9 +1,13 @@
-const WHATSAPP = '923338788861';
+import { useSettings } from '../../store/settingsContext';
+
+const FALLBACK = '923338788861';
 
 export default function FloatingWhatsApp() {
+  const { settings } = useSettings();
+  const whatsapp = settings?.checkout?.whatsapp || FALLBACK;
   return (
     <a
-      href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hi Raftar Footwear!\nI want to place an order.')}`}
+      href={`https://wa.me/${whatsapp}?text=${encodeURIComponent('Hi Raftar Footwear!\nI want to place an order.')}`}
       target="_blank"
       rel="noreferrer"
       aria-label="Chat on WhatsApp"

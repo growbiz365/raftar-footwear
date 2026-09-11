@@ -85,10 +85,15 @@ export default function ProductDetail() {
     ...(product.images || []).map(safeImage),
   ].filter((img, i, arr) => img && arr.indexOf(img) === i);
   const displayImages = [
-    ...(currentVariant?.image ? [currentVariant.image] : []),
-    ...allImages.filter((img) => img !== currentVariant?.image),
-  ];
+    ...(currentVariant?.image ? [safeImage(currentVariant.image)] : []),
+    ...allImages.filter((img) => img !== safeImage(currentVariant?.image || '')),
+  ].filter(Boolean);
+
   const shownImg = activeImg || displayImages[0];
+
+  const hideBroken = (e) => {
+    e.currentTarget.style.visibility = 'hidden';
+  };
 
   const packPrices = product.packPrices || {
     1: product.price,
@@ -140,13 +145,14 @@ export default function ProductDetail() {
             <img
               src={shownImg}
               alt={product.name}
+              onError={hideBroken}
               className="w-full h-full object-cover"
             />
           </div>
           {displayImages.length > 1 && (
             <div className="flex gap-3 overflow-x-auto pb-1">
               {displayImages.map((img, i) => {
-                const colorMatch = variants.find((v) => v.image === img);
+                const colorMatch = variants.find((v) => safeImage(v.image) === img);
                 return (
                   <button
                     key={i}
@@ -154,12 +160,12 @@ export default function ProductDetail() {
                       setActiveImg(img);
                       if (colorMatch) setSelectedColor(colorMatch.name);
                     }}
-                    className={`w-18 h-22 sm:w-20 sm:h-24 shrink-0 overflow-hidden rounded-lg border-2 transition ${
+                    className={`w-20 h-24 shrink-0 overflow-hidden rounded-lg border-2 transition ${
                       img === shownImg ? 'border-[#0b4f86]' : 'border-transparent'
                     }`}
                     title={colorMatch ? colorMatch.name : `Image ${i + 1}`}
                   >
-                    <img src={img} alt="" className="w-full h-full object-cover" />
+                    <img src={img} alt="" onError={hideBroken} className="w-full h-full object-cover" />
                     {colorMatch && (
                       <span className="text-[10px] text-center block bg-black/60 text-white truncate">
                         {colorMatch.name}

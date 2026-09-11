@@ -32,6 +32,7 @@ const AdminSettings = lazy(() => import('./pages/admin/Settings'));
 const AdminHomeSections = lazy(() => import('./pages/admin/HomeSections'));
 const AdminCategories = lazy(() => import('./pages/admin/Categories'));
 const AdminPopups = lazy(() => import('./pages/admin/Popups'));
+const AdminPayments = lazy(() => import('./pages/admin/Payments'));
 const AdminBlogs = lazy(() => import('./pages/admin/Blogs'));
 
 function PageFallback() {
@@ -71,6 +72,7 @@ const AdminSettingsPage = lazyPage(AdminSettings);
 const AdminHomeSectionsPage = lazyPage(AdminHomeSections);
 const AdminCategoriesPage = lazyPage(AdminCategories);
 const AdminPopupsPage = lazyPage(AdminPopups);
+const AdminPaymentsPage = lazyPage(AdminPayments);
 const AdminBlogsPage = lazyPage(AdminBlogs);
 
 function StoreLayout({ children }) {
@@ -112,6 +114,7 @@ export default function App() {
         <Route path="products" element={<AdminProductsPage />} />
         <Route path="categories" element={<AdminCategoriesPage />} />
         <Route path="orders" element={<AdminOrdersPage />} />
+        <Route path="payments" element={<AdminPaymentsPage />} />
         <Route path="settings" element={<AdminSettingsPage />} />
         <Route path="settings/home-sections" element={<AdminHomeSectionsPage />} />
         <Route path="popups" element={<AdminPopupsPage />} />

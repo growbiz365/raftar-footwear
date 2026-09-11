@@ -15,6 +15,14 @@ const STATUS_CLS = {
   cancelled: 'bg-rose-100 text-rose-700',
 };
 
+const PAY_LABEL = {
+  cod: 'Cash on Delivery',
+  easypaisa: 'EasyPaisa',
+  jazzcash: 'JazzCash',
+  bank: 'Bank Transfer',
+  other: 'Online Payment',
+};
+
 export default function AdminOrders() {
   const dispatch = useDispatch();
   const { toast, confirm } = useToast();
@@ -146,7 +154,7 @@ export default function AdminOrders() {
             </div>
           </div>
         )}
-        <table className="w-full text-sm min-w-[760px]">
+        <table className="w-full text-sm min-w-[900px]">
           <thead className="bg-gray-50 border-b">
             <tr>
               <th className="w-8 p-4">
@@ -169,6 +177,7 @@ export default function AdminOrders() {
               <th className="text-left p-4 font-medium">Customer</th>
               <th className="text-left p-4 font-medium">Items</th>
               <th className="text-left p-4 font-medium">Total</th>
+              <th className="text-left p-4 font-medium">Payment</th>
               <th className="text-left p-4 font-medium">Status</th>
               <th className="text-left p-4 font-medium">Date</th>
               <th className="text-right p-4 font-medium">Actions</th>
@@ -217,6 +226,34 @@ export default function AdminOrders() {
                 </td>
                 <td className="p-4 font-medium">Rs {(o.total || 0).toLocaleString()}</td>
                 <td className="p-4">
+                  <div className="flex items-center gap-2">
+                    {o.payment?.proofImage && (
+                      <a href={o.payment.proofImage} target="_blank" rel="noreferrer" title="Open payment proof">
+                        <img src={o.payment.proofImage} alt="payment proof" className="w-10 h-10 rounded-lg object-cover border border-gray-100" />
+                      </a>
+                    )}
+                    <div className="min-w-0">
+                      <span
+                        className={`inline-block text-[11px] font-medium px-2 py-0.5 rounded-full ${
+                          o.payment?.method === 'cod' ? 'bg-gray-100 text-gray-700' : 'bg-emerald-100 text-emerald-700'
+                        }`}
+                      >
+                        {o.payment?.label || PAY_LABEL[o.payment?.method] || '—'}
+                      </span>
+                      {o.payment?.txnId && (
+                        <div className="text-[11px] text-gray-500 mt-0.5 truncate max-w-[120px]" title={o.payment.txnId}>
+                          Txn: {o.payment.txnId}
+                        </div>
+                      )}
+                      {o.payment?.accountNumber && (
+                        <div className="text-[11px] text-gray-400 truncate max-w-[120px]" title={o.payment.accountNumber}>
+                          {o.payment.accountNumber}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </td>
+                <td className="p-4">
                   <select
                     value={o.status}
                     onChange={(e) => {
@@ -237,7 +274,7 @@ export default function AdminOrders() {
               </tr>
             ))}
             {pageOrders.length === 0 && (
-              <tr><td colSpan={8} className="p-8 text-center text-gray-400">No orders found</td></tr>
+              <tr><td colSpan={9} className="p-8 text-center text-gray-400">No orders found</td></tr>
             )}
           </tbody>
         </table>

@@ -60,12 +60,33 @@ const DEFAULTS = {
   },
   popup: {
     enabled: false,
+    layout: 'showcase',
+    delayMs: 4000,
+    badge: 'Best Seller',
+    images: [
+      'https://res.cloudinary.com/dj5hgapcp/image/upload/v1789020705/revone/axrnstwvojvfeumi5eiq.jpg',
+      'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Boot/04/6.jpg',
+      'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/01/2.jpg',
+      'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Chappali%20Boot/06/1.jpg'
+    ],
+    brand: 'Raftar',
+    brandSub: 'FOOTWEAR',
     title: 'Wholesale Special',
-    message: 'Order bulk packs of 6 or 12 pairs and get dealer pricing. Contact us on WhatsApp!',
+    price: 'Rs. 1,250',
+    rating: '4.8',
+    reviews: '124 reviews',
+    description: 'Comfortable, stylish and perfect for everyday wear. Wholesale packs include 6 or 12 pairs at special prices. Ideal for resellers and bulk buyers.',
+    features: [
+      { title: 'Comfortable Fit', text: 'Soft and lightweight' },
+      { title: 'Durable Quality', text: 'Built for long use' },
+      { title: 'Bulk Pricing', text: 'Best rates for wholesale' }
+    ],
+    packs: [
+      { label: '6 Pairs', sub: 'Get special price' },
+      { label: '12 Pairs', sub: 'Best value' }
+    ],
     buttonText: 'Order Bulk Now',
-    redirectUrl: 'https://wa.me/923338788861',
-    image: '',
-    delayMs: 2500
+    redirectUrl: 'https://wa.me/923338788861'
   },
   promoBar: '★ Quality Footwear, Every Step of the Way. | Wholesale Packs: 1 · 6 · 12 pairs',
   promoTiles: {
@@ -100,6 +121,17 @@ const DEFAULTS = {
     banners: [
       { eyebrow: 'Market Crash Prices!', line1: 'Step Into The', line2: 'Extraordinary', cta: 'Shop Women', link: '/collections/women', bgColor: '#0f172a', image: 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Chappali%20Boot/06/1.jpg' },
       { eyebrow: 'All time Best Seller', line1: 'Style That', line2: 'Moves You First', cta: 'Shop Men', link: '/collections/men', bgColor: '#1e293b', image: 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear/Boot/04/6.jpg' }
+    ]
+  },
+  checkout: {
+    whatsapp: '923338788861',
+    codEnabled: true,
+    onlineEnabled: true,
+    note: 'Please pay the exact order amount and share your transaction screenshot below to verify your payment.',
+    accounts: [
+      { label: 'EasyPaisa', type: 'easypaisa', accountTitle: 'Raftar Footwear', accountNumber: '0300 1234567', bankName: '', note: 'Send money to this EasyPaisa number', active: true },
+      { label: 'JazzCash', type: 'jazzcash', accountTitle: 'Raftar Footwear', accountNumber: '0300 7654321', bankName: '', note: 'Send money to this JazzCash number', active: true },
+      { label: 'Bank Transfer', type: 'bank', accountTitle: 'Raftar Footwear Enterprises', accountNumber: '0000 0000 0000 0000 0000', bankName: 'Meezan Bank', note: 'Use the IBAN / account number above', active: true }
     ]
   }
 };
