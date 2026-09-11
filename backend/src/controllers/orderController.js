@@ -17,7 +17,8 @@ exports.getOrder = async (req, res) => {
 
 exports.createOrder = async (req, res) => {
   try {
-    const order = await Order.create(req.body);
+    const orderNo = `RFT-${String(Date.now()).slice(-6)}`;
+    const order = await Order.create({ ...req.body, orderNo });
     res.status(201).json({ success: true, data: order });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });

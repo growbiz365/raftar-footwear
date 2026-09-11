@@ -1,7 +1,7 @@
 import { Outlet, Link, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/slices/authSlice';
-import { LayoutDashboard, Package, ShoppingCart, LogOut, Store, Settings, FolderOpen, Menu, X, Megaphone, FileText, Home } from 'lucide-react';
+import { LayoutDashboard, Package, ShoppingCart, LogOut, Store, Settings, FolderOpen, Menu, X, Megaphone, FileText, Home, Wallet } from 'lucide-react';
 import { useState } from 'react';
 import { ToastProvider } from '../../components/admin/Toast';
 
@@ -21,6 +21,7 @@ export default function AdminLayout() {
     { to: '/admin/v1/dashboard/products', label: 'Products', icon: Package },
     { to: '/admin/v1/dashboard/categories', label: 'Categories', icon: FolderOpen },
     { to: '/admin/v1/dashboard/orders', label: 'Orders', icon: ShoppingCart },
+    { to: '/admin/v1/dashboard/payments', label: 'Payments', icon: Wallet },
     { to: '/admin/v1/dashboard/blogs', label: 'Blog', icon: FileText },
     { to: '/admin/v1/dashboard/settings/home-sections', label: 'Home Sections', icon: Home },
     { to: '/admin/v1/dashboard/settings', label: 'Site Settings', icon: Settings, exact: true },
