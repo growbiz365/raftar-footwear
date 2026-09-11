@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts, fetchCategories } from '../store/slices/productSlice';
 import ProductCard from '../components/product/ProductCard';
 import { ChevronLeft, ChevronRight, Truck, RotateCcw, Shield, Headphones } from 'lucide-react';
-import api from '../services/api';
-import { getLocalSettings, STATIC_SETTINGS } from '../data/catalog';
+import { useSettings } from '../store/settingsContext';
+import { STATIC_SETTINGS } from '../data/catalog';
 
 function SkeletonCard() {
   return (
@@ -36,12 +36,12 @@ const BENEFITS = [
 export default function Home() {
   const dispatch = useDispatch();
   const { items: products, categories, loading } = useSelector((s) => s.products);
-  const [settings, setSettings] = useState(null);
+  const { settings } = useSettings();
   const [heroIndex, setHeroIndex] = useState(0);
   const [tab, setTab] = useState('best');
   const [countdown, setCountdown] = useState({ d: 0, h: 0, m: 0, s: 0 });
 
-  const countdownEndIso = settings?.saleCountdown?.endDate || null;
+  const countdownEndIso = settings.saleCountdown?.endDate || null;
 
   useEffect(() => {
     const resolveTarget = () => {
@@ -72,10 +72,6 @@ export default function Home() {
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchCategories());
-    api
-      .get('/settings')
-      .then((r) => setSettings(r.data?.data || getLocalSettings()))
-      .catch(() => setSettings(getLocalSettings()));
   }, [dispatch]);
 
   const s = settings || STATIC_SETTINGS;

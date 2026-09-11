@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
-import api from '../../services/api';
-import { getLocalSettings } from '../../data/catalog';
+import { useSettings } from '../../store/settingsContext';
 
 /**
  * Simple site popup – title, message, optional image, CTA with redirect link.
  * Controlled from Admin → Popups.
  */
 export default function SitePopup() {
+  const { settings } = useSettings();
   const [config, setConfig] = useState(null);
   const [show, setShow] = useState(false);
 
@@ -26,17 +26,8 @@ export default function SitePopup() {
       }
     };
 
-    api
-      .get('/settings')
-      .then((r) => {
-        const d = r.data?.data || {};
-        apply(d.popup || d.exitPopup || null);
-      })
-      .catch(() => {
-        const local = getLocalSettings();
-        apply(local.popup || null);
-      });
-  }, []);
+    apply(settings.popup || settings.exitPopup || null);
+  }, [settings]);
 
   if (!show || !config?.enabled) return null;
 

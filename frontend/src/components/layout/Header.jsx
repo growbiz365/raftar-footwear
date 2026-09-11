@@ -3,15 +3,18 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Search, Heart, ShoppingBag, Menu, X, ChevronDown, Phone } from 'lucide-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCartOpen, setSearchOpen, selectCartCount } from '../../store/slices/cartSlice';
+import { useSettings } from '../../store/settingsContext';
 import api from '../../services/api';
 
 const LOGO = '/images/raftar-logo.jpeg';
 const PHONE = '03338788861';
+const PROMO = 'GET FLAT WHOLESALE RATES · PACKS 1 · 6 · 12 · CALL ' + PHONE;
 
 export default function Header() {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+  const { settings } = useSettings();
   const cartCount = useSelector(selectCartCount);
   const wishlist = useSelector((s) => s.cart.wishlist);
   const isSearchOpen = useSelector((s) => s.cart.isSearchOpen);
@@ -19,22 +22,18 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const [allProducts, setAllProducts] = useState([]);
   const [openDropdown, setOpenDropdown] = useState(null);
-  const [logo, setLogo] = useState(LOGO);
-  const [promoBar, setPromoBar] = useState(
-    'GET FLAT WHOLESALE RATES · PACKS 1 · 6 · 12 · CALL ' + PHONE
-  );
   const dropdownRef = useRef(null);
 
-  useEffect(() => {
-    api
-      .get('/settings')
-      .then((r) => {
-        const d = r.data?.data;
-        if (d?.promoBar) setPromoBar(typeof d.promoBar === 'string' ? d.promoBar : d.promoBar);
-        if (typeof d?.logo === 'string' && d.logo && !d.logo.includes('/uploads/')) setLogo(d.logo);
-      })
-      .catch(() => {});
-  }, []);
+  const logo =
+    typeof settings?.logo === 'string' && settings.logo && !settings.logo.includes('/uploads/')
+      ? settings.logo
+      : LOGO;
+  const promoBar =
+    typeof settings?.promoBar === 'string' && settings.promoBar
+      ? settings.promoBar
+      : typeof settings?.promoBar === 'object' && settings.promoBar?.text
+        ? settings.promoBar.text
+        : PROMO;
 
   useEffect(() => {
     if (!isSearchOpen) return;
