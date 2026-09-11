@@ -4,12 +4,10 @@ import { Search, Heart, ShoppingBag, Menu, X, ChevronDown, Phone } from 'lucide-
 import { useSelector, useDispatch } from 'react-redux';
 import { setCartOpen, setSearchOpen, selectCartCount } from '../../store/slices/cartSlice';
 import { useSettings } from '../../store/settingsContext';
+import { DEFAULT_LOGO } from '../../data/catalog';
 import api from '../../services/api';
 
-// Matches the live dashboard logo so the first paint shows the correct brand
-// before /settings resolves (instead of flashing an old/blank logo).
-const LOGO =
-  'https://res.cloudinary.com/dj5hgapcp/image/upload/v1789020694/revone/r5tazrzc2ztsb5xyqtly.jpg';
+const LOGO = DEFAULT_LOGO;
 const PHONE = '03338788861';
 const PROMO = 'GET FLAT WHOLESALE RATES · PACKS 1 · 6 · 12 · CALL ' + PHONE;
 

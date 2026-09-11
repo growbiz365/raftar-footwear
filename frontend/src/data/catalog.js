@@ -11,8 +11,12 @@ const C = 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear';
 // paint matches what /api/settings returns (no hero flash).
 const LIVE_HERO = 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1789020705/revone/axrnstwvojvfeumi5eiq.jpg';
 
+// Live dashboard logo — the shared default used by Header, Footer and the
+// favicon until the updated settings arrive.
+export const DEFAULT_LOGO = 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1789020694/revone/r5tazrzc2ztsb5xyqtly.jpg';
+
 export const IMG = {
-  logo: '/images/fixlogo.jpg',
+  logo: DEFAULT_LOGO,
   hero: LIVE_HERO,
   hero2: LIVE_HERO,
   banner: `${C}/Panjadara/01/1.jpg`,
