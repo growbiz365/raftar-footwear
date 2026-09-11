@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import api from '../services/api';
-import { STATIC_SETTINGS, getLocalSettings } from '../data/catalog';
+import { STATIC_SETTINGS } from '../data/catalog';
 
 // Persisted copy of the last payload from GET /api/settings. Lets repeat visits
 // paint instantly with the correct hero/logo instead of flashing the code
@@ -27,7 +27,6 @@ const SettingsContext = createContext(null);
 export function SettingsProvider({ children }) {
   const cached = useRef(readCached());
   const [settings, setSettings] = useState(cached.current || null);
-  const [loaded, setLoaded] = useState(!!cached.current);
   const started = useRef(false);
 
   useEffect(() => {
@@ -44,25 +43,19 @@ export function SettingsProvider({ children }) {
             /* storage unavailable */
           }
           setSettings(d);
-        } else {
-          setSettings(getLocalSettings());
         }
       })
       .catch(() => {
-        setSettings(getLocalSettings());
-      })
-      .finally(() => setLoaded(true));
+        /* keep current fallback — never block the page on settings */
+      });
   }, []);
 
-  // First visit with no cache: hold the app on a blank screen instead of
-  // painting the old defaults. Render as soon as settings (or a fallback)
-  // are available — the fetch error path still releases the gate.
-  if (!loaded) {
-    return <div className="min-h-screen bg-white" aria-hidden="true" />;
-  }
-
+  // Never gate the app on settings: first paint always happens immediately
+  // with cached settings (or the aligned code defaults). Settings load in the
+  // background, so there is no blank screen — on slow API responses the app
+  // just swaps in the live values a moment later.
   return (
-    <SettingsContext.Provider value={{ settings: settings || STATIC_SETTINGS, loaded }}>
+    <SettingsContext.Provider value={{ settings: settings || STATIC_SETTINGS }}>
       {children}
     </SettingsContext.Provider>
   );

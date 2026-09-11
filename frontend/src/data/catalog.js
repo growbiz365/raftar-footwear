@@ -7,10 +7,14 @@
 // Cloudinary base without version (Cloudinary resolves versionless URLs to latest asset).
 const C = 'https://res.cloudinary.com/dj5hgapcp/image/upload/raftar-footwear';
 
+// Live dashboard hero image — used as the pre-settings fallback so the first
+// paint matches what /api/settings returns (no hero flash).
+const LIVE_HERO = 'https://res.cloudinary.com/dj5hgapcp/image/upload/v1789020705/revone/axrnstwvojvfeumi5eiq.jpg';
+
 export const IMG = {
   logo: '/images/fixlogo.jpg',
-  hero: `${C}/Chappal/01/1.jpg`,
-  hero2: `${C}/Multiple%202/01/1.jpg`,
+  hero: LIVE_HERO,
+  hero2: LIVE_HERO,
   banner: `${C}/Panjadara/01/1.jpg`,
   classy: `${C}/3trple%20Gir/01/2.jpg`,
   popup: `${C}/Boot/01/1.jpg`,
